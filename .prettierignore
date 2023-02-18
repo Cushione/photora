@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+public
+package.json
+package-lock.json
+.vscode
+.prettierrc.json
+README.md
