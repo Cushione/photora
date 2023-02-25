@@ -1,12 +1,11 @@
 import './App.scss'
 import React from 'react'
+import SignIn from './authentication/SignIn';
 
 function App() {
   return (
     <div className='App'>
-      <header className='App-header'>
-        
-      </header>
+      <SignIn></SignIn>
     </div>
   )
 }
