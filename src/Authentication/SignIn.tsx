@@ -11,15 +11,19 @@ interface SignInResponse {
 function SignIn() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(true)
 
-  const handleSubmit = (event: MouseEvent) => {
+  const handleSubmit = (event: MouseEvent): void => {
     event.preventDefault()
-    axios
-      .post<SignInResponse>(import.meta.env.VITE_API_URL + 'api/token/', {
+    localStorage.setItem("RememberMe", JSON.stringify(rememberMe))
+    axios.post<SignInResponse>(
+      import.meta.env.VITE_API_URL + 'api/token/',
+      {
         username,
         password,
-      })
-      .then((res) => console.log(res.data.access))
+      },
+      {retry: false} as any
+    )
   }
 
   return (
@@ -46,7 +50,12 @@ function SignIn() {
         />
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
-        <Form.Check type='checkbox' label='Remember me' />
+        <Form.Check
+          type='checkbox'
+          label='Remember me'
+          checked={rememberMe}
+          onChange={(event) => setRememberMe(event.target.checked)}
+        />
       </Form.Group>
       <Button
         variant='primary'
