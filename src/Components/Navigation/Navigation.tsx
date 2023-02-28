@@ -21,11 +21,6 @@ export default function Navigation() {
       <Nav.Link as={NavLink} to={`/sign-in`} className={linkState}>
         Sign In
       </Nav.Link>
-
-      
-      <Nav.Link as={NavLink} to={`/posts/9`} className={linkState}>
-        Sign In
-      </Nav.Link>
     </Nav>
   )
 }
