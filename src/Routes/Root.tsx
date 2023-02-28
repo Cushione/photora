@@ -1,42 +1,32 @@
-import React from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import { NavLink, Outlet } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Button, Col, Container, Row } from 'react-bootstrap'
+import { Outlet, useLocation } from 'react-router-dom'
+import Navigation from '../Components/Navigation/Navigation'
 import './Root.scss'
 
 export default function Root() {
-  const linkState = ({
-    isActive,
-    isPending,
-  }: {
-    isActive: boolean
-    isPending: boolean
-  }) => (isActive ? 'active' : isPending ? 'pending' : '')
+  const [open, setOpen] = useState(false)
+  let location = useLocation();
+
+  useEffect(() => {
+    setOpen(false)
+  }, [location])
 
   return (
     <Container fluid>
       <Row>
-        <Col xs='1' md='2'>
+        <Button id='sidebar-toggle' onClick={() => setOpen(!open)}>
+          Open
+        </Button>
+        <div id='sidebar' className={open ? 'open' : ''}>
           <h1>Photora</h1>
-          <nav>
-            <ul>
-              <li>
-                <NavLink to={`/`} className={linkState}>
-                  Home
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to={`/sign-in`} className={linkState}>
-                  Sign In
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
-        </Col>
-        <Col xs='11' md='10'>
+          <Navigation />
+        </div>
+        <div id='content'>
           <Container>
             <Outlet />
           </Container>
-        </Col>
+        </div>
       </Row>
     </Container>
   )

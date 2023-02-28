@@ -1,0 +1,18 @@
+#main-navigation {
+
+    a {
+        border-radius: 4px;
+
+        &:hover {
+            background-color: #F6F6F6;
+        } 
+
+        &.active {
+            font-weight: bold;
+        }
+        
+        &.pending {
+            font-weight: bold;
+        }
+    }
+}
