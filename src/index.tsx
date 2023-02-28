@@ -5,12 +5,19 @@ import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Root from './Routes/Root';
 import ErrorPage from './Components/ErrorPage/ErrorPage';
+import SignIn from './Authentication/SignIn';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'sign-in',
+        element: <SignIn />
+      }
+    ]
   },
 ])
 

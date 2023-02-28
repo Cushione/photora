@@ -24,6 +24,11 @@ export default function Root() {
                   Home
                 </NavLink>
               </li>
+              <li>
+                <NavLink to={`/sign-in`} className={linkState}>
+                  Sign In
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </Col>
