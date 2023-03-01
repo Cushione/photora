@@ -21,6 +21,10 @@ export default function Navigation() {
       <Nav.Link as={NavLink} to={`/login`} className={linkState}>
         Login
       </Nav.Link>
+
+      <Nav.Link as={NavLink} to={`/register`} className={linkState}>
+        Register
+      </Nav.Link>
     </Nav>
   )
 }
