@@ -13,13 +13,13 @@ export default function Navigation() {
   }) => (isActive ? 'active' : isPending ? 'pending' : '')
 
   return (
-    <Nav className='flex-column' id="main-navigation">
+    <Nav className='flex-column' id='main-navigation'>
       <Nav.Link as={NavLink} to={`/`} className={linkState}>
         Home
       </Nav.Link>
 
-      <Nav.Link as={NavLink} to={`/sign-in`} className={linkState}>
-        Sign In
+      <Nav.Link as={NavLink} to={`/login`} className={linkState}>
+        Login
       </Nav.Link>
     </Nav>
   )

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Root from './Routes/Root';
-import ErrorPage from './Components/ErrorPage/ErrorPage';
-import SignIn from './Authentication/SignIn';
+import Root from './Routes/Root'
+import ErrorPage from './Components/ErrorPage/ErrorPage'
+import Login from './Authentication/Login/Login'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +14,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: 'login',
+        element: <Login />,
+      },
         path: 'sign-in',
         element: <SignIn />
       }
