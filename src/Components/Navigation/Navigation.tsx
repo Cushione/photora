@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
+import { UserInfoContext } from '../../Authentication/Authentication'
 import './Navigation.scss'
 
 export default function Navigation() {
+  const { userProfile } = useContext(UserInfoContext)
+
   const linkState = ({
     isActive,
     isPending,
@@ -14,10 +17,17 @@ export default function Navigation() {
 
   return (
     <Nav className='flex-column' id='main-navigation'>
+      {userProfile && (
+        <Nav.Link as={NavLink} to={`/`} className={linkState}>
+          {userProfile.name}
+        </Nav.Link>
+      )}
       <Nav.Link as={NavLink} to={`/`} className={linkState}>
         Home
       </Nav.Link>
 
+      {!userProfile && (
+        <>
       <Nav.Link as={NavLink} to={`/login`} className={linkState}>
         Login
       </Nav.Link>
@@ -25,6 +35,8 @@ export default function Navigation() {
       <Nav.Link as={NavLink} to={`/register`} className={linkState}>
         Register
       </Nav.Link>
+        </>
+      )}
     </Nav>
   )
 }

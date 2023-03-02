@@ -1,33 +1,46 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ReactDOM from 'react-dom'
 import './index.scss'
 import reportWebVitals from './reportWebVitals'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Root from './Routes/Root'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
+import { UserInfoContext, UserInfoProvider } from './Authentication/Authentication'
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'register',
-        element: <Register />,
-      },
-  },
-])
+function Router() {
+  const {userProfile} = useContext(UserInfoContext)
+
+  const routes = (isLoggedIn: boolean) => createBrowserRouter([
+    {
+      path: '/',
+      element: <Root />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: 'login',
+          element: isLoggedIn ? <Navigate to={"/"} replace /> : <Login />,
+        },
+        {
+          path: 'register',
+          element: isLoggedIn ? <Navigate to={"/"} replace /> : <Register />,
+        },
+      ],
+    },
+  ]) 
+
+  return (
+    <RouterProvider router={routes(!!userProfile)} />
+  )
+
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserInfoProvider>
+      <Router />
+    </UserInfoProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

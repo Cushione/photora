@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { MouseEvent, useState } from 'react'
+import React, { MouseEvent, useContext, useState } from 'react'
 import Alert from 'react-bootstrap/esm/Alert'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/esm/Form'
 import { Link } from 'react-router-dom';
+import { UserInfoContext } from '../Authentication';
 
 interface LoginResponse {
   access: string
@@ -15,6 +16,7 @@ function Login() {
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
+  const {setLoggedIn} = useContext(UserInfoContext)
 
   const handleSubmit = (event: MouseEvent): void => {
     event.preventDefault()
@@ -29,6 +31,7 @@ function Login() {
         },
         { retry: false } as any
       )
+      .then(() => setLoggedIn(true))
       .catch((error) => {
         if (error.response) {
           setError(error.response.data.detail)
