@@ -43,7 +43,7 @@ export default function ProfileDetail() {
           </Row>
           <Row xs='2' md='3' id='profile-posts' className='mt-5'>
             {posts.map((post) => (
-              <Col>
+              <Col key={post.id}>
                 <Card>
                   <Card.Img src={post.image} alt={post.title} />
                 </Card>

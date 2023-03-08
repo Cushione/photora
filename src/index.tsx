@@ -9,6 +9,7 @@ import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
 import { UserInfoContext, UserInfoProvider } from './Authentication/Authentication'
 import ProfileDetail, {loader as profileLoader} from './Routes/ProfileDetail/ProfileDetail';
+import ProfileEdit, {ProfileEditLoader, ProfileEditAction} from './Routes/ProfileEdit/ProfileEdit';
 
 function Router() {
   const {userProfile} = useContext(UserInfoContext)
@@ -31,6 +32,12 @@ function Router() {
           path: 'profiles/:id',
           element: <ProfileDetail />,
           loader: profileLoader,
+        },
+        {
+          path: 'profiles/edit',
+          element: <ProfileEdit />,
+          loader: ProfileEditLoader,
+          action: ProfileEditAction
         },
       ],
     },
