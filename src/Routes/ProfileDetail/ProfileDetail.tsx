@@ -28,6 +28,7 @@ export default function ProfileDetail() {
         <>
           <Row id='profile-detail'>
             <Col xs={12} sm={4}>
+              <div id="profile-image-wrapper">
               <Image
                 fluid
                 roundedCircle
@@ -35,6 +36,7 @@ export default function ProfileDetail() {
                 src={profile.image}
                 alt='profile image'
               />
+              </div>
             </Col>
             <Col>
               <h2 className='d-flex'>

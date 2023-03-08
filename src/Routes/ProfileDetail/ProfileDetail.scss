@@ -1,20 +1,35 @@
 #profile-detail {
-    #profile-image {
-        aspect-ratio: 1;
+  #profile-image-wrapper {
+    position: relative;
+    width: 100%;
+
+    &:after {
+      content: '';
+      display: block;
+      padding-bottom: 100%;
     }
+
+    img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      transition: filter 0.2s ease-out;
+    }
+  }
 }
 
 #profile-posts {
-    .col {
-        padding: 1vw;
-    }
+  .col {
+    padding: 1vw;
+  }
 
-    .card {
-        height: 100%;
+  .card {
+    height: 100%;
 
-        .card-img {
-            height: 100%;
-            object-fit: cover;
-        }
+    .card-img {
+      height: 100%;
+      object-fit: cover;
     }
+  }
 }
