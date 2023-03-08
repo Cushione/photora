@@ -1,16 +1,16 @@
 import axios from 'axios'
 import React from 'react'
-import { Button, Card, Col, Image, Row } from 'react-bootstrap'
+import { Card, Col, Image, Row } from 'react-bootstrap'
 import { Link, useLoaderData } from 'react-router-dom'
 import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
 import './ProfileDetail.scss'
 
-export async function loader({ params }: { params: { id: number } }) {
-  const profile = axios.get<{ title: string }[]>(
+export async function ProfileDetailLoader({ params }: { params: { id: number } }) {
+  const profile = axios.get<Profile>(
     import.meta.env.VITE_API_URL + 'profiles/' + params.id
   )
-  const posts = axios.get<{ title: string }[]>(
+  const posts = axios.get<Post[]>(
     import.meta.env.VITE_API_URL + `profiles/${params.id}/posts`
   )
   return { profile: (await profile).data, posts: (await posts).data }
@@ -18,10 +18,7 @@ export async function loader({ params }: { params: { id: number } }) {
 
 export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
-    useLoaderData() as {
-      profile: Profile
-      posts: Post[]
-    }
+    useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
   return (
     <>
       {profile && posts && (

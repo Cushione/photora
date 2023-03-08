@@ -8,7 +8,7 @@ import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
 import { Post } from '../../shared/models/Post.model'
 import './PostList.scss'
 
-export async function loader({ request }: { request: any }) {
+export async function PostListLoader({ request }: { request: any }) {
   const currentUrl = new URL(request.url)
   const results = (
     await axios.get<PaginatedResult<Post>>(
@@ -22,7 +22,7 @@ export async function loader({ request }: { request: any }) {
 
 export default function PostList() {
   const { results, next }: PaginatedResult<Post> =
-    useLoaderData() as PaginatedResult<Post>
+    useLoaderData() as Awaited<ReturnType<typeof PostListLoader>>
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)
 

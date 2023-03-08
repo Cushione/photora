@@ -4,12 +4,12 @@ import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Root from './Routes/Root'
-import PostList, { loader as postListLoader } from './Routes/PostList/PostList'
+import PostList, { PostListLoader } from './Routes/PostList/PostList'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
 import { UserInfoContext, UserInfoProvider } from './Authentication/Authentication'
-import ProfileDetail, {loader as profileLoader} from './Routes/ProfileDetail/ProfileDetail';
+import ProfileDetail, {ProfileDetailLoader} from './Routes/ProfileDetail/ProfileDetail';
 import ProfileEdit, {ProfileEditLoader, ProfileEditAction} from './Routes/ProfileEdit/ProfileEdit';
 
 function Router() {
@@ -32,7 +32,7 @@ function Router() {
         {
           path: 'profiles/:id',
           element: <ProfileDetail />,
-          loader: profileLoader,
+          loader: ProfileDetailLoader,
         },
         {
           path: 'profiles/edit',
@@ -43,7 +43,7 @@ function Router() {
         {
           path: 'posts',
           element: <PostList />,
-          loader: postListLoader,
+          loader: PostListLoader,
         },
       ],
     },
