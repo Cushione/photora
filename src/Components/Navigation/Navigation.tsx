@@ -23,11 +23,11 @@ export default function Navigation() {
         </Nav.Link>
       )}
       <Nav.Link as={NavLink} to={`/`} className={linkState}>
-      <i class="fa-solid fa-house fa-xl"></i>&nbsp;Home
+      <i className="fa-solid fa-house fa-xl"></i>&nbsp;Home
       </Nav.Link>
 
       <Nav.Link as={NavLink} to={`/posts`} className={linkState}>
-      <i class="fa-regular fa-compass fa-xl"></i>&nbsp;Explore
+      <i className="fa-regular fa-compass fa-xl"></i>&nbsp;Explore
       </Nav.Link>
       
       {!userProfile && (
