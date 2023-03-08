@@ -18,8 +18,8 @@ export default function Navigation() {
   return (
     <Nav className='flex-column' id='main-navigation'>
       {userProfile && (
-        <Nav.Link as={NavLink} to={`/`} className={linkState}>
-          {userProfile.name}
+        <Nav.Link id='nav-user' as={NavLink} to={`/profiles/${userProfile.id}`} className={linkState}>
+          <img id='nav-avatar' src={userProfile.image}></img> {userProfile.name}
         </Nav.Link>
       )}
       <Nav.Link as={NavLink} to={`/`} className={linkState}>
