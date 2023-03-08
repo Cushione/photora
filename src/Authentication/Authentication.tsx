@@ -15,15 +15,18 @@ interface UserInfo {
       }
     | undefined
   setLoggedIn: any
+  setDataChange: any
 }
 
 export const UserInfoContext = createContext<UserInfo>({
   userProfile: undefined,
   setLoggedIn: undefined,
+  setDataChange: undefined
 })
 
 export function UserInfoProvider({ children }) {
   const [userProfile, setUserProfile] = useState(undefined)
+  const [dataChange, setDataChange] = useState(false)
   const [loggedIn, setLoggedIn] = useState(isLoggedIn())
 
   useEffect(() => {
@@ -31,7 +34,7 @@ export function UserInfoProvider({ children }) {
   }, [])
 
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn || dataChange) {
       getUserProfile()
     }
   }, [loggedIn])
@@ -39,11 +42,16 @@ export function UserInfoProvider({ children }) {
   function getUserProfile() {
     axios
       .get(import.meta.env.VITE_API_URL + 'profiles/user')
-      .then((res) => setUserProfile(res.data))
+      .then((res) => {
+        setUserProfile(res.data)
+        if (dataChange) {
+          setDataChange(false)
+        }
+      })
   }
 
   return (
-    <UserInfoContext.Provider value={{userProfile, setLoggedIn}}>
+    <UserInfoContext.Provider value={{userProfile, setLoggedIn, setDataChange}}>
       {children}
     </UserInfoContext.Provider>
   )
