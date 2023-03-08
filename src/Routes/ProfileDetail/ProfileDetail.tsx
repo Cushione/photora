@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React from 'react'
-import { Card, Col, Image, Row } from 'react-bootstrap'
-import { useLoaderData } from 'react-router-dom'
-import { Post } from '../../shared/models/Post.model';
+import { Button, Card, Col, Image, Row } from 'react-bootstrap'
+import { Link, useLoaderData } from 'react-router-dom'
+import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
 import './ProfileDetail.scss'
 
@@ -37,7 +37,18 @@ export default function ProfileDetail() {
               />
             </Col>
             <Col>
-              <h2>{profile.name}</h2>
+              <h2 className='d-flex'>
+                {profile.name}
+                {profile.is_owner && (
+                  <Link
+                    to='/profiles/edit'
+                    role='button'
+                    className='btn btn-primary ml-auto'
+                  >
+                    <i className='fa-regular fa-pen-to-square'></i>
+                  </Link>
+                )}
+              </h2>
               <p>{profile.content}</p>
             </Col>
           </Row>

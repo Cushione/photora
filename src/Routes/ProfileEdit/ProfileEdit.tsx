@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Col, Row, Image, Button, Form } from 'react-bootstrap'
 import {
   Form as RouterForm,
+  Link,
   redirect,
   useLoaderData,
 } from 'react-router-dom'
@@ -58,7 +59,6 @@ export default function ProfileEdit() {
     <>
       {profile && (
         <RouterForm method='post' onSubmit={() => setLoading(true)}>
-          <h2>Edit Profile</h2>
           <input type='hidden' name='id' value={profile.id} />
           <Row id='profile-edit'>
             <Col xs={12} sm={4}>
@@ -112,6 +112,13 @@ export default function ProfileEdit() {
               >
                 {loading ? 'Saving...' : 'Save'}
               </Button>
+              <Link 
+                to={`/profiles/${profile.id}`}
+                role="button"
+                className='btn btn-secondary ml-2'
+                >
+                  Cancel
+                </Link>
             </Col>
           </Row>
         </RouterForm>
