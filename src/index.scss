@@ -1,5 +1,7 @@
+@import 'shared/variables.scss';
+
 $theme-colors: (
-    "primary": teal,
+    "primary": $primaryColor,
 );
 
 

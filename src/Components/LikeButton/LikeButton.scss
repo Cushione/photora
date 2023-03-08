@@ -1,0 +1,5 @@
+@import '../../shared/variables.scss';
+
+.like-button:not(:disabled):not(.disabled).liked {
+    color: $primaryColor;
+}
