@@ -4,6 +4,7 @@ import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Root from './Routes/Root'
+import PostList, { loader as postListLoader } from './Routes/PostList/PostList'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
@@ -38,6 +39,11 @@ function Router() {
           element: <ProfileEdit />,
           loader: ProfileEditLoader,
           action: ProfileEditAction
+        },
+        {
+          path: 'posts',
+          element: <PostList />,
+          loader: postListLoader,
         },
       ],
     },
