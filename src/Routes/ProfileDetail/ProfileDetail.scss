@@ -1,0 +1,20 @@
+#profile-detail {
+    #profile-image {
+        aspect-ratio: 1;
+    }
+}
+
+#profile-posts {
+    .col {
+        padding: 1vw;
+    }
+
+    .card {
+        height: 100%;
+
+        .card-img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
