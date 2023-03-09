@@ -24,24 +24,25 @@ export default function Navigation() {
           to={`/profiles/${userProfile.id}`}
           className={linkState}
         >
-          <img id='nav-avatar' src={userProfile.image}></img> {userProfile.name}
+          <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img> {userProfile.name}
         </Nav.Link>
       )}
       <Nav.Link as={NavLink} to={`/`} className={linkState}>
-        <i className='fa-solid fa-house fa-xl'></i>&nbsp;Home
+        <i className='fa-solid fa-house fa-fw'></i>Home
       </Nav.Link>
 
       <Nav.Link as={NavLink} to={`/posts`} className={linkState}>
-        <i className='fa-regular fa-compass fa-xl'></i>&nbsp;Explore
+        <i className='fa-regular fa-compass fa-fw'></i>Explore
       </Nav.Link>
 
       {userProfile && (
         <>
           <Nav.Link as={NavLink} to={`/posts/create`} className={linkState}>
-            <i className='fa-regular fa-square-plus fa-xl'></i>&nbsp;Create
+            <i className='fa-regular fa-square-plus fa-fw'></i>Create
           </Nav.Link>
           <Nav.Link as={NavLink} to={`/logout`} className={linkState}>
-            <i className='fa-solid fa-arrow-right-from-bracket fa-xl'></i>&nbsp;Logout
+            <i className='fa-solid fa-arrow-right-from-bracket fa-fw'></i>
+            Logout
           </Nav.Link>
         </>
       )}
@@ -49,11 +50,12 @@ export default function Navigation() {
       {!userProfile && (
         <>
           <Nav.Link as={NavLink} to={`/login`} className={linkState}>
+            <i className='fa-solid fa-arrow-right-to-bracket fa-fw'></i>
             Login
           </Nav.Link>
 
           <Nav.Link as={NavLink} to={`/register`} className={linkState}>
-            Register
+            <i className='fa-solid fa-user-plus fa-fw'></i>Register
           </Nav.Link>
         </>
       )}

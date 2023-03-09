@@ -20,11 +20,14 @@
     align-items: center;
 
     img#nav-avatar {
-      width: 25px;
-      height: 25px;
+      height: 1.25em;
       object-fit: cover;
-      margin-right: 10px;
       border-radius: 50%;
     }
+  }
+
+  i, img {
+    margin-right: 15px;
+    font-size: 1.3rem;
   }
 }
