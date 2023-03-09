@@ -29,7 +29,7 @@ export async function PostFormAction({ request }) {
     formData.append('image', image)
   }
 
-  await axios.post(import.meta.env.VITE_API_URL + 'posts/', formData)
+  await axios.post('posts/', formData)
   return redirect(`/profiles/user`)
 }
 

@@ -13,7 +13,7 @@ export default function LikeButton({post, onToggle}: LikeButtonProps) {
     const [active, setActive] = useState<boolean>(post.has_liked)
 
     const toggleLike = async () => {
-        const res = await axios.post(import.meta.env.VITE_API_URL + `posts/${post.id}/likes`)
+        const res = await axios.post(`posts/${post.id}/likes`)
         setActive(res.status === 201)
         onToggle?.(res.status === 201)
     }

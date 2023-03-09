@@ -8,7 +8,10 @@ import PostList, { PostListLoader } from './Routes/Posts/PostList/PostList'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
-import { UserInfoContext, UserInfoProvider } from './Authentication/UserInfoContext'
+import {
+  UserInfoContext,
+  UserInfoProvider,
+} from './Authentication/UserInfoContext'
 import ProfileDetail, {
   ProfileDetailLoader,
   ProfileUserDetailLoader,
@@ -18,8 +21,13 @@ import ProfileEdit, {
   ProfileEditAction,
 } from './Routes/ProfileEdit/ProfileEdit'
 import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm'
-import Logout from './Authentication/Logout/Logout';
-import PostDetail, { PostDetailLoader } from './Routes/Posts/PostDetail/PostDetail';
+import Logout from './Authentication/Logout/Logout'
+import PostDetail, {
+  PostDetailLoader,
+} from './Routes/Posts/PostDetail/PostDetail'
+import axios from 'axios'
+
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 function Router() {
   const { userProfile } = useContext(UserInfoContext)

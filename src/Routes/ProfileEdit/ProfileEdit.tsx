@@ -14,7 +14,7 @@ import Utils from '../../shared/utils';
 export async function ProfileEditLoader() {
   const profile = (
     await axios.get<{ title: string }[]>(
-      import.meta.env.VITE_API_URL + 'profiles/user'
+      'profiles/user'
     )
   ).data
   return { profile }
@@ -34,7 +34,7 @@ export async function ProfileEditAction({ request }) {
     formData.append('image', image)
   }
 
-  await axios.put(import.meta.env.VITE_API_URL + 'profiles/user', formData)
+  await axios.put('profiles/user', formData)
   return redirect(`/profiles/${id}`)
 }
 

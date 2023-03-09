@@ -8,7 +8,7 @@ import './PostDetail.scss'
 
 export async function PostDetailLoader({ params }: { params: { id: number } }) {
   const post = (
-    await axios.get<Post>(import.meta.env.VITE_API_URL + 'posts/' + params.id)
+    await axios.get<Post>('posts/' + params.id)
   ).data
   return { post }
 }

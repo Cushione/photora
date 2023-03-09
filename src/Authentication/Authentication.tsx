@@ -14,7 +14,7 @@ export function login(
   password: string
 ): Promise<AxiosResponse<LoginResponse>> {
   return axios.post<LoginResponse>(
-    import.meta.env.VITE_API_URL + 'api/token/',
+    'api/token/',
     {
       username,
       password,
@@ -29,7 +29,7 @@ export function register(
   password2: string
 ): Promise<AxiosResponse<void>> {
   return axios.post(
-    import.meta.env.VITE_API_URL + 'dj-rest-auth/registration/',
+    'dj-rest-auth/registration/',
     {
       username,
       password1,
@@ -47,7 +47,7 @@ export function logout() {
 
 async function refreshAccessToken(refresh: string): Promise<boolean> {
   const response = await axios.post<{ access: string }>(
-    import.meta.env.VITE_API_URL + 'api/token/refresh/',
+    'api/token/refresh/',
     { refresh }
   )
   return response.status === 200

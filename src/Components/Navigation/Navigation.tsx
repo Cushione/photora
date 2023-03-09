@@ -27,7 +27,7 @@ export default function Navigation() {
           <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img> {userProfile.name}
         </Nav.Link>
       )}
-      <Nav.Link as={NavLink} to={`/`} className={linkState}>
+      <Nav.Link as={NavLink} to={`/feed`} className={linkState}>
         <i className='fa-solid fa-house fa-fw'></i>Home
       </Nav.Link>
 

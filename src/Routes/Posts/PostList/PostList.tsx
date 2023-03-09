@@ -8,11 +8,10 @@ import { PaginatedResult } from '../../../shared/models/PaginatedResponse.model'
 import { Post } from '../../../shared/models/Post.model'
 import './PostList.scss'
 
-export async function PostListLoader({ request }: { request: any }) {
+export async function PostListLoader({ request }) {
   const currentUrl = new URL(request.url)
   const results = (
     await axios.get<PaginatedResult<Post>>(
-      import.meta.env.VITE_API_URL +
         'posts/?' +
         currentUrl.searchParams.toString()
     )
@@ -29,11 +28,12 @@ export default function PostList() {
   const navigate = useNavigate()
 
   const loadMorePosts = async () => {
-    const url = new URL(import.meta.env.VITE_API_URL + 'posts/')
-    const urlParams = new URLSearchParams(currentNext.split('?').pop())
-    url.search = urlParams.toString()
-    const newPosts = (await axios.get<PaginatedResult<Post>>(url.toString()))
-      .data
+    const url = new URL(currentNext)
+    const newPosts = (
+      await axios.get<PaginatedResult<Post>>(
+        url.pathname.toString() + url.search.toString()
+      )
+    ).data
     setPosts(posts.concat(newPosts.results))
     setCurrentNext(newPosts.next)
   }

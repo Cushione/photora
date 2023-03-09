@@ -8,20 +8,20 @@ import './ProfileDetail.scss'
 
 export async function ProfileDetailLoader({ params }: { params: { id: number } }) {
   const profile = axios.get<Profile>(
-    import.meta.env.VITE_API_URL + 'profiles/' + params.id
+    'profiles/' + params.id
   )
   const posts = axios.get<Post[]>(
-    import.meta.env.VITE_API_URL + `profiles/${params.id}/posts`
+    `profiles/${params.id}/posts`
   )
   return { profile: (await profile).data, posts: (await posts).data }
 }
 
 export async function ProfileUserDetailLoader() {
   const profile = await axios.get<Profile>(
-    import.meta.env.VITE_API_URL + 'profiles/user'
+    'profiles/user'
   )
   const posts = axios.get<Post[]>(
-    import.meta.env.VITE_API_URL + `profiles/${profile.data.id}/posts`
+    `profiles/${profile.data.id}/posts`
   )
   return { profile: profile.data, posts: (await posts).data }
 }

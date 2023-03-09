@@ -36,7 +36,7 @@ export function UserInfoProvider({ children }) {
   }, [loggedIn, dataChange])
 
   function getUserProfile() {
-    axios.get(import.meta.env.VITE_API_URL + 'profiles/user').then((res) => {
+    axios.get('profiles/user').then((res) => {
       setUserProfile(res.data)
       if (dataChange) {
         setDataChange(false)
