@@ -42,7 +42,7 @@ export default function PostForm() {
     <RouterForm method='post' onSubmit={() => setLoading(true)}>
       <Row id='post-form'>
         <Col xs={12} sm={4}>
-          <ImageInput defaultImage={placeholderImage}/>
+          <ImageInput defaultImage={placeholderImage} onChange={setImagePreview}/>
         </Col>
         <Col>
           <Form.Group controlId='post-form-title'>

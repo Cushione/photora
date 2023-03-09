@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Utils from '../../shared/utils'
 import { Image } from 'react-bootstrap'
 import './ImageInput.scss'
@@ -6,10 +6,13 @@ import './ImageInput.scss'
 interface ImageInputProps {
   defaultImage?: string
   rounded?: boolean
+  onChange?: (url: string) => any
 }
 
-export default function ImageInput({ defaultImage, rounded }: ImageInputProps) {
+export default function ImageInput({ defaultImage, rounded, onChange }: ImageInputProps) {
   const [imagePreview, setImagePreview] = useState<string>(defaultImage || '')
+
+  useEffect(() => onChange?.(imagePreview), [imagePreview])
 
   const handleImageChange = (event) => {
     const files = event.target.files
