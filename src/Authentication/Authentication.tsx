@@ -39,6 +39,12 @@ export function register(
   )
 }
 
+export function logout() {
+  removeToken("RememberMe")
+  removeToken("AccessToken")
+  removeToken("RefreshToken")
+}
+
 async function refreshAccessToken(refresh: string): Promise<boolean> {
   const response = await axios.post<{ access: string }>(
     import.meta.env.VITE_API_URL + 'api/token/refresh/',

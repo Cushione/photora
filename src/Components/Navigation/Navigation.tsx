@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
-import { UserInfoContext } from '../../Authentication/UserInfoContext';
+import { UserInfoContext } from '../../Authentication/UserInfoContext'
 import './Navigation.scss'
 
 export default function Navigation() {
@@ -35,11 +35,15 @@ export default function Navigation() {
         <i className='fa-regular fa-compass fa-xl'></i>&nbsp;Explore
       </Nav.Link>
 
-      
       {userProfile && (
-        <Nav.Link as={NavLink} to={`/posts/create`} className={linkState}>
-        <i className='fa-regular fa-square-plus fa-xl'></i>&nbsp;Create
-      </Nav.Link>
+        <>
+          <Nav.Link as={NavLink} to={`/posts/create`} className={linkState}>
+            <i className='fa-regular fa-square-plus fa-xl'></i>&nbsp;Create
+          </Nav.Link>
+          <Nav.Link as={NavLink} to={`/logout`} className={linkState}>
+            <i className='fa-solid fa-arrow-right-from-bracket fa-xl'></i>&nbsp;Logout
+          </Nav.Link>
+        </>
       )}
 
       {!userProfile && (

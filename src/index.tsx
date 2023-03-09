@@ -18,6 +18,7 @@ import ProfileEdit, {
   ProfileEditAction,
 } from './Routes/ProfileEdit/ProfileEdit'
 import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm'
+import Logout from './Authentication/Logout/Logout';
 
 function Router() {
   const { userProfile } = useContext(UserInfoContext)
@@ -36,6 +37,10 @@ function Router() {
           {
             path: 'register',
             element: isLoggedIn ? <Navigate to={'/'} replace /> : <Register />,
+          },
+          {
+            path: 'logout',
+            element: !isLoggedIn ? <Navigate to={'/'} replace /> : <Logout />,
           },
           {
             path: 'profiles/:id',
