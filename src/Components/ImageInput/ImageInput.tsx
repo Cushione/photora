@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import Utils from '../../shared/utils'
 import { Image } from 'react-bootstrap'
 import './ImageInput.scss'
 
 interface ImageInputProps {
   defaultImage?: string
-  rounded?: boolean
+  round?: boolean
   onChange?: (url: string) => any
 }
 
-export default function ImageInput({ defaultImage, rounded, onChange }: ImageInputProps) {
+export default function ImageInput({ defaultImage, round, onChange }: ImageInputProps) {
   const [imagePreview, setImagePreview] = useState<string>(defaultImage || '')
 
   useEffect(() => onChange?.(imagePreview), [imagePreview])
 
-  const handleImageChange = (event) => {
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
-    if (!files && !files.length && !files[0].type.startsWith('image')) {
+    if (!files || !files.length || !files[0].type.startsWith('image')) {
       return
     }
     setImagePreview(Utils.createImagePreview(files[0]))
@@ -37,7 +37,8 @@ export default function ImageInput({ defaultImage, rounded, onChange }: ImageInp
           id='image-input-preview'
           src={imagePreview}
           alt='image preview'
-          roundedCircle={rounded}
+          roundedCircle={round}
+          rounded={!round}
         />
         <i className='fa-regular fa-pen-to-square fa-2xl'></i>
       </label>

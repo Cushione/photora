@@ -51,7 +51,7 @@ export default function ProfileEdit() {
           <input type='hidden' name='id' value={profile.id} />
           <Row id='profile-edit'>
             <Col xs={12} sm={4}>
-              <ImageInput rounded defaultImage={profile.image} />
+              <ImageInput round defaultImage={profile.image} />
             </Col>
             <Col>
               <Form.Group controlId='profile-edit-name'>
