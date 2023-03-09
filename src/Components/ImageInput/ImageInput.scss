@@ -1,14 +1,8 @@
-#profile-edit {
-  img {
-    aspect-ratio: 1;
-  }
-}
-
-#profile-image-input {
+#image-input {
   display: none;
 }
 
-#profile-image-input-label {
+.image-input-label {
   cursor: pointer;
   position: relative;
   width: 100%;

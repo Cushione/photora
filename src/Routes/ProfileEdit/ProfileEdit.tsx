@@ -1,15 +1,15 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Col, Row, Image, Button, Form } from 'react-bootstrap'
+import { Col, Row, Button, Form } from 'react-bootstrap'
 import {
   Form as RouterForm,
   Link,
   redirect,
   useLoaderData,
 } from 'react-router-dom'
+import ImageInput from '../../Components/ImageInput/ImageInput';
 import Profile from '../../shared/models/Profile.model'
 import Utils from '../../shared/utils';
-import './ProfileEdit.scss'
 
 export async function ProfileEditLoader() {
   const profile = (
@@ -42,17 +42,7 @@ export default function ProfileEdit() {
   const { profile }: { profile: Profile } = useLoaderData() as {
     profile: Profile
   }
-  const [imagePreview, setImagePreview] = useState<string>(profile.image)
   const [loading, setLoading] = useState<boolean>(false)
-
-  const handleImageChange = (event) => {
-    const files = event.target.files
-    if (!files && !files.length && !files[0].type.startsWith('image')) {
-      return
-    }
-    const objectUrl = URL.createObjectURL(files[0])
-    setImagePreview(objectUrl)
-  }
 
   return (
     <>
@@ -61,27 +51,7 @@ export default function ProfileEdit() {
           <input type='hidden' name='id' value={profile.id} />
           <Row id='profile-edit'>
             <Col xs={12} sm={4}>
-              <input
-                id='profile-image-input'
-                type='file'
-                name='imageName'
-                onChange={handleImageChange}
-                accept='image/*'
-              />
-              <label
-                htmlFor='profile-image-input'
-                id='profile-image-input-label'
-              >
-                <Image
-                  fluid
-                  roundedCircle
-                  id='profile-image'
-                  src={imagePreview}
-                  alt='profile image'
-                />
-                <i className='fa-regular fa-pen-to-square fa-2xl'></i>
-              </label>
-              <input type='hidden' name='imagePreview' value={imagePreview} />
+              <ImageInput rounded defaultImage={profile.image} />
             </Col>
             <Col>
               <Form.Group controlId='profile-edit-name'>

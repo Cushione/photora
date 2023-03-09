@@ -1,13 +1,13 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Col, Row, Image, Button, Form } from 'react-bootstrap'
+import { Col, Row, Button, Form } from 'react-bootstrap'
 import {
   Form as RouterForm,
   Link,
   redirect,
 } from 'react-router-dom'
+import ImageInput from '../../../Components/ImageInput/ImageInput';
 import Utils from '../../../shared/utils'
-import './PostForm.scss'
 
 const placeholderImage = 'https://placehold.co/600x400?text=Your Image'
 
@@ -38,36 +38,11 @@ export default function PostForm() {
     placeholderImage
   )
   const [loading, setLoading] = useState<boolean>(false)
-
-  const handleImageChange = (event) => {
-    const files = event.target.files
-    if (!files && !files.length && !files[0].type.startsWith('image')) {
-      return
-    }
-    setImagePreview(Utils.createImagePreview(files[0]))
-  }
-
   return (
     <RouterForm method='post' onSubmit={() => setLoading(true)}>
       <Row id='post-form'>
         <Col xs={12} sm={4}>
-          <input
-            id='post-image-input'
-            type='file'
-            name='imageName'
-            onChange={handleImageChange}
-            accept='image/*'
-          />
-          <label htmlFor='post-image-input' id='post-image-input-label'>
-            <Image
-              fluid
-              id='post-image'
-              src={imagePreview}
-              alt='post image'
-            />
-            <i className='fa-regular fa-pen-to-square fa-2xl'></i>
-          </label>
-          <input type='hidden' name='imagePreview' value={imagePreview} />
+          <ImageInput defaultImage={placeholderImage}/>
         </Col>
         <Col>
           <Form.Group controlId='post-form-title'>
