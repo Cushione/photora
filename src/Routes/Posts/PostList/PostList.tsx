@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
 import PostEntry from '../../../Components/PostEntry/PostEntry'
 import { PaginatedResult } from '../../../shared/models/PaginatedResponse.model'
 import { Post } from '../../../shared/models/Post.model'
@@ -26,6 +26,7 @@ export default function PostList() {
   >
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)
+  const navigate = useNavigate()
 
   const loadMorePosts = async () => {
     const url = new URL(import.meta.env.VITE_API_URL + 'posts/')
@@ -46,7 +47,14 @@ export default function PostList() {
         loader={<h1>Loading</h1>}
       >
         {posts.length ? (
-          posts.map((post) => <PostEntry key={post.id} post={post}></PostEntry>)
+          posts.map((post) => (
+            <PostEntry
+              openable
+              key={post.id}
+              post={post}
+              onCommentClick={() => navigate(`/posts/${post.id}`)}
+            ></PostEntry>
+          ))
         ) : (
           <p>
             <i>No posts</i>

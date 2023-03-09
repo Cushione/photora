@@ -1,15 +1,3 @@
 #post-list-container {
   max-width: 600px;
-
-  .post-list-profile-link {
-    display: flex;
-    align-items: center;
-
-    .post-list-avatar {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-  }
 }

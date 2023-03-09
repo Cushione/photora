@@ -1,14 +1,19 @@
 import moment from 'moment'
 import React, { useState } from 'react'
 import { Button, Card, Image } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Post } from '../../shared/models/Post.model'
 import LikeButton from '../LikeButton/LikeButton'
+import ProfileLink from '../ProfileLink/ProfileLink'
 
 interface PostEntryProps {
   post: Post
+  onCommentClick: () => any
+  openable?: boolean
 }
-export default function PostEntry({ post }: PostEntryProps) {
+export default function PostEntry({ post, openable, onCommentClick }: PostEntryProps) {
+  const navigate = useNavigate()
+
   const [numberOfLikes, setNumberOfLikes] = useState<number>(
     post.number_of_likes
   )
@@ -17,30 +22,35 @@ export default function PostEntry({ post }: PostEntryProps) {
     setNumberOfLikes(state ? numberOfLikes + 1 : numberOfLikes - 1)
   }
 
+  const openPost = () => {
+    if (openable) {
+      navigate(`/posts/${post.id}`)
+    }
+  }
+
   return (
-    <Card key={post.id} className='m-4'>
+    <Card key={post.id} className='my-4'>
       <Card.Body>
         <Card.Text className='d-flex justify-content-between'>
-          <Link
-            to={`/profiles/${post.profile_id}`}
-            className='post-list-profile-link'
-          >
-            <Image className='post-list-avatar' src={post.profile_image} />
-            <span className='ml-2'>{post.profile_name}</span>
-          </Link>
+          <ProfileLink
+            profileId={post.profile_id}
+            profileImage={post.profile_image}
+            profileName={post.profile_name}
+          />
           <span>{moment(post.created_at).fromNow()}</span>
         </Card.Text>
       </Card.Body>
-      <Card.Img src={post.image} />
+      <Card.Img
+        src={post.image}
+        className={openable ? 'c-pointer' : ''}
+        onClick={openPost}
+      />
       <Card.Body>
         <Card.Text className='d-flex'>
-          <LikeButton
-            post={post}
-            onToggle={handleLikeToggle}
-          ></LikeButton>
-          <Link to={`/posts/${post.id}#comment`} className='btn btn-light ml-2'>
+          <LikeButton post={post} onToggle={handleLikeToggle}></LikeButton>
+          <Button variant='link' onClick={onCommentClick}>
             <i className='fa-regular fa-message'></i>
-          </Link>
+          </Button>
           {numberOfLikes > 0 && (
             <Button variant='link' className='ml-2'>
               {numberOfLikes} Like

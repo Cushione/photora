@@ -19,6 +19,7 @@ import ProfileEdit, {
 } from './Routes/ProfileEdit/ProfileEdit'
 import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm'
 import Logout from './Authentication/Logout/Logout';
+import PostDetail, { PostDetailLoader } from './Routes/Posts/PostDetail/PostDetail';
 
 function Router() {
   const { userProfile } = useContext(UserInfoContext)
@@ -67,6 +68,11 @@ function Router() {
             path: 'posts/create',
             element: <PostForm />,
             action: PostFormAction,
+          },
+          {
+            path: 'posts/:id',
+            element: <PostDetail />,
+            loader: PostDetailLoader,
           },
         ],
       },
