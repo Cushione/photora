@@ -31,7 +31,7 @@ export default function Navigation() {
         <i className='fa-solid fa-house fa-fw'></i>Home
       </Nav.Link>
 
-      <Nav.Link as={NavLink} to={`/posts`} className={linkState}>
+      <Nav.Link as={NavLink} to={`/explore`} className={linkState}>
         <i className='fa-regular fa-compass fa-fw'></i>Explore
       </Nav.Link>
 

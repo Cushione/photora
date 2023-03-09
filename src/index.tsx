@@ -4,7 +4,6 @@ import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Root from './Routes/Root'
-import PostList, { PostListLoader } from './Routes/Posts/PostList/PostList'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
@@ -26,6 +25,9 @@ import PostDetail, {
   PostDetailLoader,
 } from './Routes/Posts/PostDetail/PostDetail'
 import axios from 'axios'
+import ExplorePage, {
+  ExplorePageLoader,
+} from './Routes/ExplorePage/ExplorePage'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -68,9 +70,9 @@ function Router() {
             action: ProfileEditAction,
           },
           {
-            path: 'posts',
-            element: <PostList />,
-            loader: PostListLoader,
+            path: 'explore',
+            element: <ExplorePage />,
+            loader: ExplorePageLoader,
           },
           {
             path: 'posts/create',

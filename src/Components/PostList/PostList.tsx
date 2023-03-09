@@ -2,27 +2,15 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useLoaderData, useNavigate } from 'react-router-dom'
-import PostEntry from '../../../Components/PostEntry/PostEntry'
-import { PaginatedResult } from '../../../shared/models/PaginatedResponse.model'
-import { Post } from '../../../shared/models/Post.model'
+import { useNavigate } from 'react-router-dom'
+import PostEntry from '../PostEntry/PostEntry'
+import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
+import { Post } from '../../shared/models/Post.model'
 import './PostList.scss'
 
-export async function PostListLoader({ request }) {
-  const currentUrl = new URL(request.url)
-  const results = (
-    await axios.get<PaginatedResult<Post>>(
-        'posts/?' +
-        currentUrl.searchParams.toString()
-    )
-  ).data
-  return results
-}
+interface PostListProps extends PaginatedResult<Post> {}
 
-export default function PostList() {
-  const { results, next }: PaginatedResult<Post> = useLoaderData() as Awaited<
-    ReturnType<typeof PostListLoader>
-  >
+export default function PostList({ next, results }: PostListProps) {
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)
   const navigate = useNavigate()
