@@ -4,13 +4,14 @@ import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import Root from './Routes/Root'
-import PostList, { PostListLoader } from './Routes/PostList/PostList'
+import PostList, { PostListLoader } from './Routes/Posts/PostList/PostList'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
 import { UserInfoContext, UserInfoProvider } from './Authentication/Authentication'
-import ProfileDetail, {ProfileDetailLoader} from './Routes/ProfileDetail/ProfileDetail';
+import ProfileDetail, {ProfileDetailLoader, ProfileUserDetailLoader} from './Routes/ProfileDetail/ProfileDetail';
 import ProfileEdit, {ProfileEditLoader, ProfileEditAction} from './Routes/ProfileEdit/ProfileEdit';
+import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm';
 
 function Router() {
   const {userProfile} = useContext(UserInfoContext)
@@ -35,6 +36,11 @@ function Router() {
           loader: ProfileDetailLoader,
         },
         {
+          path: 'profiles/user',
+          element: <ProfileDetail />,
+          loader: ProfileUserDetailLoader,
+        },
+        {
           path: 'profiles/edit',
           element: <ProfileEdit />,
           loader: ProfileEditLoader,
@@ -45,6 +51,11 @@ function Router() {
           element: <PostList />,
           loader: PostListLoader,
         },
+        {
+          path: 'posts/create',
+          element: <PostForm />,
+          action: PostFormAction
+        }
       ],
     },
   ]) 

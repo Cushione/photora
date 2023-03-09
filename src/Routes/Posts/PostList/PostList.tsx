@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useLoaderData } from 'react-router-dom'
-import PostEntry from '../../Components/PostEntry/PostEntry';
-import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
-import { Post } from '../../shared/models/Post.model'
+import PostEntry from '../../../Components/PostEntry/PostEntry'
+import { PaginatedResult } from '../../../shared/models/PaginatedResponse.model'
+import { Post } from '../../../shared/models/Post.model'
 import './PostList.scss'
 
 export async function PostListLoader({ request }: { request: any }) {
@@ -21,8 +21,9 @@ export async function PostListLoader({ request }: { request: any }) {
 }
 
 export default function PostList() {
-  const { results, next }: PaginatedResult<Post> =
-    useLoaderData() as Awaited<ReturnType<typeof PostListLoader>>
+  const { results, next }: PaginatedResult<Post> = useLoaderData() as Awaited<
+    ReturnType<typeof PostListLoader>
+  >
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)
 
@@ -45,9 +46,7 @@ export default function PostList() {
         loader={<h1>Loading</h1>}
       >
         {posts.length ? (
-          posts.map((post) => (
-            <PostEntry post={post}></PostEntry>
-          ))
+          posts.map((post) => <PostEntry key={post.id} post={post}></PostEntry>)
         ) : (
           <p>
             <i>No posts</i>

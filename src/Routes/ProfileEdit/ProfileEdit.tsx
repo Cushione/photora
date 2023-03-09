@@ -8,6 +8,7 @@ import {
   useLoaderData,
 } from 'react-router-dom'
 import Profile from '../../shared/models/Profile.model'
+import Utils from '../../shared/utils';
 import './ProfileEdit.scss'
 
 export async function ProfileEditLoader() {
@@ -29,9 +30,7 @@ export async function ProfileEditAction({ request }) {
   formData.append('content', updates.content)
 
   if (imageName) {
-    const image = await fetch(imagePreview)
-      .then((res) => res.blob())
-      .then((blob) => new File([blob], imageName))
+    const image = await Utils.urlToFile(imagePreview, imageName)
     formData.append('image', image)
   }
 

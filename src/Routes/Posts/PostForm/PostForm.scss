@@ -1,0 +1,43 @@
+#post-image-input {
+    display: none;
+  }
+  
+  #post-image-input-label {
+    cursor: pointer;
+    position: relative;
+    width: 100%;
+  
+    &:after {
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
+  
+    img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      transition: filter 0.2s ease-out;
+    }
+  
+    i {
+      opacity: 0;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      color: white;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease-out;
+    }
+  
+    &:hover {
+      img {
+        filter: brightness(0.7);
+      }
+      i {
+        opacity: 1;
+      }
+    }
+  }
+  

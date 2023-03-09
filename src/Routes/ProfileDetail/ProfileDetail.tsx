@@ -16,6 +16,16 @@ export async function ProfileDetailLoader({ params }: { params: { id: number } }
   return { profile: (await profile).data, posts: (await posts).data }
 }
 
+export async function ProfileUserDetailLoader() {
+  const profile = await axios.get<Profile>(
+    import.meta.env.VITE_API_URL + 'profiles/user'
+  )
+  const posts = axios.get<Post[]>(
+    import.meta.env.VITE_API_URL + `profiles/${profile.data.id}/posts`
+  )
+  return { profile: profile.data, posts: (await posts).data }
+}
+
 export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
