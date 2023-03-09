@@ -5,19 +5,32 @@ import {
   Form as RouterForm,
   Link,
   redirect,
+  useLoaderData,
 } from 'react-router-dom'
-import ImageInput from '../../../Components/ImageInput/ImageInput';
+import ImageInput from '../../../Components/ImageInput/ImageInput'
+import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
 
 const placeholderImage = 'https://placehold.co/600x400?text=Your Image'
 
-export async function PostFormAction({ request }) {
+export async function PostFormLoader({ params }): Promise<Post | null> {
+  if (params.id) {
+    const post = (await axios.get<Post>('posts/' + params.id)).data
+    if (!post.is_owner) {
+      throw new Error('You do not have permission to edit this post')
+    }
+    return post
+  } else {
+    return null
+  }
+}
+
+export async function PostFormAction({ request, params }) {
   const { imagePreview, imageName, title, description } = Object.fromEntries(
     await request.formData()
   )
-
   if (imagePreview === placeholderImage) {
-    throw new Error("Please select an image")
+    throw new Error('Please select an image')
   }
 
   const formData = new FormData()
@@ -27,32 +40,58 @@ export async function PostFormAction({ request }) {
   if (imageName) {
     const image = await Utils.urlToFile(imagePreview, imageName)
     formData.append('image', image)
+  } else {
+    formData.append('image', '')
   }
 
-  await axios.post('posts/', formData)
+  if (request.method === 'post') {
+    await axios.post('posts/', formData)
+  } else {
+    await axios.put(`posts/${params.id}`, formData)
+  }
+
   return redirect(`/profiles/user`)
 }
 
 export default function PostForm() {
-  const [imagePreview, setImagePreview] = useState<string>(
-    placeholderImage
-  )
+  const data: Post | undefined = useLoaderData() as
+    | Awaited<ReturnType<typeof PostFormLoader>>
+    | undefined
+  const [imagePreview, setImagePreview] = useState<string>(placeholderImage)
   const [loading, setLoading] = useState<boolean>(false)
+
   return (
-    <RouterForm method='post' onSubmit={() => setLoading(true)}>
+    <RouterForm
+      method={data ? 'put' : 'post'}
+      onSubmit={() => setLoading(true)}
+    >
       <Row id='post-form'>
         <Col xs={12} sm={4}>
-          <ImageInput defaultImage={placeholderImage} onChange={setImagePreview}/>
+          <ImageInput
+            defaultImage={data?.image || placeholderImage}
+            onChange={setImagePreview}
+          />
         </Col>
         <Col>
           <Form.Group controlId='post-form-title'>
             <Form.Label>Title</Form.Label>
-            <Form.Control type='text' placeholder='Title' name='title' required/>
+            <Form.Control
+              type='text'
+              placeholder='Title'
+              name='title'
+              defaultValue={data?.title || ''}
+              required
+            />
           </Form.Group>
 
           <Form.Group controlId='post-form-description'>
             <Form.Label>Description</Form.Label>
-            <Form.Control as='textarea' placeholder='Description' name='description'/>
+            <Form.Control
+              as='textarea'
+              placeholder='Description'
+              name='description'
+              defaultValue={data?.description || ''}
+            />
           </Form.Group>
 
           <Button
@@ -60,7 +99,7 @@ export default function PostForm() {
             className={loading ? 'loading' : ''}
             disabled={loading || imagePreview === placeholderImage}
           >
-            {loading ? 'Saving...' : 'Create'}
+            {loading ? 'Saving...' : data ? 'Update' : 'Create'}
           </Button>
           <Link
             to={`/profiles/user`}

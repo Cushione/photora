@@ -19,7 +19,7 @@ import ProfileEdit, {
   ProfileEditLoader,
   ProfileEditAction,
 } from './Routes/ProfileEdit/ProfileEdit'
-import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm'
+import PostForm, { PostFormAction, PostFormLoader } from './Routes/Posts/PostForm/PostForm'
 import Logout from './Authentication/Logout/Logout'
 import PostDetail, {
   PostDetailLoader,
@@ -77,12 +77,18 @@ function Router() {
           {
             path: 'posts/create',
             element: <PostForm />,
-            action: PostFormAction,
+            action: PostFormAction
           },
           {
             path: 'posts/:id',
             element: <PostDetail />,
             loader: PostDetailLoader,
+          },
+          {
+            path: 'posts/:id/edit',
+            element: isLoggedIn ? <PostForm /> : <Navigate to={'/'} />,
+            action: PostFormAction,
+            loader: PostFormLoader
           },
         ],
       },

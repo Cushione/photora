@@ -57,6 +57,11 @@ export default function PostEntry({ post, openable, onCommentClick }: PostEntryP
               {numberOfLikes !== 1 ? 's' : ''}
             </Button>
           )}
+          {post.is_owner && (
+            <Link className='ml-auto btn btn-primary' to={`/posts/${post.id}/edit`}>
+              <i className='fa-regular fa-pen-to-square'></i>
+            </Link>
+          )}
         </Card.Text>
         <Card.Title>{post.title}</Card.Title>
         <Card.Text>{post.description}</Card.Text>

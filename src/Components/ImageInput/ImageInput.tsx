@@ -9,10 +9,18 @@ interface ImageInputProps {
   onChange?: (url: string) => any
 }
 
-export default function ImageInput({ defaultImage, round, onChange }: ImageInputProps) {
+export default function ImageInput({
+  defaultImage,
+  round,
+  onChange,
+}: ImageInputProps) {
   const [imagePreview, setImagePreview] = useState<string>(defaultImage || '')
 
   useEffect(() => onChange?.(imagePreview), [imagePreview])
+
+  useEffect(() => {
+    setImagePreview((prev) => defaultImage || prev)
+  }, [defaultImage])
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
