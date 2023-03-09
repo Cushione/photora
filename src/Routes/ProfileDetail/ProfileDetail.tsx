@@ -1,48 +1,51 @@
 import axios from 'axios'
 import React from 'react'
 import { Card, Col, Image, Row } from 'react-bootstrap'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData, useNavigate } from 'react-router-dom'
 import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
 import './ProfileDetail.scss'
 
-export async function ProfileDetailLoader({ params }: { params: { id: number } }) {
-  const profile = axios.get<Profile>(
-    'profiles/' + params.id
-  )
-  const posts = axios.get<Post[]>(
-    `profiles/${params.id}/posts`
-  )
+export async function ProfileDetailLoader({
+  params,
+}: {
+  params: { id: number }
+}) {
+  const profile = axios.get<Profile>('profiles/' + params.id)
+  const posts = axios.get<Post[]>(`profiles/${params.id}/posts`)
   return { profile: (await profile).data, posts: (await posts).data }
 }
 
 export async function ProfileUserDetailLoader() {
-  const profile = await axios.get<Profile>(
-    'profiles/user'
-  )
-  const posts = axios.get<Post[]>(
-    `profiles/${profile.data.id}/posts`
-  )
+  const profile = await axios.get<Profile>('profiles/user')
+  const posts = axios.get<Post[]>(`profiles/${profile.data.id}/posts`)
   return { profile: profile.data, posts: (await posts).data }
 }
 
 export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
+
+  const navigate = useNavigate()
+
+  const openPost = (id: number) => {
+    navigate(`/posts/${id}`)
+  }
+
   return (
     <>
       {profile && posts && (
         <>
           <Row id='profile-detail'>
             <Col xs={12} sm={4}>
-              <div id="profile-image-wrapper">
-              <Image
-                fluid
-                roundedCircle
-                id='profile-image'
-                src={profile.image}
-                alt='profile image'
-              />
+              <div id='profile-image-wrapper'>
+                <Image
+                  fluid
+                  roundedCircle
+                  id='profile-image'
+                  src={profile.image}
+                  alt='profile image'
+                />
               </div>
             </Col>
             <Col>
@@ -64,7 +67,7 @@ export default function ProfileDetail() {
           <Row xs='2' md='3' id='profile-posts' className='mt-5'>
             {posts.map((post) => (
               <Col key={post.id}>
-                <Card>
+                <Card className='c-pointer' onClick={() => openPost(post.id)}>
                   <Card.Img src={post.image} alt={post.title} />
                 </Card>
               </Col>
