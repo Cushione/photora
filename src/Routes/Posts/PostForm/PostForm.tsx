@@ -16,6 +16,10 @@ export async function PostFormAction({ request }) {
     await request.formData()
   )
 
+  if (imagePreview === placeholderImage) {
+    throw new Error("Please select an image")
+  }
+
   const formData = new FormData()
   formData.append('title', title)
   formData.append('description', description)
