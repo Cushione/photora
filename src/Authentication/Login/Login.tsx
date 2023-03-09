@@ -1,15 +1,10 @@
-import axios from 'axios'
 import React, { MouseEvent, useContext, useState } from 'react'
 import Alert from 'react-bootstrap/esm/Alert'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/esm/Form'
 import { Link } from 'react-router-dom';
-import { UserInfoContext } from '../Authentication';
-
-interface LoginResponse {
-  access: string
-  refresh: string
-}
+import { login } from '../Authentication';
+import { UserInfoContext } from '../UserInfoContext';
 
 function Login() {
   const [username, setUsername] = useState('')
@@ -22,16 +17,10 @@ function Login() {
     event.preventDefault()
     setError(undefined)
     localStorage.setItem('RememberMe', JSON.stringify(rememberMe))
-    axios
-      .post<LoginResponse>(
-        import.meta.env.VITE_API_URL + 'api/token/',
-        {
-          username,
-          password,
-        },
-        { retry: false } as any
-      )
-      .then(() => setLoggedIn(true))
+    login(username, password)
+      .then(() => {
+        setLoggedIn(true)
+      })
       .catch((error) => {
         if (error.response) {
           setError(error.response.data.detail)

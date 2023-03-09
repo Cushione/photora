@@ -1,14 +1,10 @@
-import axios from 'axios'
-import React, { MouseEvent, useState } from 'react'
+import React, { MouseEvent, useContext, useState } from 'react'
 import Alert from 'react-bootstrap/esm/Alert'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/esm/Form'
 import { Link } from 'react-router-dom'
-
-interface RegisterResponse {
-  access: string
-  refresh: string
-}
+import { login, register } from '../Authentication'
+import { UserInfoContext } from '../UserInfoContext'
 
 function Register() {
   const [username, setUsername] = useState('')
@@ -16,30 +12,16 @@ function Register() {
   const [password2, setPassword2] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
+  const { setLoggedIn } = useContext(UserInfoContext)
 
   const handleSubmit = (event: MouseEvent): void => {
     event.preventDefault()
     setError(undefined)
     localStorage.setItem('RememberMe', JSON.stringify(rememberMe))
-    axios
-      .post<RegisterResponse>(
-        import.meta.env.VITE_API_URL + 'dj-rest-auth/registration/',
-        {
-          username,
-          password1,
-          password2,
-        },
-        { retry: false } as any
-      )
+    register(username, password1, password2)
+      .then(() => login(username, password1))
       .then(() => {
-        axios.post(
-          import.meta.env.VITE_API_URL + 'api/token/',
-          {
-            username,
-            password: password1,
-          },
-          { retry: false } as any
-        )
+        setLoggedIn(true)
       })
       .catch((error) => {
         if (error.response) {
@@ -105,7 +87,7 @@ function Register() {
           Register
         </Button>
       </Form>
-      <p className="mt-4">
+      <p className='mt-4'>
         Already have an account? <Link to={'/login'}>Log in</Link>
       </p>
     </>

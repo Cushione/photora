@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
-import { UserInfoContext } from '../../Authentication/Authentication'
+import { UserInfoContext } from '../../Authentication/UserInfoContext';
 import './Navigation.scss'
 
 export default function Navigation() {

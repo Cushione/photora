@@ -1,59 +1,41 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import React, { createContext, useEffect, useState } from 'react'
+
+interface LoginResponse {
+  access: string
+  refresh: string
+}
 
 export function isLoggedIn(): boolean {
   return !!getToken('AccessToken')
 }
 
-interface UserInfo {
-  userProfile:
-    | {
-        id: number
-        owner: string
-        name: string
-        image: string
-      }
-    | undefined
-  setLoggedIn: any
-  setDataChange: any
+export function login(
+  username: string,
+  password: string
+): Promise<AxiosResponse<LoginResponse>> {
+  return axios.post<LoginResponse>(
+    import.meta.env.VITE_API_URL + 'api/token/',
+    {
+      username,
+      password,
+    },
+    { retry: false } as any
+  )
 }
 
-export const UserInfoContext = createContext<UserInfo>({
-  userProfile: undefined,
-  setLoggedIn: undefined,
-  setDataChange: undefined
-})
-
-export function UserInfoProvider({ children }) {
-  const [userProfile, setUserProfile] = useState(undefined)
-  const [dataChange, setDataChange] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(isLoggedIn())
-
-  useEffect(() => {
-    setupInterceptors()
-  }, [])
-
-  useEffect(() => {
-    if (loggedIn || dataChange) {
-      getUserProfile()
-    }
-  }, [loggedIn])
-
-  function getUserProfile() {
-    axios
-      .get(import.meta.env.VITE_API_URL + 'profiles/user')
-      .then((res) => {
-        setUserProfile(res.data)
-        if (dataChange) {
-          setDataChange(false)
-        }
-      })
-  }
-
-  return (
-    <UserInfoContext.Provider value={{userProfile, setLoggedIn, setDataChange}}>
-      {children}
-    </UserInfoContext.Provider>
+export function register(
+  username: string,
+  password1: string,
+  password2: string
+): Promise<AxiosResponse<void>> {
+  return axios.post(
+    import.meta.env.VITE_API_URL + 'dj-rest-auth/registration/',
+    {
+      username,
+      password1,
+      password2,
+    },
+    { retry: false } as any
   )
 }
 

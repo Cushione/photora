@@ -8,62 +8,66 @@ import PostList, { PostListLoader } from './Routes/Posts/PostList/PostList'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
-import { UserInfoContext, UserInfoProvider } from './Authentication/Authentication'
-import ProfileDetail, {ProfileDetailLoader, ProfileUserDetailLoader} from './Routes/ProfileDetail/ProfileDetail';
-import ProfileEdit, {ProfileEditLoader, ProfileEditAction} from './Routes/ProfileEdit/ProfileEdit';
-import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm';
+import { UserInfoContext, UserInfoProvider } from './Authentication/UserInfoContext'
+import ProfileDetail, {
+  ProfileDetailLoader,
+  ProfileUserDetailLoader,
+} from './Routes/ProfileDetail/ProfileDetail'
+import ProfileEdit, {
+  ProfileEditLoader,
+  ProfileEditAction,
+} from './Routes/ProfileEdit/ProfileEdit'
+import PostForm, { PostFormAction } from './Routes/Posts/PostForm/PostForm'
 
 function Router() {
-  const {userProfile} = useContext(UserInfoContext)
+  const { userProfile } = useContext(UserInfoContext)
 
-  const routes = (isLoggedIn: boolean) => createBrowserRouter([
-    {
-      path: '/',
-      element: <Root />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: 'login',
-          element: isLoggedIn ? <Navigate to={"/"} replace /> : <Login />,
-        },
-        {
-          path: 'register',
-          element: isLoggedIn ? <Navigate to={"/"} replace /> : <Register />,
-        },
-        {
-          path: 'profiles/:id',
-          element: <ProfileDetail />,
-          loader: ProfileDetailLoader,
-        },
-        {
-          path: 'profiles/user',
-          element: <ProfileDetail />,
-          loader: ProfileUserDetailLoader,
-        },
-        {
-          path: 'profiles/edit',
-          element: <ProfileEdit />,
-          loader: ProfileEditLoader,
-          action: ProfileEditAction
-        },
-        {
-          path: 'posts',
-          element: <PostList />,
-          loader: PostListLoader,
-        },
-        {
-          path: 'posts/create',
-          element: <PostForm />,
-          action: PostFormAction
-        }
-      ],
-    },
-  ]) 
+  const routes = (isLoggedIn: boolean) =>
+    createBrowserRouter([
+      {
+        path: '/',
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+          {
+            path: 'login',
+            element: isLoggedIn ? <Navigate to={'/'} replace /> : <Login />,
+          },
+          {
+            path: 'register',
+            element: isLoggedIn ? <Navigate to={'/'} replace /> : <Register />,
+          },
+          {
+            path: 'profiles/:id',
+            element: <ProfileDetail />,
+            loader: ProfileDetailLoader,
+          },
+          {
+            path: 'profiles/user',
+            element: <ProfileDetail />,
+            loader: ProfileUserDetailLoader,
+          },
+          {
+            path: 'profiles/edit',
+            element: <ProfileEdit />,
+            loader: ProfileEditLoader,
+            action: ProfileEditAction,
+          },
+          {
+            path: 'posts',
+            element: <PostList />,
+            loader: PostListLoader,
+          },
+          {
+            path: 'posts/create',
+            element: <PostForm />,
+            action: PostFormAction,
+          },
+        ],
+      },
+    ])
 
-  return (
-    <RouterProvider router={routes(!!userProfile)} />
-  )
-
+  return <RouterProvider router={routes(!!userProfile)} />
 }
 
 ReactDOM.render(
