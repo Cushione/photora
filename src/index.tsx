@@ -22,6 +22,7 @@ import ProfileEdit, {
 import PostForm, { PostFormAction, PostFormLoader } from './Routes/Posts/PostForm/PostForm'
 import Logout from './Authentication/Logout/Logout'
 import PostDetail, {
+  PostDetailAction,
   PostDetailLoader,
 } from './Routes/Posts/PostDetail/PostDetail'
 import axios from 'axios'
@@ -84,6 +85,7 @@ function Router() {
             path: 'posts/:id',
             element: <PostDetail />,
             loader: PostDetailLoader,
+            action: PostDetailAction
           },
           {
             path: 'posts/:id/delete',
