@@ -31,6 +31,7 @@ import ExplorePage, {
 } from './Routes/ExplorePage/ExplorePage'
 import { DeletePostAction, DeletePostLoader } from './Routes/Posts/DeletePost/DeletePost';
 import LikedPage, { LikedPageLoader } from './Routes/Posts/LikedPage/LikedPage';
+import SearchPage, { SearchPageLoader } from './Routes/SearchPage/SearchPage';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -76,6 +77,11 @@ function Router() {
             path: 'explore',
             element: <ExplorePage />,
             loader: ExplorePageLoader,
+          },
+          {
+            path: 'search',
+            element: <SearchPage />,
+            loader: SearchPageLoader,
           },
           {
             path: 'liked',

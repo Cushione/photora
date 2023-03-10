@@ -1,0 +1,17 @@
+#search-page-container {
+  max-width: 600px;
+}
+
+#search-page-spinner {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+}
+
+.form-group {
+  position: relative;
+
+  input {
+    padding-left: 32px;
+  }
+}
