@@ -1,17 +1,17 @@
 #search-page-container {
   max-width: 600px;
-}
 
-#search-page-spinner {
-  position: absolute;
-  top: 8px;
-  left: 10px;
-}
+  #search-form-group {
+    position: relative;
 
-.form-group {
-  position: relative;
+    input {
+      padding-left: 32px;
+    }
+  }
 
-  input {
-    padding-left: 32px;
+  #search-page-spinner {
+    position: absolute;
+    top: 8px;
+    left: 10px;
   }
 }

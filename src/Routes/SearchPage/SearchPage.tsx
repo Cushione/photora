@@ -61,7 +61,7 @@ export default function SearchPage() {
     <>
       <Container id='search-page-container'>
         <RouterForm ref={searchForm} role='search' className='mx-auto'>
-          <Form.Group controlId='searchFormKeywords'>
+          <Form.Group controlId='searchFormKeywords' id="search-form-group">
             <Form.Label srOnly>Keywords</Form.Label>
             <Form.Control
               type='search'
