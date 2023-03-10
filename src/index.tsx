@@ -28,6 +28,7 @@ import axios from 'axios'
 import ExplorePage, {
   ExplorePageLoader,
 } from './Routes/ExplorePage/ExplorePage'
+import { DeletePostAction, DeletePostLoader } from './Routes/Posts/DeletePost/DeletePost';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -83,6 +84,11 @@ function Router() {
             path: 'posts/:id',
             element: <PostDetail />,
             loader: PostDetailLoader,
+          },
+          {
+            path: 'posts/:id/delete',
+            action: DeletePostAction,
+            loader: DeletePostLoader
           },
           {
             path: 'posts/:id/edit',

@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React, { useState } from 'react'
-import { Button, Card, Image } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import { Button, Card, Image, Modal } from 'react-bootstrap'
+import { Form, Link, useNavigate } from 'react-router-dom'
 import { Post } from '../../shared/models/Post.model'
 import LikeButton from '../LikeButton/LikeButton'
 import ProfileLink from '../ProfileLink/ProfileLink'
@@ -11,12 +11,18 @@ interface PostEntryProps {
   onCommentClick: () => any
   openable?: boolean
 }
-export default function PostEntry({ post, openable, onCommentClick }: PostEntryProps) {
+export default function PostEntry({
+  post,
+  openable,
+  onCommentClick,
+}: PostEntryProps) {
   const navigate = useNavigate()
 
   const [numberOfLikes, setNumberOfLikes] = useState<number>(
     post.number_of_likes
   )
+
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
   const handleLikeToggle = (state: boolean) => {
     setNumberOfLikes(state ? numberOfLikes + 1 : numberOfLikes - 1)
@@ -28,44 +34,84 @@ export default function PostEntry({ post, openable, onCommentClick }: PostEntryP
     }
   }
 
+  const handleClose = () => {
+    setShowDeleteModal(false)
+  }
+
+  const handleDelete = () => {
+    setShowDeleteModal(false)
+  }
+
   return (
-    <Card key={post.id} className='my-4'>
-      <Card.Body>
-        <Card.Text className='d-flex justify-content-between'>
-          <ProfileLink
-            profileId={post.profile_id}
-            profileImage={post.profile_image}
-            profileName={post.profile_name}
-          />
-          <span>{moment(post.created_at).fromNow()}</span>
-        </Card.Text>
-      </Card.Body>
-      <Card.Img
-        src={post.image}
-        className={openable ? 'c-pointer' : ''}
-        onClick={openPost}
-      />
-      <Card.Body>
-        <Card.Text className='d-flex'>
-          <LikeButton post={post} onToggle={handleLikeToggle}></LikeButton>
-          <Button variant='link' onClick={onCommentClick}>
-            <i className='fa-regular fa-message'></i>
-          </Button>
-          {numberOfLikes > 0 && (
-            <Button variant='link' className='ml-2'>
-              {numberOfLikes} Like
-              {numberOfLikes !== 1 ? 's' : ''}
+    <>
+      <Card key={post.id} className='my-4'>
+        <Card.Body>
+          <Card.Text className='d-flex justify-content-between'>
+            <ProfileLink
+              profileId={post.profile_id}
+              profileImage={post.profile_image}
+              profileName={post.profile_name}
+            />
+            <span>{moment(post.created_at).fromNow()}</span>
+          </Card.Text>
+        </Card.Body>
+        <Card.Img
+          src={post.image}
+          className={openable ? 'c-pointer' : ''}
+          onClick={openPost}
+        />
+        <Card.Body>
+          <Card.Text className='d-flex'>
+            <LikeButton post={post} onToggle={handleLikeToggle}></LikeButton>
+            <Button variant='link' onClick={onCommentClick}>
+              <i className='fa-regular fa-message'></i>
             </Button>
-          )}
-          {post.is_owner && (
-            <Link className='ml-auto btn btn-primary' to={`/posts/${post.id}/edit`}>
-              <i className='fa-regular fa-pen-to-square'></i>
-            </Link>
-          )}
-        </Card.Text>
-        <Card.Title>{post.title}</Card.Title>
-        <Card.Text>{post.description}</Card.Text>
-      </Card.Body>
-    </Card>
+            {numberOfLikes > 0 && (
+              <Button variant='link' className='ml-2'>
+                {numberOfLikes} Like
+                {numberOfLikes !== 1 ? 's' : ''}
+              </Button>
+            )}
+            {post.is_owner && !openable && (
+              <>
+                <Link
+                  className='ml-auto btn btn-link'
+                  to={`/posts/${post.id}/edit`}
+                >
+                  <i className='fa-regular fa-pen-to-square'></i>
+                </Link>
+                <Button
+                  variant='link'
+                  className='text-danger'
+                  onClick={() => setShowDeleteModal(true)}
+                >
+                  <i className='fa-regular fa-trash-can'></i>
+                </Button>
+              </>
+            )}
+          </Card.Text>
+          <Card.Title>{post.title}</Card.Title>
+          <Card.Text>{post.description}</Card.Text>
+        </Card.Body>
+      </Card>
+      <Modal show={showDeleteModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure that you want to delete this Post: "{post.title}"?
+        </Modal.Body>
+        <Modal.Footer>
+          <Form method='delete' action='delete'>
+            <Button type='submit' variant='danger' onClick={handleDelete}>
+              Delete
+            </Button>
+          </Form>
+          <Button variant='secondary' onClick={handleClose}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   )
 }
