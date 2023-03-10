@@ -66,6 +66,7 @@ export default function SearchPage() {
             <Form.Control
               type='search'
               name='keywords'
+              placeholder='Search here'
               value={keywords || ''}
               onChange={(event) => {
                 setKeywords(event.target.value)
