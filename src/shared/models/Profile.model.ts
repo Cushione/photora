@@ -6,4 +6,5 @@ export default interface Profile {
   is_owner: boolean
   name: string
   owner: string
+  is_followed: boolean
 }

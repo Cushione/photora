@@ -1,6 +1,6 @@
 import axios from 'axios'
-import React from 'react'
-import { Card, Col, Image, Row } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Card, Col, Image, Row } from 'react-bootstrap'
 import { Link, useLoaderData, useNavigate } from 'react-router-dom'
 import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
@@ -26,10 +26,18 @@ export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
 
+  const [isFollowed, setIsFollowed] = useState<boolean>(profile.is_followed)
+
   const navigate = useNavigate()
 
   const openPost = (id: number) => {
     navigate(`/posts/${id}`)
+  }
+
+  const followProfile = async () => {
+    axios.post(`profiles/${profile.id}/followers`).then(res => {
+      setIsFollowed(res.status === 201)
+    })
   }
 
   return (
@@ -51,7 +59,7 @@ export default function ProfileDetail() {
             <Col>
               <h2 className='d-flex'>
                 {profile.name}
-                {profile.is_owner && (
+                {profile.is_owner ? (
                   <Link
                     to='/profiles/edit'
                     role='button'
@@ -59,6 +67,14 @@ export default function ProfileDetail() {
                   >
                     <i className='fa-regular fa-pen-to-square'></i>
                   </Link>
+                ) : (
+                  <Button
+                    onClick={followProfile}
+                    variant={isFollowed ? 'light' : 'primary'}
+                    className='ml-auto'
+                  >
+                    {isFollowed ? 'Unfollow' : 'Follow'}
+                  </Button>
                 )}
               </h2>
               <p>{profile.content}</p>
