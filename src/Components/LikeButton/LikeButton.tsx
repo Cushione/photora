@@ -1,6 +1,7 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { UserInfoContext } from '../../Authentication/UserInfoContext'
 import { Post } from '../../shared/models/Post.model'
 
 interface LikeButtonProps {
@@ -10,6 +11,7 @@ interface LikeButtonProps {
 
 export default function LikeButton({ post, onToggle }: LikeButtonProps) {
   const [active, setActive] = useState<boolean>(post.has_liked)
+  const { userProfile } = useContext(UserInfoContext)
 
   const toggleLike = async () => {
     const res = await axios.post(`posts/${post.id}/likes`)
@@ -19,6 +21,7 @@ export default function LikeButton({ post, onToggle }: LikeButtonProps) {
 
   return (
     <Button
+      disabled={!userProfile}
       variant='link'
       onClick={toggleLike}
       className={`like-button ${active ? 'liked' : ''}`}

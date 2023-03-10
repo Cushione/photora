@@ -1,7 +1,8 @@
 import moment from 'moment'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Card, Image, Modal } from 'react-bootstrap'
 import { Form, Link, useNavigate } from 'react-router-dom'
+import { UserInfoContext } from '../../Authentication/UserInfoContext'
 import { Post } from '../../shared/models/Post.model'
 import LikeButton from '../LikeButton/LikeButton'
 import ProfileLink from '../ProfileLink/ProfileLink'
@@ -17,6 +18,7 @@ export default function PostEntry({
   onCommentClick,
 }: PostEntryProps) {
   const navigate = useNavigate()
+  const { userProfile } = useContext(UserInfoContext)
 
   const [numberOfLikes, setNumberOfLikes] = useState<number>(
     post.number_of_likes
@@ -63,7 +65,11 @@ export default function PostEntry({
         <Card.Body>
           <Card.Text className='d-flex'>
             <LikeButton post={post} onToggle={handleLikeToggle}></LikeButton>
-            <Button variant='link' onClick={onCommentClick}>
+            <Button
+              variant='link'
+              onClick={onCommentClick}
+              disabled={!userProfile}
+            >
               <i className='fa-regular fa-message'></i>
             </Button>
             {numberOfLikes > 0 && (
