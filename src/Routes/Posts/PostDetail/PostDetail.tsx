@@ -1,8 +1,9 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { Form as RouterForm, useLoaderData } from 'react-router-dom'
+import { Form as RouterForm, Link, useLoaderData } from 'react-router-dom'
+import { UserInfoContext } from '../../../Authentication/UserInfoContext'
 import CommentCard from '../../../Components/CommentCard/CommentCard'
 import PostEntry from '../../../Components/PostEntry/PostEntry'
 import Comment from '../../../shared/models/Comment.model'
@@ -32,11 +33,10 @@ export default function PostDetail() {
   >
 
   const [comments, setComments] = useState<Comment[]>(initialComments.results)
-  
   const [currentNext, setCurrentNext] = useState<string>(initialComments.next)
-
   const [submitted, setSubmitted] = useState<boolean>(false)
   const commentInput = useRef<HTMLTextAreaElement | null>(null)
+  const { userProfile } = useContext(UserInfoContext)
 
   useEffect(() => {
     if (submitted) {
@@ -62,24 +62,31 @@ export default function PostDetail() {
     <Container id='post-detail-container'>
       {post && <PostEntry post={post} onCommentClick={() => void 0} />}
       <h2>Comments</h2>
-      <RouterForm method='post' onSubmit={() => setSubmitted(true)}>
-        <Form.Group controlId='commentFormContent'>
-          <Form.Label srOnly={true}>Comment Content</Form.Label>
-          <Form.Control
-            ref={commentInput}
-            required
-            as='textarea'
-            rows={2}
-            name='content'
-            placeholder='Enter your comment'
-          />
-        </Form.Group>
-        <div className='d-flex justify-content-end'>
-          <Button disabled={submitted} type='submit'>
-            {submitted ? 'Posting...' : 'Post'}
-          </Button>
-        </div>
-      </RouterForm>
+      {userProfile ? (
+        <RouterForm method='post' onSubmit={() => setSubmitted(true)}>
+          <Form.Group controlId='commentFormContent'>
+            <Form.Label srOnly={true}>Comment Content</Form.Label>
+            <Form.Control
+              ref={commentInput}
+              required
+              as='textarea'
+              rows={2}
+              name='content'
+              placeholder='Enter your comment'
+            />
+          </Form.Group>
+          <div className='d-flex justify-content-end'>
+            <Button disabled={submitted} type='submit'>
+              {submitted ? 'Posting...' : 'Post'}
+            </Button>
+          </div>
+        </RouterForm>
+      ) : (
+        <p>
+          <Link to='/login'>Log in</Link> or&nbsp;
+          <Link to='/register'>register</Link> to comment.
+        </p>
+      )}
       <hr />
       <InfiniteScroll
         dataLength={comments.length}
