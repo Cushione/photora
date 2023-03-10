@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Card, Col, Image, Row } from 'react-bootstrap'
 import { Link, useLoaderData, useNavigate } from 'react-router-dom'
+import FollowButton from '../../Components/FollowButton/FollowButton';
 import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
 import './ProfileDetail.scss'
@@ -26,18 +27,10 @@ export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
 
-  const [isFollowed, setIsFollowed] = useState<boolean>(profile.is_followed)
-
   const navigate = useNavigate()
 
   const openPost = (id: number) => {
     navigate(`/posts/${id}`)
-  }
-
-  const followProfile = async () => {
-    axios.post(`profiles/${profile.id}/followers`).then(res => {
-      setIsFollowed(res.status === 201)
-    })
   }
 
   return (
@@ -68,13 +61,7 @@ export default function ProfileDetail() {
                     <i className='fa-regular fa-pen-to-square'></i>
                   </Link>
                 ) : (
-                  <Button
-                    onClick={followProfile}
-                    variant={isFollowed ? 'light' : 'primary'}
-                    className='ml-auto'
-                  >
-                    {isFollowed ? 'Unfollow' : 'Follow'}
-                  </Button>
+                  <FollowButton profile_id={profile.id} is_followed={profile.is_followed} />
                 )}
               </h2>
               <p>{profile.content}</p>

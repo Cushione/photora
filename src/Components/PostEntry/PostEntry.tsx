@@ -5,6 +5,7 @@ import { Button, Card, Image, Modal } from 'react-bootstrap'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { UserInfoContext } from '../../Authentication/UserInfoContext'
 import { Post } from '../../shared/models/Post.model'
+import FollowButton from '../FollowButton/FollowButton'
 import LikeButton from '../LikeButton/LikeButton'
 import ProfileLink from '../ProfileLink/ProfileLink'
 
@@ -49,12 +50,11 @@ export default function PostEntry({
   }
 
   const openUserLikesModal = () => {
+    setUserLikes(null)
     setShowUserLikesModal(true)
-    if (!userLikes) {
-      axios
-        .get<UserLike[]>(`posts/${post.id}/likes`)
-        .then((res) => setUserLikes(res.data))
-    }
+    axios
+      .get<UserLike[]>(`posts/${post.id}/likes`)
+      .then((res) => setUserLikes(res.data))
   }
 
   return (
@@ -164,6 +164,9 @@ export default function PostEntry({
                   profileImage={user.profile_image}
                   profileName={user.profile_name}
                 />
+                {userProfile && !user.is_owner && (
+                  <FollowButton size='sm' {...user} />
+                )}
               </div>
             ))
           ) : (
