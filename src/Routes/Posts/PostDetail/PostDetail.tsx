@@ -45,7 +45,12 @@ export default function PostDetail() {
         setSubmitted(false)
       }
     }
-  }, [comments])
+    setComments(
+      initialComments.results
+        .filter((c1) => !comments.find((c2) => c2.id === c1.id))
+        .concat(comments)
+    )
+  }, [initialComments])
 
   const loadMoreComments = async () => {
     const url = new URL(currentNext)
@@ -54,7 +59,13 @@ export default function PostDetail() {
         url.pathname.toString() + url.search.toString()
       )
     ).data
-    setComments(comments.concat(newComments.results))
+    setComments(
+      comments.concat(
+        newComments.results.filter(
+          (c1) => !comments.find((c2) => c2.id === c1.id)
+        )
+      )
+    )
     setCurrentNext(newComments.next)
   }
 
