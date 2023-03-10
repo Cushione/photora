@@ -1,3 +1,4 @@
+import axios from 'axios'
 import moment from 'moment'
 import React, { useContext, useState } from 'react'
 import { Button, Card, Image, Modal } from 'react-bootstrap'
@@ -12,6 +13,15 @@ interface PostEntryProps {
   onCommentClick: () => any
   openable?: boolean
 }
+
+interface UserLike {
+  is_followed: boolean
+  profile_id: number
+  profile_image: string
+  profile_name: string
+  is_owner: boolean
+}
+
 export default function PostEntry({
   post,
   openable,
@@ -25,6 +35,8 @@ export default function PostEntry({
   )
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
+  const [showUserLikesModal, setShowUserLikesModal] = useState<boolean>(false)
+  const [userLikes, setUserLikes] = useState<UserLike[] | null>(null)
 
   const handleLikeToggle = (state: boolean) => {
     setNumberOfLikes(state ? numberOfLikes + 1 : numberOfLikes - 1)
@@ -36,12 +48,13 @@ export default function PostEntry({
     }
   }
 
-  const handleClose = () => {
-    setShowDeleteModal(false)
-  }
-
-  const handleDelete = () => {
-    setShowDeleteModal(false)
+  const openUserLikesModal = () => {
+    setShowUserLikesModal(true)
+    if (!userLikes) {
+      axios
+        .get<UserLike[]>(`posts/${post.id}/likes`)
+        .then((res) => setUserLikes(res.data))
+    }
   }
 
   return (
@@ -73,16 +86,17 @@ export default function PostEntry({
               <i className='fa-regular fa-message'></i>
             </Button>
             {numberOfLikes > 0 && (
-              <Button variant='link' className='ml-2'>
+              <Button
+                variant='link'
+                className='ml-2'
+                onClick={() => openUserLikesModal()}
+              >
                 {numberOfLikes} Like
                 {numberOfLikes !== 1 ? 's' : ''}
               </Button>
             )}
             {post.number_of_comments > 0 && (
-              <Button
-                variant='link'
-                onClick={onCommentClick}
-              >
+              <Button variant='link' onClick={onCommentClick}>
                 {post.number_of_comments} Comment
                 {post.number_of_comments !== 1 ? 's' : ''}
               </Button>
@@ -109,7 +123,7 @@ export default function PostEntry({
           <Card.Text>{post.description}</Card.Text>
         </Card.Body>
       </Card>
-      <Modal show={showDeleteModal} onHide={handleClose}>
+      <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Post</Modal.Title>
         </Modal.Header>
@@ -118,14 +132,46 @@ export default function PostEntry({
         </Modal.Body>
         <Modal.Footer>
           <Form method='delete' action='delete'>
-            <Button type='submit' variant='danger' onClick={handleDelete}>
+            <Button
+              type='submit'
+              variant='danger'
+              onClick={() => setShowDeleteModal(false)}
+            >
               Delete
             </Button>
           </Form>
-          <Button variant='secondary' onClick={handleClose}>
+          <Button variant='secondary' onClick={() => setShowDeleteModal(false)}>
             Cancel
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      <Modal
+        centered
+        size='sm'
+        show={showUserLikesModal}
+        onHide={() => setShowUserLikesModal(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Likes</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {userLikes ? (
+            userLikes.map((user) => (
+              <div className='d-flex justify-content-between mb-3'>
+                <ProfileLink
+                  profileId={user.profile_id}
+                  profileImage={user.profile_image}
+                  profileName={user.profile_name}
+                />
+              </div>
+            ))
+          ) : (
+            <p className='text-center p-4'>
+              <i className='fa-solid fa-circle-notch fa-spin fa-2xl'></i>
+            </p>
+          )}
+        </Modal.Body>
       </Modal>
     </>
   )
