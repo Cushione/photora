@@ -46,11 +46,11 @@ export async function PostFormAction({ request, params }) {
 
   if (request.method === 'post') {
     await axios.post('posts/', formData)
+    return redirect(`/profiles/user`)
   } else {
     await axios.put(`posts/${params.id}`, formData)
+    return redirect(`/posts/${params.id}`)
   }
-
-  return redirect(`/profiles/user`)
 }
 
 export default function PostForm() {
