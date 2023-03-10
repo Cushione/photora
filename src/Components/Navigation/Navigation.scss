@@ -18,11 +18,18 @@
   #nav-user {
     display: flex;
     align-items: center;
+    width: 100%;
 
     img#nav-avatar {
       height: 1.25em;
       object-fit: cover;
       border-radius: 50%;
+    }
+
+    span {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

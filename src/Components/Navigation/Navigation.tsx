@@ -25,7 +25,7 @@ export default function Navigation() {
           className={linkState}
         >
           <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img>{' '}
-          {userProfile.name}
+          <span>{userProfile.name}</span>
         </Nav.Link>
       )}
       <Nav.Link as={NavLink} to={`/`} className={linkState}>

@@ -17,6 +17,12 @@
       transition: filter 0.2s ease-out;
     }
   }
+
+  #profile-name {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 #profile-posts {

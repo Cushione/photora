@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Card, Col, Image, Row } from 'react-bootstrap'
 import { Link, useLoaderData, useNavigate } from 'react-router-dom'
-import FollowButton from '../../Components/FollowButton/FollowButton';
+import FollowButton from '../../Components/FollowButton/FollowButton'
 import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
 import './ProfileDetail.scss'
@@ -49,9 +49,9 @@ export default function ProfileDetail() {
                 />
               </div>
             </Col>
-            <Col>
+            <Col xs={12} sm={8}>
               <h2 className='d-flex'>
-                {profile.name}
+                <span id='profile-name'>{profile.name}</span>
                 {profile.is_owner ? (
                   <Link
                     to='/profiles/edit'
@@ -61,7 +61,10 @@ export default function ProfileDetail() {
                     <i className='fa-regular fa-pen-to-square'></i>
                   </Link>
                 ) : (
-                  <FollowButton profile_id={profile.id} is_followed={profile.is_followed} />
+                  <FollowButton
+                    profile_id={profile.id}
+                    is_followed={profile.is_followed}
+                  />
                 )}
               </h2>
               <p>{profile.content}</p>

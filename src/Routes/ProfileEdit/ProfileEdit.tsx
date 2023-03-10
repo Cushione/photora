@@ -7,16 +7,12 @@ import {
   redirect,
   useLoaderData,
 } from 'react-router-dom'
-import ImageInput from '../../Components/ImageInput/ImageInput';
+import ImageInput from '../../Components/ImageInput/ImageInput'
 import Profile from '../../shared/models/Profile.model'
-import Utils from '../../shared/utils';
+import Utils from '../../shared/utils'
 
 export async function ProfileEditLoader() {
-  const profile = (
-    await axios.get<{ title: string }[]>(
-      'profiles/user'
-    )
-  ).data
+  const profile = (await axios.get<{ title: string }[]>('profiles/user')).data
   return { profile }
 }
 
@@ -60,8 +56,13 @@ export default function ProfileEdit() {
                   type='text'
                   placeholder='Name'
                   name='name'
+                  maxLength={35}
+                  required
                   defaultValue={profile.name}
                 />
+                <Form.Text className='text-muted'>
+                  Changing your profile name does not change the username for logging in
+                </Form.Text>
               </Form.Group>
 
               <Form.Group controlId='profile-edit-content'>
@@ -81,13 +82,13 @@ export default function ProfileEdit() {
               >
                 {loading ? 'Saving...' : 'Save'}
               </Button>
-              <Link 
+              <Link
                 to={`/profiles/${profile.id}`}
-                role="button"
+                role='button'
                 className='btn btn-secondary ml-2'
-                >
-                  Cancel
-                </Link>
+              >
+                Cancel
+              </Link>
             </Col>
           </Row>
         </RouterForm>
