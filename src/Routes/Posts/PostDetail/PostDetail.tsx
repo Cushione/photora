@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
+import InfiniteScroll from 'react-infinite-scroll-component'
 import { Form as RouterForm, useLoaderData } from 'react-router-dom'
 import CommentCard from '../../../Components/CommentCard/CommentCard'
 import PostEntry from '../../../Components/PostEntry/PostEntry'
@@ -26,9 +27,13 @@ export async function PostDetailAction({ request, params }) {
 }
 
 export default function PostDetail() {
-  const { post, comments } = useLoaderData() as Awaited<
+  const { post, comments: initialComments } = useLoaderData() as Awaited<
     ReturnType<typeof PostDetailLoader>
   >
+
+  const [comments, setComments] = useState<Comment[]>(initialComments.results)
+  
+  const [currentNext, setCurrentNext] = useState<string>(initialComments.next)
 
   const [submitted, setSubmitted] = useState<boolean>(false)
   const commentInput = useRef<HTMLTextAreaElement | null>(null)
@@ -41,6 +46,17 @@ export default function PostDetail() {
       }
     }
   }, [comments])
+
+  const loadMoreComments = async () => {
+    const url = new URL(currentNext)
+    const newComments = (
+      await axios.get<PaginatedResult<Comment>>(
+        url.pathname.toString() + url.search.toString()
+      )
+    ).data
+    setComments(comments.concat(newComments.results))
+    setCurrentNext(newComments.next)
+  }
 
   return (
     <Container id='post-detail-container'>
@@ -65,13 +81,20 @@ export default function PostDetail() {
         </div>
       </RouterForm>
       <hr />
-      {comments && comments.results.length ? (
-        comments.results.map((comment) => (
-          <CommentCard key={comment.id} comment={comment} />
-        ))
-      ) : (
-        <p>No comments yet</p>
-      )}
+      <InfiniteScroll
+        dataLength={comments.length}
+        next={loadMoreComments}
+        hasMore={!!currentNext}
+        loader={<h1>Loading</h1>}
+      >
+        {comments && comments.length ? (
+          comments.map((comment) => (
+            <CommentCard key={comment.id} comment={comment} />
+          ))
+        ) : (
+          <p>No comments yet</p>
+        )}
+      </InfiniteScroll>
     </Container>
   )
 }
