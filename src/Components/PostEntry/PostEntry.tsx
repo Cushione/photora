@@ -78,6 +78,15 @@ export default function PostEntry({
                 {numberOfLikes !== 1 ? 's' : ''}
               </Button>
             )}
+            {post.number_of_comments > 0 && (
+              <Button
+                variant='link'
+                onClick={onCommentClick}
+              >
+                {post.number_of_comments} Comment
+                {post.number_of_comments !== 1 ? 's' : ''}
+              </Button>
+            )}
             {post.is_owner && !openable && (
               <>
                 <Link
