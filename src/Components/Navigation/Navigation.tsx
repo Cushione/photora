@@ -24,7 +24,8 @@ export default function Navigation() {
           to={`/profiles/${userProfile.id}`}
           className={linkState}
         >
-          <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img> {userProfile.name}
+          <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img>{' '}
+          {userProfile.name}
         </Nav.Link>
       )}
       <Nav.Link as={NavLink} to={`/`} className={linkState}>
@@ -37,6 +38,9 @@ export default function Navigation() {
 
       {userProfile && (
         <>
+          <Nav.Link as={NavLink} to={`/liked`} className={linkState}>
+            <i className='fa-regular fa-heart fa-fw'></i>Liked
+          </Nav.Link>
           <Nav.Link as={NavLink} to={`/posts/create`} className={linkState}>
             <i className='fa-regular fa-square-plus fa-fw'></i>Create
           </Nav.Link>
