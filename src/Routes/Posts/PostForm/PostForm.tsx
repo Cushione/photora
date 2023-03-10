@@ -44,8 +44,8 @@ export async function PostFormAction({ request, params }) {
     formData.append('image', '')
   }
 
-  if (request.method === 'post') {
-    await axios.post('posts/', formData)
+  if (request.method.toLowerCase() === 'post') {
+    await axios.post('posts', formData)
     return redirect(`/profiles/user`)
   } else {
     await axios.put(`posts/${params.id}`, formData)
@@ -102,7 +102,7 @@ export default function PostForm() {
             {loading ? 'Saving...' : data ? 'Update' : 'Create'}
           </Button>
           <Link
-            to={`/profiles/user`}
+            to={data ? `/posts/${data.id}` : '/profiles/user'}
             role='button'
             className='btn btn-secondary ml-2'
           >
