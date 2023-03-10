@@ -18,7 +18,7 @@ export default function ErrorPage() {
          <a href='javascript:void 0' onClick={() => navigate(-1)}>
           Go Back
         </a>
-        &nbsp;or return to the <Link to={'/'}>Homepage</Link>?
+        &nbsp;or return to the <Link to={'/home'}>Homepage</Link>?
       </p>
     </div>
   )

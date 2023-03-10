@@ -8,9 +8,11 @@ import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
 import { Post } from '../../shared/models/Post.model'
 import './PostList.scss'
 
-interface PostListProps extends PaginatedResult<Post> {}
+interface PostListProps extends PaginatedResult<Post> {
+  emptyMessage?: JSX.Element
+}
 
-export default function PostList({ next, results }: PostListProps) {
+export default function PostList({ next, results, emptyMessage }: PostListProps) {
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)
   const navigate = useNavigate()
@@ -45,7 +47,7 @@ export default function PostList({ next, results }: PostListProps) {
           ))
         ) : (
           <p>
-            <i>No posts</i>
+            {emptyMessage ? emptyMessage : <i>No posts</i>}
           </p>
         )}
       </InfiniteScroll>

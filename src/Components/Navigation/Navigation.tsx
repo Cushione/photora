@@ -28,7 +28,7 @@ export default function Navigation() {
           <span>{userProfile.name}</span>
         </Nav.Link>
       )}
-      <Nav.Link as={NavLink} to={`/`} className={linkState}>
+      <Nav.Link as={NavLink} to={`/home`} className={linkState}>
         <i className='fa-solid fa-house fa-fw'></i>Home
       </Nav.Link>
 

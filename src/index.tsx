@@ -32,6 +32,8 @@ import ExplorePage, {
 import { DeletePostAction, DeletePostLoader } from './Routes/Posts/DeletePost/DeletePost';
 import LikedPage, { LikedPageLoader } from './Routes/Posts/LikedPage/LikedPage';
 import SearchPage, { SearchPageLoader } from './Routes/SearchPage/SearchPage';
+import HomePage from './Routes/HomePage/HomePage';
+import FeedPage, { FeedPageLoader } from './Routes/FeedPage/FeedPage';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -46,16 +48,22 @@ function Router() {
         errorElement: <ErrorPage />,
         children: [
           {
+            path: 'home',
+            element: <FeedPage />,
+            loader: FeedPageLoader,
+            errorElement: <HomePage />
+          },
+          {
             path: 'login',
-            element: isLoggedIn ? <Navigate to={'/'} replace /> : <Login />,
+            element: isLoggedIn ? <Navigate to={'/home'} replace /> : <Login />,
           },
           {
             path: 'register',
-            element: isLoggedIn ? <Navigate to={'/'} replace /> : <Register />,
+            element: isLoggedIn ? <Navigate to={'/home'} replace /> : <Register />,
           },
           {
             path: 'logout',
-            element: !isLoggedIn ? <Navigate to={'/'} replace /> : <Logout />,
+            element: !isLoggedIn ? <Navigate to={'/home'} replace /> : <Logout />,
           },
           {
             path: 'profiles/:id',
@@ -106,7 +114,7 @@ function Router() {
           },
           {
             path: 'posts/:id/edit',
-            element: isLoggedIn ? <PostForm /> : <Navigate to={'/'} />,
+            element: isLoggedIn ? <PostForm /> : <Navigate to={'/home'} />,
             action: PostFormAction,
             loader: PostFormLoader
           },

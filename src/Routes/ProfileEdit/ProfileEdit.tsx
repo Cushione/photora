@@ -51,7 +51,7 @@ export default function ProfileEdit() {
             </Col>
             <Col>
               <Form.Group controlId='profile-edit-name'>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Profile Name</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='Name'
