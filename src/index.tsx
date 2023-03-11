@@ -34,6 +34,7 @@ import LikedPage, { LikedPageLoader } from './Routes/Posts/LikedPage/LikedPage';
 import SearchPage, { SearchPageLoader } from './Routes/SearchPage/SearchPage';
 import HomePage from './Routes/HomePage/HomePage';
 import FeedPage, { FeedPageLoader } from './Routes/FeedPage/FeedPage';
+import LandingPage from './Routes/LandingPage/LandingPage';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -42,6 +43,10 @@ function Router() {
 
   const routes = (isLoggedIn: boolean) =>
     createBrowserRouter([
+      {
+        path: '',
+        element: <LandingPage />
+      },
       {
         path: '/',
         element: <Root />,

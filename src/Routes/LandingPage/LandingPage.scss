@@ -1,0 +1,109 @@
+@import '../../shared/variables.scss';
+
+.jumbotron {
+  background-color: $primaryColor;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    font-size: 2rem;
+    letter-spacing: 0.3em;
+    background: rgb(255, 255, 255);
+    background: -webkit-linear-gradient(
+      69deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(103, 239, 255, 1) 50%,
+      rgba(47, 83, 115, 1) 90%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media screen and (min-width: 550px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    h1 {
+      font-size: 5rem;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    h1 {
+      font-size: 6rem;
+    }
+  }
+
+  /* Icon copied from https://codemyui.com/scroll-icon-animation/ */
+
+  #icon-scroll,
+  #icon-scroll:before {
+    position: absolute;
+    left: 50%;
+  }
+
+  #icon-scroll {
+    width: 40px;
+    height: 70px;
+    bottom: 15vh;
+    margin-left: -20px;
+    margin-top: -35px;
+    box-shadow: inset 0 0 0 1px #fff;
+    border-radius: 25px;
+    padding: 20px;
+
+    &:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      margin-left: -4px;
+      top: 8px;
+      border-radius: 4px;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+      animation-name: scroll;
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(46px);
+    }
+  }
+}
+
+#features {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    padding: 0.25rem 1.5rem;
+  }
+
+  .row {
+    padding: 10vh 0;
+  }
+
+  .lead-text {
+    max-width: 60vw;
+    margin: 0 auto;
+  }
+
+}
