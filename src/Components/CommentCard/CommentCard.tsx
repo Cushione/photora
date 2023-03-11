@@ -3,6 +3,7 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import { Button, Card, Form, Modal } from 'react-bootstrap'
 import Comment from '../../shared/models/Comment.model'
+import { useShowMessage } from '../Messages/MessagesContext';
 import ProfileLink from '../ProfileLink/ProfileLink'
 
 interface CommentCardProps {
@@ -15,6 +16,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
   const [content, setContent] = useState(comment.content)
   const [loading, setLoading] = useState<boolean>(false)
   const [deleted, setDeleted] = useState<boolean>(false)
+  const showMessage = useShowMessage()
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
@@ -26,6 +28,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
         setLoading(false)
         setShowForm(false)
         setCommentText(res.data.content)
+        showMessage({content: "Comment updated"})
       })
   }
 
@@ -38,6 +41,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
         setShowForm(false)
         setDeleted(true)
         setShowDeleteModal(false)
+        showMessage({content: "Comment deleted"})
       })
   }
 

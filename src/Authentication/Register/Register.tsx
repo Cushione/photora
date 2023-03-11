@@ -3,6 +3,7 @@ import Alert from 'react-bootstrap/esm/Alert'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/esm/Form'
 import { Link } from 'react-router-dom'
+import { useShowMessage } from '../../Components/Messages/MessagesContext'
 import usePageTitle from '../../shared/hooks/usePageTitle'
 import { login, register } from '../Authentication'
 import { UserInfoContext } from '../UserInfoContext'
@@ -14,6 +15,7 @@ function Register() {
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
   const { setLoggedIn } = useContext(UserInfoContext)
+  const showMessage = useShowMessage()
 
   usePageTitle('Register')
 
@@ -25,6 +27,7 @@ function Register() {
       .then(() => login(username, password1))
       .then(() => {
         setLoggedIn(true)
+        showMessage({ content: `Logged in as ${username}` })
       })
       .catch((error) => {
         if (error.response) {

@@ -8,6 +8,7 @@ import {
   useLoaderData,
 } from 'react-router-dom'
 import ImageInput from '../../../Components/ImageInput/ImageInput'
+import { showMessage } from '../../../Components/Messages/MessagesContext';
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
@@ -48,9 +49,11 @@ export async function PostFormAction({ request, params }) {
 
   if (request.method.toLowerCase() === 'post') {
     await axios.post('posts', formData)
+    showMessage({content: 'Post created'})
     return redirect(`/profiles/user`)
   } else {
     await axios.put(`posts/${params.id}`, formData)
+    showMessage({content: 'Post updated'})
     return redirect(`/posts/${params.id}`)
   }
 }
