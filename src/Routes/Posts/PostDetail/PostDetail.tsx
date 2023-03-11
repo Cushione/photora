@@ -76,7 +76,7 @@ export default function PostDetail() {
 
   return (
     <Container id='post-detail-container'>
-      {post && <PostEntry post={post} onCommentClick={() => void 0} />}
+      {post && <PostEntry post={post} onCommentClick={() => commentInput.current?.focus()} />}
       <h2>Comments</h2>
       {userProfile ? (
         <RouterForm method='post' onSubmit={() => setSubmitted(true)}>
