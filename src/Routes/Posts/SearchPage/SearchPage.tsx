@@ -7,10 +7,10 @@ import {
   useNavigation,
   useSubmit,
 } from 'react-router-dom'
-import PostList from '../../Components/PostList/PostList'
-import usePageTitle from '../../shared/hooks/usePageTitle'
-import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
-import { Post } from '../../shared/models/Post.model'
+import PostList from '../../../Components/PostList/PostList'
+import usePageTitle from '../../../shared/hooks/usePageTitle'
+import { PaginatedResult } from '../../../shared/models/PaginatedResponse.model'
+import { Post } from '../../../shared/models/Post.model'
 import './SearchPage.scss'
 
 export async function SearchPageLoader({ request }) {

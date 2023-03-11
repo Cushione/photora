@@ -7,10 +7,10 @@ import {
   redirect,
   useLoaderData,
 } from 'react-router-dom'
-import ImageInput from '../../Components/ImageInput/ImageInput'
-import usePageTitle from '../../shared/hooks/usePageTitle'
-import Profile from '../../shared/models/Profile.model'
-import Utils from '../../shared/utils'
+import ImageInput from '../../../Components/ImageInput/ImageInput'
+import usePageTitle from '../../../shared/hooks/usePageTitle'
+import Profile from '../../../shared/models/Profile.model'
+import Utils from '../../../shared/utils'
 
 export async function ProfileEditLoader() {
   const profile = (await axios.get<{ title: string }[]>('profiles/user')).data

@@ -2,10 +2,10 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Card, Col, Image, Row } from 'react-bootstrap'
 import { Link, useLoaderData, useNavigate } from 'react-router-dom'
-import FollowButton from '../../Components/FollowButton/FollowButton'
-import usePageTitle from '../../shared/hooks/usePageTitle'
-import { Post } from '../../shared/models/Post.model'
-import Profile from '../../shared/models/Profile.model'
+import FollowButton from '../../../Components/FollowButton/FollowButton'
+import usePageTitle from '../../../shared/hooks/usePageTitle'
+import { Post } from '../../../shared/models/Post.model'
+import Profile from '../../../shared/models/Profile.model'
 import './ProfileDetail.scss'
 
 export async function ProfileDetailLoader({
@@ -75,7 +75,7 @@ export default function ProfileDetail() {
           <Row xs='2' md='3' id='profile-posts' className='mt-5'>
             {posts.map((post) => (
               <Col key={post.id}>
-                <Card className='c-pointer' onClick={() => openPost(post.id)}>
+                <Card className='c-pointer profile-post' onClick={() => openPost(post.id)}>
                   <Card.Img src={post.image} alt={post.title} />
                 </Card>
               </Col>

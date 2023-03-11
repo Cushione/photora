@@ -14,11 +14,11 @@ import {
 import ProfileDetail, {
   ProfileDetailLoader,
   ProfileUserDetailLoader,
-} from './Routes/ProfileDetail/ProfileDetail'
+} from './Routes/Profiles/ProfileDetail/ProfileDetail'
 import ProfileEdit, {
   ProfileEditLoader,
   ProfileEditAction,
-} from './Routes/ProfileEdit/ProfileEdit'
+} from './Routes/Profiles/ProfileEdit/ProfileEdit'
 import PostForm, {
   PostFormAction,
   PostFormLoader,
@@ -31,15 +31,15 @@ import PostDetail, {
 import axios from 'axios'
 import ExplorePage, {
   ExplorePageLoader,
-} from './Routes/ExplorePage/ExplorePage'
+} from './Routes/Posts/ExplorePage/ExplorePage'
 import {
   DeletePostAction,
   DeletePostLoader,
 } from './Routes/Posts/DeletePost/DeletePost'
 import LikedPage, { LikedPageLoader } from './Routes/Posts/LikedPage/LikedPage'
-import SearchPage, { SearchPageLoader } from './Routes/SearchPage/SearchPage'
+import SearchPage, { SearchPageLoader } from './Routes/Posts/SearchPage/SearchPage'
 import HomePage from './Routes/HomePage/HomePage'
-import FeedPage, { FeedPageLoader } from './Routes/FeedPage/FeedPage'
+import FeedPage, { FeedPageLoader } from './Routes/Posts/FeedPage/FeedPage'
 import LandingPage from './Routes/LandingPage/LandingPage'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
