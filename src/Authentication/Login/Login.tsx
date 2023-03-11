@@ -11,7 +11,7 @@ import { login } from '../Authentication'
  * Login Page Component
  * @returns Login Form Component
  */
-function Login(): JSX.Element {
+function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(true)

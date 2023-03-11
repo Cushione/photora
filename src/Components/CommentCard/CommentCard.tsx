@@ -3,13 +3,21 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import { Button, Card, Form, Modal } from 'react-bootstrap'
 import Comment from '../../shared/models/Comment.model'
-import { useShowMessage } from '../Messages/MessagesContext';
+import { useShowMessage } from '../Messages/MessagesContext'
 import ProfileLink from '../ProfileLink/ProfileLink'
 
+/**
+ * Props for the Comment Card Component
+ */
 interface CommentCardProps {
   comment: Comment
 }
 
+/**
+ * Component to display an comment
+ * @param props Comment Card Props
+ * @returns Comment Card
+ */
 export default function CommentCard({ comment }: CommentCardProps) {
   const [showForm, setShowForm] = useState<boolean>(false)
   const [commentText, setCommentText] = useState(comment.content)
@@ -20,7 +28,12 @@ export default function CommentCard({ comment }: CommentCardProps) {
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
-  const updateComment = () => {
+  /**
+   * Update Comment Handler
+   * Send update request. On success, hide form,
+   * update comment text and show message
+   */
+  const updateComment = (): void => {
     setLoading(true)
     axios
       .put<Comment>(`posts/${comment.post}/comments/${comment.id}`, { content })
@@ -28,11 +41,17 @@ export default function CommentCard({ comment }: CommentCardProps) {
         setLoading(false)
         setShowForm(false)
         setCommentText(res.data.content)
-        showMessage({content: "Comment updated"})
+        showMessage({ content: 'Comment updated' })
       })
   }
 
-  const deleteComment = () => {
+  /**
+   * Delete Comment Handler
+   * Send delete request. On success, hide form and
+   * confirm modal, mark comment as deleted and show
+   * message
+   */
+  const deleteComment = (): void => {
     setLoading(true)
     axios
       .delete<void>(`posts/${comment.post}/comments/${comment.id}`)
@@ -41,12 +60,16 @@ export default function CommentCard({ comment }: CommentCardProps) {
         setShowForm(false)
         setDeleted(true)
         setShowDeleteModal(false)
-        showMessage({content: "Comment deleted"})
+        showMessage({ content: 'Comment deleted' })
       })
   }
 
+  /**
+   * Handle Modal Close
+   * Close modal if no request is currently active
+   */
   const handleClose = () => {
-    if(!loading) {
+    if (!loading) {
       setShowDeleteModal(false)
     }
   }
@@ -56,35 +79,44 @@ export default function CommentCard({ comment }: CommentCardProps) {
       <Card className='mb-1' hidden={deleted}>
         <Card.Body>
           <Card.Title className='d-flex justify-content-between'>
+            {/* Author Profile Link */}
             <ProfileLink
               profileId={comment.profile_id}
               profileImage={comment.profile_image}
               profileName={comment.profile_name}
             />
-            {comment.is_owner && <div>
-              <Button
-                hidden={showForm}
-                disabled={loading}
-                size='sm'
-                variant='link'
-                className='text-danger mr-1'
-                onClick={() => setShowDeleteModal(true)}
-              >
-                <i className='fa-regular fa-trash-can'></i>
-              </Button>
-              <Button
-                disabled={loading}
-                size='sm'
-                variant={showForm ? 'primary' : 'link'}
-                onClick={() => setShowForm(!showForm)}
-              >
-                <i className='fa-regular fa-pen-to-square'></i>
-              </Button>
-            </div>}
+
+            {/* If owner, show comment manipulation buttons */}
+            {comment.is_owner && (
+              <div>
+                <Button
+                  hidden={showForm}
+                  disabled={loading}
+                  size='sm'
+                  variant='link'
+                  className='text-danger mr-1'
+                  onClick={() => setShowDeleteModal(true)}
+                >
+                  <i className='fa-regular fa-trash-can'></i>
+                </Button>
+                <Button
+                  disabled={loading}
+                  size='sm'
+                  variant={showForm ? 'primary' : 'link'}
+                  onClick={() => setShowForm(!showForm)}
+                >
+                  <i className='fa-regular fa-pen-to-square'></i>
+                </Button>
+              </div>
+            )}
           </Card.Title>
+
+          {/* Comment creation timestamp */}
           <Card.Subtitle className='mb-2 text-muted'>
             {moment(comment.created_at).fromNow()}
           </Card.Subtitle>
+
+          {/* Inline form or comment text that can be toggle by the user */}
           {showForm ? (
             <Form>
               <Form.Group controlId='commentFormContent'>
@@ -119,6 +151,8 @@ export default function CommentCard({ comment }: CommentCardProps) {
           )}
         </Card.Body>
       </Card>
+
+      {/* Modal for confirming the deletion of a comment */}
       <Modal show={showDeleteModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Comment</Modal.Title>
@@ -130,11 +164,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
           <Button variant='danger' disabled={loading} onClick={deleteComment}>
             Delete
           </Button>
-          <Button
-            variant='secondary'
-            disabled={loading}
-            onClick={handleClose}
-          >
+          <Button variant='secondary' disabled={loading} onClick={handleClose}>
             Cancel
           </Button>
         </Modal.Footer>

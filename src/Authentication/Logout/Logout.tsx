@@ -6,7 +6,7 @@ import { setLogin } from '../UserInfoContext';
  * Initialises user logout
  * @returns empty JSX
  */
-export default function Logout(): JSX.Element {
+export default function Logout() {
 
   /* On component mount, trigger user logout and 
   display message */

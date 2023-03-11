@@ -11,7 +11,7 @@ import { login, register } from '../Authentication'
  * Register Page Component
  * @returns Register Form
  */
-function Register(): JSX.Element {
+function Register() {
   const [username, setUsername] = useState('')
   const [password1, setPassword1] = useState('')
   const [password2, setPassword2] = useState('')

@@ -1,21 +1,38 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { setLogin } from './UserInfoContext'
 
+/**
+ * Response body of a successful login
+ */
 interface LoginResponse {
   access: string
   refresh: string
 }
 
+/**
+ * Defines token storage keys
+ */
 enum Token {
   Access = 'AccessToken',
   Refresh = 'RefreshToken',
   RememberMe = 'RememberMe',
 }
 
+/**
+ * Checks if the storage contains an access token in order
+ * to decide whether the user is currently logged in
+ * @returns current user login state
+ */
 export function isLoggedIn(): boolean {
   return !!getToken(Token.Access)
 }
 
+/**
+ * Send login request with the provided data
+ * @param username username
+ * @param password password
+ * @returns login response body
+ */
 export async function login(
   username: string,
   password: string
@@ -28,10 +45,17 @@ export async function login(
     },
     { retry: false } as any
   )
+  // Set user login state to true
   setLogin(true)
   return res
 }
 
+/**
+ * Send register request with provided data
+ * @param username username
+ * @param password1 password
+ * @param password2 confirm password
+ */
 export function register(
   username: string,
   password1: string,
@@ -48,12 +72,20 @@ export function register(
   )
 }
 
+/**
+ * Logout user by removing tokens from storage
+ */
 export function logout(): void {
   removeToken(Token.Access)
   removeToken(Token.Refresh)
   removeToken(Token.RememberMe)
 }
 
+/**
+ * Send access token refresh request with provided refresh token
+ * @param refresh refresh token
+ * @returns whether request was successful
+ */
 async function refreshAccessToken(refresh: string): Promise<boolean> {
   const response = await axios.post<{ access: string }>('api/token/refresh/', {
     refresh,

@@ -2,6 +2,8 @@
   display: none;
 }
 
+// Styles for responsive square image
+// https://spin.atomicobject.com/2015/07/14/css-responsive-square/
 .image-input-label {
   cursor: pointer;
   position: relative;
@@ -21,6 +23,7 @@
     transition: filter 0.2s ease-out;
   }
 
+  // Center pen icon
   i {
     opacity: 0;
     position: absolute;
@@ -31,6 +34,7 @@
     transition: opacity 0.2s ease-out;
   }
 
+  // Image hover effect
   &:hover {
     img {
       filter: brightness(0.7);

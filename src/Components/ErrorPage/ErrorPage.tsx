@@ -2,6 +2,11 @@ import React from 'react'
 import { Link, useNavigate, useRouteError } from 'react-router-dom'
 import './ErrorPage.scss'
 
+/**
+ * Error Page Component
+ * Used to display error messages
+ * @returns Error Page
+ */
 export default function ErrorPage() {
   const error = useRouteError()
   const navigate = useNavigate()
@@ -15,7 +20,7 @@ export default function ErrorPage() {
       </p>
       <p>
         Would you like to&nbsp;
-         <a href='javascript:void 0' onClick={() => navigate(-1)}>
+        <a href='javascript:void 0' onClick={() => navigate(-1)}>
           Go Back
         </a>
         &nbsp;or return to the <Link to={'/home'}>Homepage</Link>?

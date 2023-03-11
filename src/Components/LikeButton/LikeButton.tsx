@@ -4,11 +4,19 @@ import { Button } from 'react-bootstrap'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext';
 import { Post } from '../../shared/models/Post.model'
 
+/**
+ * Props for the Like Button Component
+ */
 interface LikeButtonProps {
   post: Post
   onToggle?: (state: boolean) => any
 }
 
+/**
+ * 
+ * @param param0 
+ * @returns 
+ */
 export default function LikeButton({ post, onToggle }: LikeButtonProps) {
   const [active, setActive] = useState<boolean>(post.has_liked)
   const { loggedIn } = useUserInfoStore()

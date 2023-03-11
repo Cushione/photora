@@ -12,7 +12,7 @@ import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
 import {
-  UserInfoProvider,
+  UserInfoHandler,
   useUserInfoStore,
 } from './Authentication/UserInfoContext'
 import ProfileDetail, {
@@ -170,7 +170,7 @@ ReactDOM.render(
   <React.StrictMode>
     <RouterProvider />
     <MessageProvider />
-    <UserInfoProvider />
+    <UserInfoHandler />
   </React.StrictMode>,
   document.getElementById('root')
 )

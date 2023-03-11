@@ -6,6 +6,9 @@ import { create } from 'zustand'
 
 type UserProfile = Profile | undefined | null
 
+/**
+ * Structure of the user info store
+ */
 interface UserInfoStore {
   userProfile: UserProfile
   loggedIn: boolean
@@ -13,9 +16,10 @@ interface UserInfoStore {
   fetchUserProfile: () => void
 }
 
-
+// Setup Axios interceptors before creating user info store
 setupInterceptors()
 
+// Create user info store from managing user info state
 export const useUserInfoStore = create<UserInfoStore>((set) => ({
   userProfile: undefined,
   loggedIn: isLoggedIn(),
@@ -29,15 +33,27 @@ export const useUserInfoStore = create<UserInfoStore>((set) => ({
   },
 }))
 
+/**
+ * Set user login state
+ * @param state login state
+ */
 export const setLogin = (state: boolean) => {
   useUserInfoStore.setState({ loggedIn: state })
 }
 
+/**
+ * Update user profile in state
+ * @param profile user profile
+ */
 export const updateUserProfile = (profile: Profile) => {
   useUserInfoStore.setState({ userProfile: profile })
 }
 
-export function UserInfoProvider() {
+/**
+ * Component for handling user profile in state
+ * @returns User Info Handler Component
+ */
+export function UserInfoHandler() {
   const { setUserProfile, fetchUserProfile, loggedIn } = useUserInfoStore()
 
   useEffect(() => {
