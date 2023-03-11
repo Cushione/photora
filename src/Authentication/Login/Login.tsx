@@ -6,14 +6,12 @@ import { Link } from 'react-router-dom'
 import { useShowMessage } from '../../Components/Messages/MessagesContext'
 import usePageTitle from '../../shared/hooks/usePageTitle'
 import { login } from '../Authentication'
-import { UserInfoContext } from '../UserInfoContext'
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
-  const { setLoggedIn } = useContext(UserInfoContext)
   const showMessage = useShowMessage()
 
   usePageTitle('Login')
@@ -24,7 +22,6 @@ function Login() {
     localStorage.setItem('RememberMe', JSON.stringify(rememberMe))
     login(username, password)
       .then(() => {
-        setLoggedIn(true)
         showMessage({ content: `Logged in as ${username}` })
       })
       .catch((error) => {

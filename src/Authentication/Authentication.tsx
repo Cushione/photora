@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { setLogin } from './UserInfoContext';
 
 interface LoginResponse {
   access: string
@@ -9,11 +10,11 @@ export function isLoggedIn(): boolean {
   return !!getToken('AccessToken')
 }
 
-export function login(
+export async function login(
   username: string,
   password: string
 ): Promise<AxiosResponse<LoginResponse>> {
-  return axios.post<LoginResponse>(
+  const res = await axios.post<LoginResponse>(
     'api/token/',
     {
       username,
@@ -21,6 +22,8 @@ export function login(
     },
     { retry: false } as any
   )
+  setLogin(true)
+  return res
 }
 
 export function register(
@@ -53,7 +56,7 @@ async function refreshAccessToken(refresh: string): Promise<boolean> {
   return response.status === 200
 }
 
-function getToken(type: string): string | null {
+export function getToken(type: string): string | null {
   return localStorage.getItem(type) || sessionStorage.getItem(type)
 }
 
@@ -90,7 +93,7 @@ export function setupInterceptors() {
       return response
     },
     async (error) => {
-      if (error.response.status == 401) {
+      if (error.response.status == 401 || error.response.status === 403) {
         const accessToken = getToken('AccessToken')
         if (accessToken) {
           removeToken('AccessToken')
@@ -105,7 +108,6 @@ export function setupInterceptors() {
           }
         }
         localStorage.removeItem('RememberMe')
-        // TODO: Navigate to login
       }
       return Promise.reject(error)
     }

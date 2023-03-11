@@ -1,54 +1,54 @@
 import axios from 'axios'
-import React, { createContext, useEffect, useState } from 'react'
-import { isLoggedIn, logout, setupInterceptors } from './Authentication'
+import React, { useEffect } from 'react'
+import { getToken, isLoggedIn, logout, setupInterceptors } from './Authentication'
 import Profile from '../shared/models/Profile.model'
+import { create } from 'zustand'
+import { useNavigate } from 'react-router-dom';
 
 type UserProfile = Profile | undefined | null
 
-interface UserInfo {
+interface UserInfoStore {
   userProfile: UserProfile
-  setLoggedIn: any
-  setDataChange: any
+  loggedIn: boolean
+  setUserProfile: (profile: UserProfile) => void
+  fetchUserProfile: () => void
 }
 
-export const UserInfoContext = createContext<UserInfo>({
+
+setupInterceptors()
+
+export const useUserInfoStore = create<UserInfoStore>((set) => ({
   userProfile: undefined,
-  setLoggedIn: undefined,
-  setDataChange: undefined,
-})
+  loggedIn: isLoggedIn(),
+  setUserProfile: (profile: UserProfile) =>
+    set(() => ({ userProfile: profile })),
+  fetchUserProfile: async () => {
+    if (getToken("AccessToken")) {
+      const res = axios.get('profiles/user')
+      set({ userProfile: await (await res).data })
+    }
+  },
+}))
 
-export function UserInfoProvider({ children }) {
-  const [userProfile, setUserProfile] = useState<UserProfile>(undefined)
-  const [dataChange, setDataChange] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(isLoggedIn())
+export const setLogin = (state: boolean) => {
+  useUserInfoStore.setState({ loggedIn: state })
+}
+
+export const updateUserProfile = (profile: Profile) => {
+  useUserInfoStore.setState({ userProfile: profile })
+}
+
+export function UserInfoProvider() {
+  const { setUserProfile, fetchUserProfile, loggedIn } = useUserInfoStore()
 
   useEffect(() => {
-    setupInterceptors()
-  }, [])
-
-  useEffect(() => {
-    if (loggedIn || dataChange) {
-      getUserProfile()
+    if (loggedIn) {
+      fetchUserProfile()
     } else if (!loggedIn) {
       setUserProfile(null)
       logout()
     }
-  }, [loggedIn, dataChange])
+  }, [loggedIn])
 
-  function getUserProfile() {
-    axios.get('profiles/user').then((res) => {
-      setUserProfile(res.data)
-      if (dataChange) {
-        setDataChange(false)
-      }
-    })
-  }
-
-  return (
-    <UserInfoContext.Provider
-      value={{ userProfile, setLoggedIn, setDataChange }}
-    >
-      {children}
-    </UserInfoContext.Provider>
-  )
+  return <></>
 }

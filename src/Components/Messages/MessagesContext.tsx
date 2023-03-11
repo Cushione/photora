@@ -38,11 +38,10 @@ export const showMessage = (message: Message) => {
   })
 }
 
-export function MessageProvider({ children }) {
+export function MessageProvider() {
   const messages = useMessageStore((state) => state.messages)
 
   return (
-    <>
       <div
         style={{
           position: 'absolute',
@@ -55,7 +54,5 @@ export function MessageProvider({ children }) {
           <MessageToast key={message.time} {...message} />
         ))}
       </div>
-      {children}
-    </>
   )
 }

@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Form as RouterForm, Link, useLoaderData } from 'react-router-dom'
-import { UserInfoContext } from '../../../Authentication/UserInfoContext'
+import { useUserInfoStore } from '../../../Authentication/UserInfoContext';
 import CommentCard from '../../../Components/CommentCard/CommentCard'
 import { showMessage } from '../../../Components/Messages/MessagesContext';
 import PostEntry from '../../../Components/PostEntry/PostEntry'
@@ -39,7 +39,7 @@ export default function PostDetail() {
   const [currentNext, setCurrentNext] = useState<string>(initialComments.next)
   const [submitted, setSubmitted] = useState<boolean>(false)
   const commentInput = useRef<HTMLTextAreaElement | null>(null)
-  const { userProfile } = useContext(UserInfoContext)
+  const { loggedIn } = useUserInfoStore()
 
   usePageTitle(post.title)
 
@@ -78,7 +78,7 @@ export default function PostDetail() {
     <Container id='post-detail-container'>
       {post && <PostEntry post={post} onCommentClick={() => commentInput.current?.focus()} />}
       <h2>Comments</h2>
-      {userProfile ? (
+      {loggedIn ? (
         <RouterForm method='post' onSubmit={() => setSubmitted(true)}>
           <Form.Group controlId='commentFormContent'>
             <Form.Label srOnly={true}>Comment Content</Form.Label>

@@ -1,9 +1,9 @@
 import axios from 'axios'
 import moment from 'moment'
 import React, { useContext, useState } from 'react'
-import { Button, Card, Image, Modal } from 'react-bootstrap'
+import { Button, Card, Modal } from 'react-bootstrap'
 import { Form, Link, useNavigate } from 'react-router-dom'
-import { UserInfoContext } from '../../Authentication/UserInfoContext'
+import { useUserInfoStore } from '../../Authentication/UserInfoContext';
 import { Post } from '../../shared/models/Post.model'
 import FollowButton from '../FollowButton/FollowButton'
 import LikeButton from '../LikeButton/LikeButton'
@@ -29,7 +29,7 @@ export default function PostEntry({
   onCommentClick,
 }: PostEntryProps) {
   const navigate = useNavigate()
-  const { userProfile } = useContext(UserInfoContext)
+  const { loggedIn } = useUserInfoStore()
 
   const [numberOfLikes, setNumberOfLikes] = useState<number>(
     post.number_of_likes
@@ -81,7 +81,7 @@ export default function PostEntry({
             <Button
               variant='link'
               onClick={onCommentClick}
-              disabled={!userProfile}
+              disabled={!loggedIn}
             >
               <i className='fa-regular fa-message'></i>
             </Button>
@@ -164,7 +164,7 @@ export default function PostEntry({
                   profileImage={user.profile_image}
                   profileName={user.profile_name}
                 />
-                {userProfile && !user.is_owner && (
+                {loggedIn && !user.is_owner && (
                   <FollowButton size='sm' {...user} />
                 )}
               </div>

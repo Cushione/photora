@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
-import { UserInfoContext } from '../../Authentication/UserInfoContext'
+import { useUserInfoStore } from '../../Authentication/UserInfoContext';
 import './Navigation.scss'
 
 export default function Navigation() {
-  const { userProfile } = useContext(UserInfoContext)
+  const { userProfile } = useUserInfoStore()
 
   const linkState = ({
     isActive,
@@ -21,7 +21,7 @@ export default function Navigation() {
         <Nav.Link
           id='nav-user'
           as={NavLink}
-          to={`/profiles/${userProfile.id}`}
+          to={`/profiles/user`}
           className={linkState}
         >
           <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img>{' '}

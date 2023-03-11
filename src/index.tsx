@@ -8,8 +8,8 @@ import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
 import Register from './Authentication/Register/Register'
 import {
-  UserInfoContext,
   UserInfoProvider,
+  useUserInfoStore,
 } from './Authentication/UserInfoContext'
 import ProfileDetail, {
   ProfileDetailLoader,
@@ -48,7 +48,7 @@ import { MessageProvider } from './Components/Messages/MessagesContext'
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 function Router() {
-  const { userProfile } = useContext(UserInfoContext)
+  const { loggedIn } = useUserInfoStore()
 
   const routes = (isLoggedIn: boolean) =>
     createBrowserRouter([
@@ -144,16 +144,14 @@ function Router() {
       },
     ])
 
-  return <RouterProvider router={routes(!!userProfile)} />
+  return <RouterProvider router={routes(loggedIn)} />
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserInfoProvider>
-      <MessageProvider>
-        <Router />
-      </MessageProvider>
-    </UserInfoProvider>
+    <Router />
+    <MessageProvider />
+    <UserInfoProvider />
   </React.StrictMode>,
   document.getElementById('root')
 )

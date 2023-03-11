@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 import { useShowMessage } from '../../Components/Messages/MessagesContext'
 import usePageTitle from '../../shared/hooks/usePageTitle'
 import { login, register } from '../Authentication'
-import { UserInfoContext } from '../UserInfoContext'
 
 function Register() {
   const [username, setUsername] = useState('')
@@ -14,7 +13,6 @@ function Register() {
   const [password2, setPassword2] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
-  const { setLoggedIn } = useContext(UserInfoContext)
   const showMessage = useShowMessage()
 
   usePageTitle('Register')
@@ -26,7 +24,6 @@ function Register() {
     register(username, password1, password2)
       .then(() => login(username, password1))
       .then(() => {
-        setLoggedIn(true)
         showMessage({ content: `Logged in as ${username}` })
       })
       .catch((error) => {

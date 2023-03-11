@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { useState } from 'react'
-import { Button, Card, Col, Image, Row } from 'react-bootstrap'
-import { Link, useLoaderData, useNavigate } from 'react-router-dom'
+import React from 'react'
+import { Card, Col, Image, Row } from 'react-bootstrap'
+import { Link, redirect, useLoaderData, useNavigate } from 'react-router-dom'
+import { useUserInfoStore } from '../../../Authentication/UserInfoContext'
 import FollowButton from '../../../Components/FollowButton/FollowButton'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
@@ -19,6 +20,9 @@ export async function ProfileDetailLoader({
 }
 
 export async function ProfileUserDetailLoader() {
+  if (!useUserInfoStore.getState().loggedIn) {
+    return redirect('/login')
+  }
   const profile = await axios.get<Profile>('profiles/user')
   const posts = axios.get<Post[]>(`profiles/${profile.data.id}/posts`)
   return { profile: profile.data, posts: (await posts).data }
@@ -40,7 +44,7 @@ export default function ProfileDetail() {
       {profile && posts && (
         <>
           <Row id='profile-detail'>
-            <Col xs={12} sm={4} id="profile-image-column">
+            <Col xs={12} sm={4} id='profile-image-column'>
               <div id='profile-image-wrapper'>
                 <Image
                   fluid
@@ -75,7 +79,10 @@ export default function ProfileDetail() {
           <Row xs='2' md='3' id='profile-posts' className='mt-5'>
             {posts.map((post) => (
               <Col key={post.id}>
-                <Card className='c-pointer profile-post' onClick={() => openPost(post.id)}>
+                <Card
+                  className='c-pointer profile-post'
+                  onClick={() => openPost(post.id)}
+                >
                   <Card.Img src={post.image} alt={post.title} />
                 </Card>
               </Col>

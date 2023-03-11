@@ -32,9 +32,9 @@ export async function ProfileEditAction({ request }) {
     formData.append('image', image)
   }
 
-  await axios.put('profiles/user', formData)
-  showMessage({content: 'Profile created'})
-  return redirect(`/profiles/${id}`)
+  await axios.put<Profile>('profiles/user', formData)
+  showMessage({content: 'Profile updated'})
+  return redirect(`/profiles/user`)
 }
 
 export default function ProfileEdit() {
