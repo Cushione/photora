@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Image, Row } from 'react-bootstrap'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useNavigation } from 'react-router-dom'
 import Navigation from '../Components/Navigation/Navigation'
 import './Root.scss'
 
 export default function Root() {
   const [open, setOpen] = useState(false)
-  let location = useLocation()
+  const location = useLocation()
+  const navigation = useNavigation()
 
   useEffect(() => {
     setOpen(false)
@@ -47,7 +48,10 @@ export default function Root() {
             ></i>
           </Button>
         </div>
-        <div id='content'>
+        <div
+          id='content'
+          className={navigation.state === 'loading' ? 'loading' : ''}
+        >
           <Container>
             <Outlet />
           </Container>
