@@ -43,7 +43,7 @@ export default function ProfileDetail() {
     <>
       {profile && posts && (
         <>
-          <Row id='profile-detail'>
+          <Row id='profile-detail' className='mb-5'>
             <Col xs={12} sm={4} id='profile-image-column'>
               <div id='profile-image-wrapper'>
                 <Image
@@ -76,6 +76,7 @@ export default function ProfileDetail() {
               <p>{profile.content}</p>
             </Col>
           </Row>
+          <hr />
           <Row xs='2' md='3' id='profile-posts' className='mt-5'>
             {posts.map((post) => (
               <Col key={post.id}>
