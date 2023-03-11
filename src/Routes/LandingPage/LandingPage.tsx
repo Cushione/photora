@@ -50,7 +50,7 @@ export default function LandingPage() {
           <Col>
             <h2 className='mb-5'>Enjoy the world of photography</h2>
             <p className='lead-text'>
-              Are you ready to dive into the ocean of colors?
+              Are you ready to dive into an ocean of colors?
             </p>
           </Col>
         </Row>

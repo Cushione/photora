@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Container, Row } from 'react-bootstrap'
+import { Button, Container, Image, Row } from 'react-bootstrap'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navigation from '../Components/Navigation/Navigation'
 import './Root.scss'
@@ -27,7 +27,10 @@ export default function Root() {
       </Button>
       <Row>
         <div id='sidebar' className={open ? 'open' : ''}>
-          <h1>Photora</h1>
+          <h1 id='brand-name'>
+            <Image src='logo.png' />
+            <span>Photora</span>
+          </h1>
           <Navigation />
 
           <Button

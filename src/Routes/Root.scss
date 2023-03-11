@@ -18,8 +18,22 @@
     padding: 0 20px;
   }
 
-  h1 {
+  #brand-name {
+    padding-left: 16px;
     margin: 20px 0;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+
+    img {
+      height: auto;
+      width: 26px;
+    }
+
+    span {
+      margin-left: 15px;
+      padding-top: 8px;
+    }
   }
 }
 
@@ -66,6 +80,16 @@
 @media screen and (min-width: 500px) {
   #sidebar {
     width: 200px;
+
+    #brand-name {
+      span {
+        margin: 0;
+      }
+
+      img {
+        display: none;
+      }
+    }
   }
 
   #content {
