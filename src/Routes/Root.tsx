@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Image, Row } from 'react-bootstrap'
-import { Outlet, useLocation, useNavigation } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useLocation, useNavigation } from 'react-router-dom'
 import Navigation from '../Components/Navigation/Navigation'
 import './Root.scss'
 
@@ -57,6 +57,8 @@ export default function Root() {
           </Container>
         </div>
       </Row>
+
+      <ScrollRestoration />
     </Container>
   )
 }
