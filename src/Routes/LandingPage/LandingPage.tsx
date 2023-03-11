@@ -26,8 +26,7 @@ export default function LandingPage() {
             <i className='fa-solid fa-camera-retro'></i>
             <h2>Share</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in
-              nunc quis diam ultrices malesuada eget sit amet nunc.
+              Share your best moments with people around the world.
             </p>
           </Col>
 
@@ -35,17 +34,15 @@ export default function LandingPage() {
             <i className='fa-solid fa-user-group'></i>
             <h2>Connect</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in
-              nunc quis diam ultrices malesuada eget sit amet nunc.
+              Get in touch with people and make new friends.
             </p>
           </Col>
 
           <Col sm={4}>
             <i className='fa-solid fa-compass'></i>
-            <h2>Explore</h2>
+            <h2>Discover</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in
-              nunc quis diam ultrices malesuada eget sit amet nunc.
+              Explore and create your own unique catalog of stunning images.
             </p>
           </Col>
         </Row>
@@ -53,17 +50,15 @@ export default function LandingPage() {
           <Col>
             <h2 className='mb-5'>Enjoy the world of photography</h2>
             <p className='lead-text'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in
-              nunc quis diam ultrices malesuada eget sit amet nunc. Aliquam
-              dignissim laoreet nibh, at mattis mauris accumsan id. Aliquam
-              porta rhoncus consectetur. Etiam convallis elit commodo leo
-              feugiat ultricies. Aliquam rhoncus tortor lacus, quis aliquet urna
-              mollis eget.
+              Are you ready to dive into the ocean of colors?
             </p>
           </Col>
         </Row>
-        <Row sm={3}>
-          <Col>
+        <Row>
+          <Col xs={12}>
+            <p id="cta-line" className='mb-5 font-weight-bold'>Get started now!</p>
+          </Col>
+          <Col sm={4}>
             <Link
               className='btn btn-primary btn-lg'
               role='button'
@@ -73,17 +68,13 @@ export default function LandingPage() {
             </Link>
           </Col>
 
-          <Col>
-            <Link
-              className='btn btn-primary btn-lg'
-              role='button'
-              to='/login'
-            >
+          <Col sm={4}>
+            <Link className='btn btn-primary btn-lg' role='button' to='/login'>
               Login
             </Link>
           </Col>
 
-          <Col>
+          <Col sm={4}>
             <Link
               className='btn btn-primary btn-lg'
               role='button'

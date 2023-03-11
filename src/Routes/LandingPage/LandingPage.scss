@@ -83,7 +83,8 @@
 }
 
 #features {
-  min-height: 100vh;
+  min-height: 80vh;
+  gap: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -104,6 +105,10 @@
   .lead-text {
     max-width: 60vw;
     margin: 0 auto;
+  }
+
+  #cta-line {
+    font-size: 1.25rem;
   }
 
 }
