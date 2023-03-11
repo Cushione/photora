@@ -1,3 +1,6 @@
+/**
+ * Model for a Profile Entity
+ */
 export default interface Profile {
   content: string
   created_at: string

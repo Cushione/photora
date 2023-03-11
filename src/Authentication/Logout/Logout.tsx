@@ -2,8 +2,14 @@ import React, { useEffect } from 'react'
 import { showMessage } from '../../Components/Messages/MessagesContext'
 import { setLogin } from '../UserInfoContext';
 
-export default function Logout() {
+/**
+ * Initialises user logout
+ * @returns empty JSX
+ */
+export default function Logout(): JSX.Element {
 
+  /* On component mount, trigger user logout and 
+  display message */
   useEffect(() => {
     setLogin(false)
     showMessage({

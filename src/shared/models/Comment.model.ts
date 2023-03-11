@@ -1,3 +1,6 @@
+/**
+ * Model for a Comment Entity
+ */
 export default interface Comment {
   id: number
   post: number

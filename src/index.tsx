@@ -1,8 +1,12 @@
-import React, { useContext } from 'react'
+import React, { ReactElement, useContext } from 'react'
 import ReactDOM from 'react-dom'
 import './index.scss'
 import reportWebVitals from './reportWebVitals'
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider as RouterDomProvider,
+} from 'react-router-dom'
 import Root from './Routes/Root'
 import ErrorPage from './Components/ErrorPage/ErrorPage'
 import Login from './Authentication/Login/Login'
@@ -47,9 +51,15 @@ import { MessageProvider } from './Components/Messages/MessagesContext'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-function Router() {
+/**
+ * Wrapper Component for the react router provider
+ * Defines all the routes used in the application
+ * @returns {ReactElement}
+ */
+function RouterProvider(): ReactElement {
   const { loggedIn } = useUserInfoStore()
 
+  // Creates all the routes for the application
   const routes = (isLoggedIn: boolean) =>
     createBrowserRouter([
       {
@@ -144,12 +154,12 @@ function Router() {
       },
     ])
 
-  return <RouterProvider router={routes(loggedIn)} />
+  return <RouterDomProvider router={routes(loggedIn)} />
 }
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router />
+    <RouterProvider />
     <MessageProvider />
     <UserInfoProvider />
   </React.StrictMode>,

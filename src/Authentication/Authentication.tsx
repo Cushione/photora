@@ -48,7 +48,7 @@ export function register(
   )
 }
 
-export function logout() {
+export function logout(): void {
   removeToken(Token.Access)
   removeToken(Token.Refresh)
   removeToken(Token.RememberMe)
@@ -61,11 +61,21 @@ async function refreshAccessToken(refresh: string): Promise<boolean> {
   return response.status === 200
 }
 
-export function getToken(type: string): string | null {
+// Utility functions for handling tokens in session- and localstorage
+
+/**
+ * Retrieve specified token from storage
+ * @param type Type of token
+ * @returns token or null
+ */
 function getToken(type: Token): string | null {
   return localStorage.getItem(type) || sessionStorage.getItem(type)
 }
 
+/**
+ * Store specified token in storage
+ * @param type Type of token
+ */
 function storeToken(type: string, value: string): void {
   if (localStorage.getItem(Token.RememberMe)) {
     localStorage.setItem(type, value)
@@ -74,12 +84,23 @@ function storeToken(type: string, value: string): void {
   }
 }
 
+/**
+ * Delete specified token from storage
+ * @param type Type of token
+ */
 function removeToken(type: Token): void {
   localStorage.removeItem(type)
   sessionStorage.removeItem(type)
 }
 
-export function setupInterceptors() {
+/**
+ * Setup Axios interceptors
+ */
+export function setupInterceptors(): void {
+  /* 
+  Add Axios Request Interceptor
+  If user is logged in, add access token as bearer token
+  */
   axios.interceptors.request.use((config: AxiosRequestConfig) => {
     const accessToken = getToken(Token.Access)
     if (accessToken) {
@@ -88,8 +109,14 @@ export function setupInterceptors() {
     return config
   })
 
+  /* 
+  Add Axios Response Interceptor
+  If request is successful, check if response contains tokens and store them
+  Attempt to refresh access token if request returns authorisation error
+  */
   axios.interceptors.response.use(
     (response: AxiosResponse<any>) => {
+      // Store tokens if response contains access or response tokens
       if (response.data && response.data['access']) {
         storeToken(Token.Access, response.data.access)
       }
@@ -99,14 +126,19 @@ export function setupInterceptors() {
       return response
     },
     async (error) => {
+      /* If an request returns authorisation error, attempt to refresh tokens
+      otherwise logout the user */
       if (error.response.status == 401 || error.response.status === 403) {
         const accessToken = getToken(Token.Access)
         if (accessToken) {
+          // Invalidate the access token by removing stored token
           removeToken(Token.Access)
         }
         const refreshToken = getToken(Token.Refresh)
+        // If refresh token exists, attempt to refresh access token
         if (refreshToken) {
           const success = await refreshAccessToken(refreshToken)
+          // If successful, retry original request, otherwise remove token
           if (success && error.config.retry) {
             return axios.request(error.config)
           } else {

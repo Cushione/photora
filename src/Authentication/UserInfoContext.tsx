@@ -1,9 +1,8 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
-import { getToken, isLoggedIn, logout, setupInterceptors } from './Authentication'
+import { isLoggedIn, logout, setupInterceptors } from './Authentication'
 import Profile from '../shared/models/Profile.model'
 import { create } from 'zustand'
-import { useNavigate } from 'react-router-dom';
 
 type UserProfile = Profile | undefined | null
 
@@ -23,7 +22,7 @@ export const useUserInfoStore = create<UserInfoStore>((set) => ({
   setUserProfile: (profile: UserProfile) =>
     set(() => ({ userProfile: profile })),
   fetchUserProfile: async () => {
-    if (getToken("AccessToken")) {
+    if (isLoggedIn()) {
       const res = axios.get('profiles/user')
       set({ userProfile: await (await res).data })
     }

@@ -1,3 +1,6 @@
+/**
+ * Model for a Post Entity
+ */
 export interface Post {
   id: number
   owner: string

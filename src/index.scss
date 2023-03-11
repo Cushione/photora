@@ -1,5 +1,6 @@
 @import 'shared/variables.scss';
 
+// Bootstrap Overwrites
 $theme-colors: (
   'primary': $primaryColor,
 );
@@ -8,6 +9,7 @@ $enable-gradients: true;
 
 @import 'bootstrap/scss/bootstrap';
 
+// Default styling for elements
 h1,
 h2,
 h3,
@@ -29,6 +31,8 @@ h1 {
 h2 {
   font-size: 1.75rem;
 }
+
+// Custom utility classes
 
 .c-pointer {
   cursor: pointer;
