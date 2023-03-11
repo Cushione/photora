@@ -1,13 +1,19 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { setLogin } from './UserInfoContext';
+import { setLogin } from './UserInfoContext'
 
 interface LoginResponse {
   access: string
   refresh: string
 }
 
+enum Token {
+  Access = 'AccessToken',
+  Refresh = 'RefreshToken',
+  RememberMe = 'RememberMe',
+}
+
 export function isLoggedIn(): boolean {
-  return !!getToken('AccessToken')
+  return !!getToken(Token.Access)
 }
 
 export async function login(
@@ -43,39 +49,39 @@ export function register(
 }
 
 export function logout() {
-  removeToken("RememberMe")
-  removeToken("AccessToken")
-  removeToken("RefreshToken")
+  removeToken(Token.Access)
+  removeToken(Token.Refresh)
+  removeToken(Token.RememberMe)
 }
 
 async function refreshAccessToken(refresh: string): Promise<boolean> {
-  const response = await axios.post<{ access: string }>(
-    'api/token/refresh/',
-    { refresh }
-  )
+  const response = await axios.post<{ access: string }>('api/token/refresh/', {
+    refresh,
+  })
   return response.status === 200
 }
 
 export function getToken(type: string): string | null {
+function getToken(type: Token): string | null {
   return localStorage.getItem(type) || sessionStorage.getItem(type)
 }
 
 function storeToken(type: string, value: string): void {
-  if (localStorage.getItem('RememberMe')) {
+  if (localStorage.getItem(Token.RememberMe)) {
     localStorage.setItem(type, value)
   } else {
     sessionStorage.setItem(type, value)
   }
 }
 
-function removeToken(type: string): void {
+function removeToken(type: Token): void {
   localStorage.removeItem(type)
   sessionStorage.removeItem(type)
 }
 
 export function setupInterceptors() {
   axios.interceptors.request.use((config: AxiosRequestConfig) => {
-    const accessToken = getToken('AccessToken')
+    const accessToken = getToken(Token.Access)
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
@@ -85,29 +91,29 @@ export function setupInterceptors() {
   axios.interceptors.response.use(
     (response: AxiosResponse<any>) => {
       if (response.data && response.data['access']) {
-        storeToken('AccessToken', response.data.access)
+        storeToken(Token.Access, response.data.access)
       }
       if (response.data && response.data['refresh']) {
-        storeToken('RefreshToken', response.data.refresh)
+        storeToken(Token.Refresh, response.data.refresh)
       }
       return response
     },
     async (error) => {
       if (error.response.status == 401 || error.response.status === 403) {
-        const accessToken = getToken('AccessToken')
+        const accessToken = getToken(Token.Access)
         if (accessToken) {
-          removeToken('AccessToken')
+          removeToken(Token.Access)
         }
-        const refreshToken = getToken('RefreshToken')
+        const refreshToken = getToken(Token.Refresh)
         if (refreshToken) {
           const success = await refreshAccessToken(refreshToken)
           if (success && error.config.retry) {
             return axios.request(error.config)
           } else {
-            removeToken('RefreshToken')
+            removeToken(Token.Refresh)
           }
         }
-        localStorage.removeItem('RememberMe')
+        localStorage.removeItem(Token.RememberMe)
       }
       return Promise.reject(error)
     }
