@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React, { useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -25,17 +26,13 @@ export default function LandingPage() {
           <Col sm={4}>
             <i className='fa-solid fa-camera-retro'></i>
             <h2>Share</h2>
-            <p>
-              Share your best moments with people around the world.
-            </p>
+            <p>Share your best moments with people around the world.</p>
           </Col>
 
           <Col sm={4}>
             <i className='fa-solid fa-user-group'></i>
             <h2>Connect</h2>
-            <p>
-              Get in touch with people and make new friends.
-            </p>
+            <p>Get in touch with people and make new friends.</p>
           </Col>
 
           <Col sm={4}>
@@ -56,7 +53,9 @@ export default function LandingPage() {
         </Row>
         <Row>
           <Col xs={12}>
-            <p id="cta-line" className='mb-5 font-weight-bold'>Get started now!</p>
+            <p id='cta-line' className='mb-5 font-weight-bold'>
+              Get started now!
+            </p>
           </Col>
           <Col sm={4}>
             <Link
@@ -82,6 +81,16 @@ export default function LandingPage() {
             >
               Browse
             </Link>
+          </Col>
+        </Row>
+      </Container>
+      <Container fluid>
+        <Row
+          id='footer'
+          className='text-white text-center bg-gradient-secondary'
+        >
+          <Col>
+            <p>© {moment().year()} Photora</p>
           </Col>
         </Row>
       </Container>

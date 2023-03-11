@@ -99,7 +99,7 @@
   }
 
   .row {
-    padding: 10vh 0;
+    padding: 8vh 0;
   }
 
   .lead-text {
@@ -111,4 +111,20 @@
     font-size: 1.25rem;
   }
 
+  .btn {
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+#footer {
+  padding: 5vh 0;
+
+  p {
+    margin: 0;
+  }
 }

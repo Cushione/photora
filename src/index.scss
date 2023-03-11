@@ -1,29 +1,35 @@
 @import 'shared/variables.scss';
 
 $theme-colors: (
-    "primary": $primaryColor,
+  'primary': $primaryColor,
 );
 
+$enable-gradients: true;
 
-@import "bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Comfortaa', cursive;
-    font-weight: 300;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Comfortaa', cursive;
+  font-weight: 300;
 }
 
 body {
-    font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 h1 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.75rem;
+  font-size: 1.75rem;
 }
 
 .c-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
