@@ -2,6 +2,7 @@ import axios from 'axios'
 import React from 'react'
 import { useLoaderData } from 'react-router-dom'
 import PostList from '../../Components/PostList/PostList'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
 import { Post } from '../../shared/models/Post.model'
 
@@ -15,5 +16,7 @@ export default function ExplorePage() {
     ReturnType<typeof ExplorePageLoader>
   >
 
-  return <PostList {...result}/>
+  usePageTitle('Explore')
+
+  return <PostList {...result} />
 }

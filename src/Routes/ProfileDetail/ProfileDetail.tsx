@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Button, Card, Col, Image, Row } from 'react-bootstrap'
 import { Link, useLoaderData, useNavigate } from 'react-router-dom'
 import FollowButton from '../../Components/FollowButton/FollowButton'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 import { Post } from '../../shared/models/Post.model'
 import Profile from '../../shared/models/Profile.model'
 import './ProfileDetail.scss'
@@ -28,6 +29,7 @@ export default function ProfileDetail() {
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
 
   const navigate = useNavigate()
+  usePageTitle(profile.name)
 
   const openPost = (id: number) => {
     navigate(`/posts/${id}`)

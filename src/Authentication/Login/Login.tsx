@@ -2,16 +2,19 @@ import React, { MouseEvent, useContext, useState } from 'react'
 import Alert from 'react-bootstrap/esm/Alert'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/esm/Form'
-import { Link } from 'react-router-dom';
-import { login } from '../Authentication';
-import { UserInfoContext } from '../UserInfoContext';
+import { Link } from 'react-router-dom'
+import usePageTitle from '../../shared/hooks/usePageTitle'
+import { login } from '../Authentication'
+import { UserInfoContext } from '../UserInfoContext'
 
 function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
-  const {setLoggedIn} = useContext(UserInfoContext)
+  const { setLoggedIn } = useContext(UserInfoContext)
+
+  usePageTitle('Login')
 
   const handleSubmit = (event: MouseEvent): void => {
     event.preventDefault()
@@ -30,7 +33,7 @@ function Login() {
 
   return (
     <>
-    <h2>Login</h2>
+      <h2>Login</h2>
       <Form>
         {error && <Alert variant={'danger'}>{error}</Alert>}
         <Form.Group className='mb-3' controlId='loginUsername'>

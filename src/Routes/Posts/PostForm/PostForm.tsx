@@ -8,6 +8,7 @@ import {
   useLoaderData,
 } from 'react-router-dom'
 import ImageInput from '../../../Components/ImageInput/ImageInput'
+import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
 
@@ -59,6 +60,8 @@ export default function PostForm() {
     | undefined
   const [imagePreview, setImagePreview] = useState<string>(placeholderImage)
   const [loading, setLoading] = useState<boolean>(false)
+
+  usePageTitle(data ? `Edit '${data.title}'` : 'Create Post')
 
   return (
     <RouterForm

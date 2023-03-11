@@ -8,6 +8,7 @@ import {
   useLoaderData,
 } from 'react-router-dom'
 import ImageInput from '../../Components/ImageInput/ImageInput'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 import Profile from '../../shared/models/Profile.model'
 import Utils from '../../shared/utils'
 
@@ -40,6 +41,8 @@ export default function ProfileEdit() {
   }
   const [loading, setLoading] = useState<boolean>(false)
 
+  usePageTitle('Edit Profile')
+
   return (
     <>
       {profile && (
@@ -61,7 +64,8 @@ export default function ProfileEdit() {
                   defaultValue={profile.name}
                 />
                 <Form.Text className='text-muted'>
-                  Changing your profile name does not change the username for logging in
+                  Changing your profile name does not change the username for
+                  logging in
                 </Form.Text>
               </Form.Group>
 

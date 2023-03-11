@@ -3,6 +3,7 @@ import Alert from 'react-bootstrap/esm/Alert'
 import Button from 'react-bootstrap/esm/Button'
 import Form from 'react-bootstrap/esm/Form'
 import { Link } from 'react-router-dom'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 import { login, register } from '../Authentication'
 import { UserInfoContext } from '../UserInfoContext'
 
@@ -13,6 +14,8 @@ function Register() {
   const [rememberMe, setRememberMe] = useState(true)
   const [error, setError] = useState<string | undefined>()
   const { setLoggedIn } = useContext(UserInfoContext)
+
+  usePageTitle('Register')
 
   const handleSubmit = (event: MouseEvent): void => {
     event.preventDefault()

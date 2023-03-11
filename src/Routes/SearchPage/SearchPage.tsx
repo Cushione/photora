@@ -8,6 +8,7 @@ import {
   useSubmit,
 } from 'react-router-dom'
 import PostList from '../../Components/PostList/PostList'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
 import { Post } from '../../shared/models/Post.model'
 import './SearchPage.scss'
@@ -38,6 +39,8 @@ export default function SearchPage() {
   const navigation = useNavigation()
   const searchForm = useRef<HTMLFormElement | null>(null)
 
+  usePageTitle('Search')
+
   const searching =
     navigation.location &&
     new URLSearchParams(navigation.location.search).has('keywords')
@@ -61,7 +64,7 @@ export default function SearchPage() {
     <>
       <Container id='search-page-container'>
         <RouterForm ref={searchForm} role='search' className='mx-auto'>
-          <Form.Group controlId='searchFormKeywords' id="search-form-group">
+          <Form.Group controlId='searchFormKeywords' id='search-form-group'>
             <Form.Label srOnly>Keywords</Form.Label>
             <Form.Control
               type='search'

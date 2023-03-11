@@ -2,10 +2,13 @@ import moment from 'moment'
 import React, { useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 import './LandingPage.scss'
 
 export default function LandingPage() {
   const features = useRef<any>()
+
+  usePageTitle('Photora', true)
 
   const goToFeatures = () => {
     features.current?.scrollIntoView({ behavior: 'smooth' })

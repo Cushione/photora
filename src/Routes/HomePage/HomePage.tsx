@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import usePageTitle from '../../shared/hooks/usePageTitle'
 
 export default function HomePage() {
+  usePageTitle('Home')
+
   return (
     <div className='text-center'>
       <h2>Welcome to Photora!</h2>

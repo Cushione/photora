@@ -6,6 +6,7 @@ import { Form as RouterForm, Link, useLoaderData } from 'react-router-dom'
 import { UserInfoContext } from '../../../Authentication/UserInfoContext'
 import CommentCard from '../../../Components/CommentCard/CommentCard'
 import PostEntry from '../../../Components/PostEntry/PostEntry'
+import usePageTitle from '../../../shared/hooks/usePageTitle'
 import Comment from '../../../shared/models/Comment.model'
 import { PaginatedResult } from '../../../shared/models/PaginatedResponse.model'
 import { Post } from '../../../shared/models/Post.model'
@@ -37,6 +38,8 @@ export default function PostDetail() {
   const [submitted, setSubmitted] = useState<boolean>(false)
   const commentInput = useRef<HTMLTextAreaElement | null>(null)
   const { userProfile } = useContext(UserInfoContext)
+
+  usePageTitle(post.title)
 
   useEffect(() => {
     if (submitted) {

@@ -19,7 +19,10 @@ import ProfileEdit, {
   ProfileEditLoader,
   ProfileEditAction,
 } from './Routes/ProfileEdit/ProfileEdit'
-import PostForm, { PostFormAction, PostFormLoader } from './Routes/Posts/PostForm/PostForm'
+import PostForm, {
+  PostFormAction,
+  PostFormLoader,
+} from './Routes/Posts/PostForm/PostForm'
 import Logout from './Authentication/Logout/Logout'
 import PostDetail, {
   PostDetailAction,
@@ -29,12 +32,15 @@ import axios from 'axios'
 import ExplorePage, {
   ExplorePageLoader,
 } from './Routes/ExplorePage/ExplorePage'
-import { DeletePostAction, DeletePostLoader } from './Routes/Posts/DeletePost/DeletePost';
-import LikedPage, { LikedPageLoader } from './Routes/Posts/LikedPage/LikedPage';
-import SearchPage, { SearchPageLoader } from './Routes/SearchPage/SearchPage';
-import HomePage from './Routes/HomePage/HomePage';
-import FeedPage, { FeedPageLoader } from './Routes/FeedPage/FeedPage';
-import LandingPage from './Routes/LandingPage/LandingPage';
+import {
+  DeletePostAction,
+  DeletePostLoader,
+} from './Routes/Posts/DeletePost/DeletePost'
+import LikedPage, { LikedPageLoader } from './Routes/Posts/LikedPage/LikedPage'
+import SearchPage, { SearchPageLoader } from './Routes/SearchPage/SearchPage'
+import HomePage from './Routes/HomePage/HomePage'
+import FeedPage, { FeedPageLoader } from './Routes/FeedPage/FeedPage'
+import LandingPage from './Routes/LandingPage/LandingPage'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -45,7 +51,7 @@ function Router() {
     createBrowserRouter([
       {
         path: '',
-        element: <LandingPage />
+        element: <LandingPage />,
       },
       {
         path: '/',
@@ -56,7 +62,7 @@ function Router() {
             path: 'home',
             element: <FeedPage />,
             loader: FeedPageLoader,
-            errorElement: <HomePage />
+            errorElement: <HomePage />,
           },
           {
             path: 'login',
@@ -64,11 +70,19 @@ function Router() {
           },
           {
             path: 'register',
-            element: isLoggedIn ? <Navigate to={'/home'} replace /> : <Register />,
+            element: isLoggedIn ? (
+              <Navigate to={'/home'} replace />
+            ) : (
+              <Register />
+            ),
           },
           {
             path: 'logout',
-            element: !isLoggedIn ? <Navigate to={'/home'} replace /> : <Logout />,
+            element: !isLoggedIn ? (
+              <Navigate to={'/home'} replace />
+            ) : (
+              <Logout />
+            ),
           },
           {
             path: 'profiles/:id',
@@ -104,24 +118,24 @@ function Router() {
           {
             path: 'posts/create',
             element: <PostForm />,
-            action: PostFormAction
+            action: PostFormAction,
           },
           {
             path: 'posts/:id',
             element: <PostDetail />,
             loader: PostDetailLoader,
-            action: PostDetailAction
+            action: PostDetailAction,
           },
           {
             path: 'posts/:id/delete',
             action: DeletePostAction,
-            loader: DeletePostLoader
+            loader: DeletePostLoader,
           },
           {
             path: 'posts/:id/edit',
             element: isLoggedIn ? <PostForm /> : <Navigate to={'/home'} />,
             action: PostFormAction,
-            loader: PostFormLoader
+            loader: PostFormLoader,
           },
         ],
       },
