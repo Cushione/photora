@@ -40,7 +40,7 @@ export default function ProfileDetail() {
       {profile && posts && (
         <>
           <Row id='profile-detail'>
-            <Col xs={12} sm={4}>
+            <Col xs={12} sm={4} id="profile-image-column">
               <div id='profile-image-wrapper'>
                 <Image
                   fluid

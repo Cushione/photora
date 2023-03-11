@@ -28,7 +28,7 @@ export default function Root() {
       <Row>
         <div id='sidebar' className={open ? 'open' : ''}>
           <h1 id='brand-name'>
-            <Image src='logo.png' />
+            <Image src='/logo.png' />
             <span>Photora</span>
           </h1>
           <Navigation />

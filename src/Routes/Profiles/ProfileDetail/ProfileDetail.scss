@@ -1,4 +1,17 @@
 #profile-detail {
+  max-width: 800px;
+  margin: 0 auto;
+
+  #profile-image-column {
+    padding: 30px 60px
+  }
+
+  @media screen and (min-width: 576px) {
+    #profile-image-column {
+      padding: 0 15px;
+    }
+  }
+
   #profile-image-wrapper {
     position: relative;
     width: 100%;
