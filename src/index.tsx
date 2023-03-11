@@ -69,86 +69,95 @@ function RouterProvider(): ReactElement {
       {
         path: '/',
         element: <Root />,
-        errorElement: <ErrorPage />,
         children: [
           {
-            path: 'home',
-            element: <FeedPage />,
-            loader: FeedPageLoader,
-            errorElement: <HomePage />,
-          },
-          {
-            path: 'login',
-            element: isLoggedIn ? <Navigate to={'/home'} replace /> : <Login />,
-          },
-          {
-            path: 'register',
-            element: isLoggedIn ? (
-              <Navigate to={'/home'} replace />
-            ) : (
-              <Register />
-            ),
-          },
-          {
-            path: 'logout',
-            element: !isLoggedIn ? (
-              <Navigate to={'/home'} replace />
-            ) : (
-              <Logout />
-            ),
-          },
-          {
-            path: 'profiles/:id',
-            element: <ProfileDetail />,
-            loader: ProfileDetailLoader,
-          },
-          {
-            path: 'profiles/user',
-            element: <ProfileDetail />,
-            loader: ProfileUserDetailLoader,
-          },
-          {
-            path: 'profiles/edit',
-            element: <ProfileEdit />,
-            loader: ProfileEditLoader,
-            action: ProfileEditAction,
-          },
-          {
-            path: 'explore',
-            element: <ExplorePage />,
-            loader: ExplorePageLoader,
-          },
-          {
-            path: 'search',
-            element: <SearchPage />,
-            loader: SearchPageLoader,
-          },
-          {
-            path: 'liked',
-            element: <LikedPage />,
-            loader: LikedPageLoader,
-          },
-          {
-            path: 'posts/create',
-            element: <PostForm />,
-            action: PostFormAction,
-          },
-          {
-            path: 'posts/:id',
-            element: <PostDetail />,
-            loader: PostDetailLoader,
-            action: PostDetailAction,
-          },
-          {
-            path: 'posts/:id/delete',
-            action: DeletePostAction,
-            loader: DeletePostLoader,
-          },
-          {
-            path: 'posts/:id/edit',
-            element: isLoggedIn ? <PostForm /> : <Navigate to={'/home'} />,
-            action: PostFormAction,
-            loader: PostFormLoader,
+            path: '',
+            errorElement: <ErrorPage />,
+            children: [
+              {
+                path: 'home',
+                element: <FeedPage />,
+                loader: FeedPageLoader,
+                errorElement: <HomePage />,
+              },
+              {
+                path: 'login',
+                element: isLoggedIn ? (
+                  <Navigate to={'/home'} replace />
+                ) : (
+                  <Login />
+                ),
+              },
+              {
+                path: 'register',
+                element: isLoggedIn ? (
+                  <Navigate to={'/home'} replace />
+                ) : (
+                  <Register />
+                ),
+              },
+              {
+                path: 'logout',
+                element: !isLoggedIn ? (
+                  <Navigate to={'/home'} replace />
+                ) : (
+                  <Logout />
+                ),
+              },
+              {
+                path: 'profiles/:id',
+                element: <ProfileDetail />,
+                loader: ProfileDetailLoader,
+              },
+              {
+                path: 'profiles/user',
+                element: <ProfileDetail />,
+                loader: ProfileUserDetailLoader,
+              },
+              {
+                path: 'profiles/edit',
+                element: <ProfileEdit />,
+                loader: ProfileEditLoader,
+                action: ProfileEditAction,
+              },
+              {
+                path: 'explore',
+                element: <ExplorePage />,
+                loader: ExplorePageLoader,
+              },
+              {
+                path: 'search',
+                element: <SearchPage />,
+                loader: SearchPageLoader,
+              },
+              {
+                path: 'liked',
+                element: <LikedPage />,
+                loader: LikedPageLoader,
+              },
+              {
+                path: 'posts/create',
+                element: <PostForm />,
+                action: PostFormAction,
+              },
+              {
+                path: 'posts/:id',
+                element: <PostDetail />,
+                loader: PostDetailLoader,
+                action: PostDetailAction,
+              },
+              {
+                path: 'posts/:id/delete',
+                action: DeletePostAction,
+                loader: DeletePostLoader,
+              },
+              {
+                path: 'posts/:id/edit',
+                element: isLoggedIn ? <PostForm /> : <Navigate to={'/home'} />,
+                action: PostFormAction,
+                loader: PostFormLoader,
+              },
+            ],
           },
         ],
       },
