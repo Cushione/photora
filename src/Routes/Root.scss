@@ -2,7 +2,6 @@
   box-sizing: border-box;
   height: 100vh;
   width: 0;
-  position: absolute;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 98;
@@ -10,9 +9,12 @@
   overflow: hidden;
   white-space: nowrap;
   position: fixed;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
 
   &.open {
-    width: 200px;
+    width: 250px;
     padding: 0 20px;
   }
 
@@ -23,23 +25,41 @@
 
 #content {
   width: 100%;
+  margin-top: 5vh;
+  height: 95vh;
+  overflow: scroll;
 }
 
+#sidebar-toggle,
+#sidebar-toggle-mobile {
+  z-index: 99;
+}
 #sidebar-toggle {
-  position: absolute;
+  margin-top: auto;
+  display: none;
+}
+
+#sidebar-toggle-mobile {
+  position: fixed;
   bottom: 20px;
   left: 20px;
-  z-index: 99;
 }
 
 @media screen and (min-width: 300px) {
   #sidebar {
-    width: 50px;
-    padding: 0 10px
+    width: 56px;
   }
 
   #content {
     margin-left: 50px;
+  }
+
+  #sidebar-toggle {
+    display: block;
+  }
+
+  #sidebar-toggle-mobile {
+    display: none;
   }
 }
 

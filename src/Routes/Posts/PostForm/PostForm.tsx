@@ -11,6 +11,7 @@ import ImageInput from '../../../Components/ImageInput/ImageInput'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
+import './PostForm.scss'
 
 const placeholderImage = 'https://placehold.co/600x400?text=Your Image'
 
@@ -69,11 +70,13 @@ export default function PostForm() {
       onSubmit={() => setLoading(true)}
     >
       <Row id='post-form'>
-        <Col xs={12} sm={4}>
-          <ImageInput
-            defaultImage={data?.image || placeholderImage}
-            onChange={setImagePreview}
-          />
+        <Col xs={12} lg={4}>
+          <div className='image-wrapper'>
+            <ImageInput
+              defaultImage={data?.image || placeholderImage}
+              onChange={setImagePreview}
+            />
+          </div>
         </Col>
         <Col>
           <Form.Group controlId='post-form-title'>
