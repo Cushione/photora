@@ -36,7 +36,7 @@ function Register() {
   }
 
   return (
-    <>
+    <div style={{ maxWidth: '600px' }} className='mx-auto'>
       <Form>
         <h2>Create Account</h2>
         {error && <Alert variant={'danger'}>{error}</Alert>}
@@ -93,7 +93,7 @@ function Register() {
       <p className='mt-4'>
         Already have an account? <Link to={'/login'}>Log in</Link>
       </p>
-    </>
+    </div>
   )
 }
 

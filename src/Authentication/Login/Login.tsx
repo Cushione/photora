@@ -32,7 +32,7 @@ function Login() {
   }
 
   return (
-    <>
+    <div style={{ maxWidth: '600px' }} className='mx-auto'>
       <h2>Login</h2>
       <Form>
         {error && <Alert variant={'danger'}>{error}</Alert>}
@@ -77,7 +77,7 @@ function Login() {
       <p className='mt-4'>
         Don't have an account yet? <Link to={'/register'}>Register</Link>
       </p>
-    </>
+    </div>
   )
 }
 
