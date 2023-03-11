@@ -61,7 +61,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
               profileImage={comment.profile_image}
               profileName={comment.profile_name}
             />
-            <div>
+            {comment.is_owner && <div>
               <Button
                 hidden={showForm}
                 disabled={loading}
@@ -80,7 +80,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
               >
                 <i className='fa-regular fa-pen-to-square'></i>
               </Button>
-            </div>
+            </div>}
           </Card.Title>
           <Card.Subtitle className='mb-2 text-muted'>
             {moment(comment.created_at).fromNow()}
