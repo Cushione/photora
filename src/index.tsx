@@ -76,9 +76,12 @@ function RouterProvider(): ReactElement {
             children: [
               {
                 path: 'home',
-                element: <FeedPage />,
-                loader: FeedPageLoader,
-                errorElement: <HomePage />,
+                element: isLoggedIn ? (
+                  <FeedPage />
+                ) : (
+                  <HomePage />
+                ),
+                loader: isLoggedIn ? FeedPageLoader : undefined
               },
               {
                 path: 'login',

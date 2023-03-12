@@ -33,7 +33,7 @@ export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
 
-  const {isLoggedIn} = useUserInfoStore()
+  const {loggedIn} = useUserInfoStore()
 
   const navigate = useNavigate()
   usePageTitle(profile.name)
@@ -61,7 +61,7 @@ export default function ProfileDetail() {
             <Col xs={12} sm={8}>
               <h2 className='d-flex'>
                 <span id='profile-name'>{profile.name}</span>
-                {isLoggedIn && (profile.is_owner ? (
+                {loggedIn ? (profile.is_owner ? (
                   <Link
                     to='/profiles/edit'
                     role='button'
@@ -74,7 +74,7 @@ export default function ProfileDetail() {
                     profile_id={profile.id}
                     is_followed={profile.is_followed}
                   />
-                ))}
+                )): ''}
               </h2>
               <p>{profile.content}</p>
             </Col>
