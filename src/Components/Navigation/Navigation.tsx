@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext'
@@ -49,13 +49,12 @@ export default function Navigation() {
   return (
     <Nav className='flex-column' id='main-navigation'>
       {userProfile && (
-        <Nav.Link
+        <NavLink
           id='nav-user'
-          as={NavLink}
           to={`/profiles/user`}
-          className={linkState}
+          className={`${linkState} nav-link`}
         >
-          {({ isPending }) =>
+          {({ isPending }: LinkState) =>
             displayLink(
               isPending,
               <img
@@ -66,9 +65,9 @@ export default function Navigation() {
               userProfile.name
             )
           }
-        </Nav.Link>
+        </NavLink>
       )}
-      <Nav.Link as={NavLink} to={`/home`} className={linkState}>
+      <NavLink to={`/home`} className={`${linkState} nav-link`}>
         {({ isPending }) =>
           displayLink(
             isPending,
@@ -76,9 +75,9 @@ export default function Navigation() {
             'Home'
           )
         }
-      </Nav.Link>
+      </NavLink>
 
-      <Nav.Link as={NavLink} to={`/search`} className={linkState}>
+      <NavLink to={`/search`} className={`${linkState} nav-link`}>
         {({ isPending }) =>
           displayLink(
             isPending,
@@ -86,9 +85,9 @@ export default function Navigation() {
             'Search'
           )
         }
-      </Nav.Link>
+      </NavLink>
 
-      <Nav.Link as={NavLink} to={`/explore`} className={linkState}>
+      <NavLink to={`/explore`} className={`${linkState} nav-link`}>
         {({ isPending }) =>
           displayLink(
             isPending,
@@ -96,11 +95,11 @@ export default function Navigation() {
             'Explore'
           )
         }
-      </Nav.Link>
+      </NavLink>
 
       {userProfile && (
         <>
-          <Nav.Link as={NavLink} to={`/liked`} className={linkState}>
+          <NavLink to={`/liked`} className={`${linkState} nav-link`}>
             {({ isPending }) =>
               displayLink(
                 isPending,
@@ -108,8 +107,8 @@ export default function Navigation() {
                 'Liked'
               )
             }
-          </Nav.Link>
-          <Nav.Link as={NavLink} to={`/posts/create`} className={linkState}>
+          </NavLink>
+          <NavLink to={`/posts/create`} className={`${linkState} nav-link`}>
             {({ isPending }) =>
               displayLink(
                 isPending,
@@ -117,8 +116,8 @@ export default function Navigation() {
                 'Create'
               )
             }
-          </Nav.Link>
-          <Nav.Link as={NavLink} to={`/logout`} className={linkState}>
+          </NavLink>
+          <NavLink to={`/logout`} className={`${linkState} nav-link`}>
             {({ isPending }) =>
               displayLink(
                 isPending,
@@ -126,13 +125,13 @@ export default function Navigation() {
                 'Logout'
               )
             }
-          </Nav.Link>
+          </NavLink>
         </>
       )}
 
       {!userProfile && (
         <>
-          <Nav.Link as={NavLink} to={`/login`} className={linkState}>
+          <NavLink to={`/login`} className={`${linkState} nav-link`}>
             {({ isPending }) =>
               displayLink(
                 isPending,
@@ -140,9 +139,9 @@ export default function Navigation() {
                 'Login'
               )
             }
-          </Nav.Link>
+          </NavLink>
 
-          <Nav.Link as={NavLink} to={`/register`} className={linkState}>
+          <NavLink to={`/register`} className={`${linkState} nav-link`}>
             {({ isPending }) =>
               displayLink(
                 isPending,
@@ -150,7 +149,7 @@ export default function Navigation() {
                 'Register'
               )
             }
-          </Nav.Link>
+          </NavLink>
         </>
       )}
     </Nav>
