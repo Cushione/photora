@@ -1,3 +1,5 @@
+# Copied from https://github.com/heroku/heroku-buildpack-nginx/blob/main/config/nginx-solo-sample.conf.erb
+
 daemon off;
 # Heroku dynos have at least 4 cores.
 worker_processes <%= ENV['NGINX_WORKERS'] || 4 %>;
@@ -34,10 +36,19 @@ http {
 		keepalive_timeout 5;
 		client_max_body_size <%= ENV['NGINX_CLIENT_MAX_BODY_SIZE'] || 1 %>M;
 
+		# Path to the root of the application i.e. the output folder of the build
         root build;
+		# File name of the index file 
         index index.html;
 
+		# Location block that will be used to process incoming requests
         location / {
+			# For every request try the following
+			# - Check if a file can be found with the uri, if so serve that file
+			# - Check if a file can be found with the uri and trailing slash, if so serve that file
+			# - Check if a file can be found with the uri with added .html, if so serve that file
+			# - If no files can be found, serve the index.html
+			# - If no index.html can be found, show 404 error
             try_files $uri $uri/ $uri.html /index.html =404;
         }
 	}
