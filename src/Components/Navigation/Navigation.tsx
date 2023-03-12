@@ -63,7 +63,7 @@ export default function Navigation() {
               <div
                 id='nav-avatar'
                 className='fa-fw'
-                style={{backgroundImage: `url(${userProfile.image}) 50% 50% no-repeat`}}
+                style={{backgroundImage: `url(${userProfile.image})`}}
               ></div>,
               userProfile.name
             )
