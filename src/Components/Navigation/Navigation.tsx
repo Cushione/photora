@@ -1,19 +1,50 @@
 import React, { useContext } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
-import { useUserInfoStore } from '../../Authentication/UserInfoContext';
+import { useUserInfoStore } from '../../Authentication/UserInfoContext'
 import './Navigation.scss'
 
+interface LinkState {
+  isActive: boolean
+  isPending: boolean
+}
+
+/**
+ * Navigation Component
+ * Displays all the page links depending on user login state
+ * @returns
+ */
 export default function Navigation() {
   const { userProfile } = useUserInfoStore()
 
-  const linkState = ({
-    isActive,
-    isPending,
-  }: {
-    isActive: boolean
-    isPending: boolean
-  }) => (isActive ? 'active' : isPending ? 'pending' : '')
+  /**
+   * Helper function for setting link styles depending on link state
+   * @param LinkState Current state of the link
+   * @returns Style classes
+   */
+  const linkState = (state: LinkState) =>
+    state.isActive ? 'active' : state.isPending ? 'pending' : ''
+
+  /**
+   * Helper function for displaying links depending on link state
+   * @param isPending Current pending state of the link
+   * @param icon default icon to display
+   * @returns Icon
+   */
+  const displayLink = (
+    isPending: boolean,
+    icon: JSX.Element,
+    text: string
+  ): JSX.Element => (
+    <>
+      {isPending ? (
+        <i className='fa-solid fa-circle-notch fa-spin fa-fw'></i>
+      ) : (
+        icon
+      )}
+      {text}
+    </>
+  )
 
   return (
     <Nav className='flex-column' id='main-navigation'>
@@ -24,33 +55,77 @@ export default function Navigation() {
           to={`/profiles/user`}
           className={linkState}
         >
-          <img id='nav-avatar' className='fa-fw' src={userProfile.image}></img>{' '}
-          <span>{userProfile.name}</span>
+          {({ isPending }) =>
+            displayLink(
+              isPending,
+              <img
+                id='nav-avatar'
+                className='fa-fw'
+                src={userProfile.image}
+              ></img>,
+              userProfile.name
+            )
+          }
         </Nav.Link>
       )}
       <Nav.Link as={NavLink} to={`/home`} className={linkState}>
-        <i className='fa-solid fa-house fa-fw'></i>Home
+        {({ isPending }) =>
+          displayLink(
+            isPending,
+            <i className='fa-solid fa-house fa-fw'></i>,
+            'Home'
+          )
+        }
       </Nav.Link>
 
       <Nav.Link as={NavLink} to={`/search`} className={linkState}>
-        <i className='fa-solid fa-magnifying-glass fa-fw'></i>Search
+        {({ isPending }) =>
+          displayLink(
+            isPending,
+            <i className='fa-solid fa-magnifying-glass fa-fw'></i>,
+            'Search'
+          )
+        }
       </Nav.Link>
 
       <Nav.Link as={NavLink} to={`/explore`} className={linkState}>
-        <i className='fa-regular fa-compass fa-fw'></i>Explore
+        {({ isPending }) =>
+          displayLink(
+            isPending,
+            <i className='fa-regular fa-compass fa-fw'></i>,
+            'Explore'
+          )
+        }
       </Nav.Link>
 
       {userProfile && (
         <>
           <Nav.Link as={NavLink} to={`/liked`} className={linkState}>
-            <i className='fa-regular fa-heart fa-fw'></i>Liked
+            {({ isPending }) =>
+              displayLink(
+                isPending,
+                <i className='fa-regular fa-heart fa-fw'></i>,
+                'Liked'
+              )
+            }
           </Nav.Link>
           <Nav.Link as={NavLink} to={`/posts/create`} className={linkState}>
-            <i className='fa-regular fa-square-plus fa-fw'></i>Create
+            {({ isPending }) =>
+              displayLink(
+                isPending,
+                <i className='fa-regular fa-square-plus fa-fw'></i>,
+                'Create'
+              )
+            }
           </Nav.Link>
           <Nav.Link as={NavLink} to={`/logout`} className={linkState}>
-            <i className='fa-solid fa-arrow-right-from-bracket fa-fw'></i>
-            Logout
+            {({ isPending }) =>
+              displayLink(
+                isPending,
+                <i className='fa-solid fa-arrow-right-from-bracket fa-fw'></i>,
+                'Logout'
+              )
+            }
           </Nav.Link>
         </>
       )}
@@ -58,12 +133,23 @@ export default function Navigation() {
       {!userProfile && (
         <>
           <Nav.Link as={NavLink} to={`/login`} className={linkState}>
-            <i className='fa-solid fa-arrow-right-to-bracket fa-fw'></i>
-            Login
+            {({ isPending }) =>
+              displayLink(
+                isPending,
+                <i className='fa-solid fa-arrow-right-to-bracket fa-fw'></i>,
+                'Login'
+              )
+            }
           </Nav.Link>
 
           <Nav.Link as={NavLink} to={`/register`} className={linkState}>
-            <i className='fa-solid fa-user-plus fa-fw'></i>Register
+            {({ isPending }) =>
+              displayLink(
+                isPending,
+                <i className='fa-solid fa-user-plus fa-fw'></i>,
+                'Register'
+              )
+            }
           </Nav.Link>
         </>
       )}
