@@ -161,6 +161,10 @@ function RouterProvider(): ReactElement {
           },
         ],
       },
+      {
+        path: '*',
+        element: <Navigate to={'/'} replace />
+      }
     ])
 
   return <RouterDomProvider router={routes(loggedIn)} />
