@@ -42,8 +42,6 @@ export async function PostFormAction({ request, params }) {
   if (imageName) {
     const image = await Utils.urlToFile(imagePreview, imageName)
     formData.append('image', image)
-  } else {
-    formData.append('image', '')
   }
 
   if (request.method.toLowerCase() === 'post') {
