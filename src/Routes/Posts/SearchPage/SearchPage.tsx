@@ -63,7 +63,7 @@ export default function SearchPage() {
   return (
     <>
       <Container id='search-page-container' className='mw-600'>
-      <h2 className='text-center'>Search</h2>
+        <h2 className='text-center'>Search</h2>
         <RouterForm ref={searchForm} role='search' className='mx-auto'>
           <Form.Group controlId='searchFormKeywords' id='search-form-group'>
             <Form.Label srOnly>Keywords</Form.Label>
@@ -82,7 +82,9 @@ export default function SearchPage() {
           </Form.Group>
         </RouterForm>
       </Container>
-      {result && <PostList {...result} emptyMessage={<p>No posts found 😞</p>} />}
+      {result && (
+        <PostList {...result} emptyMessage={<p>No posts found 😞</p>} />
+      )}
     </>
   )
 }

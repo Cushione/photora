@@ -1,22 +1,22 @@
 // Profile Link Component Styles
 
 .post-list-profile-link {
-    display: flex;
-    align-items: center;
-    flex: 1 1 0;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  flex: 1 1 0;
+  overflow: hidden;
 
-    .post-list-avatar {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    span {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-right: 8px;
-    }
+  .post-list-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
   }
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+  }
+}

@@ -33,7 +33,7 @@ function Register() {
     event.preventDefault()
     // Reset errors
     setError(undefined)
-    // Stores if the user wants to be remembered 
+    // Stores if the user wants to be remembered
     localStorage.setItem('RememberMe', JSON.stringify(rememberMe))
     // Send register request
     register(username, password1, password2)
@@ -56,8 +56,8 @@ function Register() {
   return (
     <div style={{ maxWidth: '600px' }} className='mx-auto'>
       <Form>
-        <h2>Create Account</h2>
-        
+        <h2>Create your Account</h2>
+
         {/* Display error in BS Alert component */}
         {error && <Alert variant={'danger'}>{error}</Alert>}
 
@@ -106,7 +106,7 @@ function Register() {
             onChange={(event) => setRememberMe(event.target.checked)}
           />
         </Form.Group>
-        
+
         {/* Submit button */}
         <Button
           variant='primary'

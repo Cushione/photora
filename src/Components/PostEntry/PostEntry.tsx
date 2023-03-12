@@ -104,8 +104,8 @@ export default function PostEntry({
           <Card.Text className='w-100'>
             <Row>
               <Col
-                xs={{span: 12, order: 2}}
-                lg={{span: "auto", order: 1}}
+                xs={{ span: 12, order: 2 }}
+                lg={{ span: 'auto', order: 1 }}
                 className='d-flex justify-content-around align-items-center'
               >
                 {/* Like and Comment Buttons */}
@@ -123,8 +123,8 @@ export default function PostEntry({
               </Col>
 
               <Col
-                xs={{span: 12, order: 3}}
-                lg={{span: "auto", order: 2}}
+                xs={{ span: 12, order: 3 }}
+                lg={{ span: 'auto', order: 2 }}
                 className='d-flex justify-content-around align-items-center'
               >
                 {/* Number of likes and comments */}
@@ -147,8 +147,8 @@ export default function PostEntry({
               </Col>
 
               <Col
-                xs={{span: 12, order: 1}}
-                lg={{order: 3}}
+                xs={{ span: 12, order: 1 }}
+                lg={{ order: 3 }}
                 className='d-flex justify-content-end align-items-center mb-3 mb-sm-0'
               >
                 {/* Post mutation buttons if post owner */}

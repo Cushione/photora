@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useUserInfoStore } from '../../Authentication/UserInfoContext';
+import { useUserInfoStore } from '../../Authentication/UserInfoContext'
 import { Post } from '../../shared/models/Post.model'
 
 /**
@@ -16,7 +16,7 @@ interface LikeButtonProps {
  * Component for handling post likes
  * Allows the user to toggle the like state of the provided
  * post. Handles the request and state.
- * @param props Like Button Props 
+ * @param props Like Button Props
  * @returns Like Button
  */
 export default function LikeButton({ post, onToggle }: LikeButtonProps) {

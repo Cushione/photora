@@ -7,7 +7,7 @@ import FollowButton from '../../../Components/FollowButton/FollowButton'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Profile from '../../../shared/models/Profile.model'
-import Utils from '../../../shared/utils';
+import Utils from '../../../shared/utils'
 import './ProfileDetail.scss'
 
 export async function ProfileDetailLoader({
@@ -33,7 +33,7 @@ export default function ProfileDetail() {
   const { profile, posts }: { profile: Profile; posts: Post[] } =
     useLoaderData() as Awaited<ReturnType<typeof ProfileDetailLoader>>
 
-  const {loggedIn} = useUserInfoStore()
+  const { loggedIn } = useUserInfoStore()
 
   const navigate = useNavigate()
   usePageTitle(profile.name)
@@ -61,20 +61,24 @@ export default function ProfileDetail() {
             <Col xs={12} sm={8}>
               <h2 className='d-flex'>
                 <span id='profile-name'>{profile.name}</span>
-                {loggedIn ? (profile.is_owner ? (
-                  <Link
-                    to='/profiles/edit'
-                    role='button'
-                    className='btn btn-primary ml-auto'
-                  >
-                    <i className='fa-regular fa-pen-to-square'></i>
-                  </Link>
+                {loggedIn ? (
+                  profile.is_owner ? (
+                    <Link
+                      to='/profiles/edit'
+                      role='button'
+                      className='btn btn-primary ml-auto'
+                    >
+                      <i className='fa-regular fa-pen-to-square'></i>
+                    </Link>
+                  ) : (
+                    <FollowButton
+                      profile_id={profile.id}
+                      is_followed={profile.is_followed}
+                    />
+                  )
                 ) : (
-                  <FollowButton
-                    profile_id={profile.id}
-                    is_followed={profile.is_followed}
-                  />
-                )): ''}
+                  ''
+                )}
               </h2>
               <p>{profile.content}</p>
             </Col>

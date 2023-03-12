@@ -25,7 +25,6 @@ export default function Root() {
 
   return (
     <Container fluid>
-
       {/* Sidebar toggle for small screens */}
       <Button
         as={'a'}
@@ -40,7 +39,6 @@ export default function Root() {
       </Button>
       <Row>
         <div id='sidebar' className={open ? 'open' : ''}>
-          
           {/* Brand name and logo */}
           <h1 id='brand-name'>
             <Image src='/logo.png' />

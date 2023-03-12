@@ -42,7 +42,7 @@ const useMessageStore = create<MessageStore>((set) => ({
  * Helper Hook for adding messages from inside of components
  * @returns Message setter
  */
-export const useShowMessage = (): (message: Message) => void => {
+export const useShowMessage = (): ((message: Message) => void) => {
   return useMessageStore((state) => state.showMessage)
 }
 
@@ -60,11 +60,11 @@ export const showMessage = (message: Message): void => {
 }
 
 /**
- * Message Output Component for displaying messages 
+ * Message Output Component for displaying messages
  * @returns Message Output
  */
 export function MessageOutput() {
-  // Get messages from the message store 
+  // Get messages from the message store
   const messages = useMessageStore((state) => state.messages)
 
   return (

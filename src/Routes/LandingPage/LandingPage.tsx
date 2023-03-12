@@ -23,7 +23,6 @@ export default function LandingPage() {
 
   return (
     <>
-    
       {/* Jumbotron */}
       <div className='jumbotron text-white text-center'>
         <h1 className='display-1 mb-5'>PHOTORA</h1>
@@ -47,7 +46,7 @@ export default function LandingPage() {
           <Col sm={4} className='my-4'>
             <i className='fa-solid fa-user-group'></i>
             <h2>Connect</h2>
-            <p>Get in touch with people and make new friends.</p>
+            <p>Get in touch with other members and make new friends.</p>
           </Col>
 
           <Col sm={4} className='my-4'>
@@ -99,7 +98,7 @@ export default function LandingPage() {
           </Col>
         </Row>
       </Container>
-      
+
       {/* Footer */}
       <Container fluid>
         <Row

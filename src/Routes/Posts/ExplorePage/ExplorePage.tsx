@@ -18,5 +18,5 @@ export default function ExplorePage() {
 
   usePageTitle('Explore')
 
-  return <PostList {...result} title="Explore"/>
+  return <PostList {...result} title='Explore' />
 }

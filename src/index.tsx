@@ -76,12 +76,8 @@ function RouterProvider(): ReactElement {
             children: [
               {
                 path: 'home',
-                element: isLoggedIn ? (
-                  <FeedPage />
-                ) : (
-                  <HomePage />
-                ),
-                loader: isLoggedIn ? FeedPageLoader : undefined
+                element: isLoggedIn ? <FeedPage /> : <HomePage />,
+                loader: isLoggedIn ? FeedPageLoader : undefined,
               },
               {
                 path: 'login',
@@ -166,8 +162,8 @@ function RouterProvider(): ReactElement {
       },
       {
         path: '*',
-        element: <Navigate to={'/'} replace />
-      }
+        element: <Navigate to={'/'} replace />,
+      },
     ])
 
   return <RouterDomProvider router={routes(loggedIn)} />

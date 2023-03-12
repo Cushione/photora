@@ -1,14 +1,20 @@
-import moment from 'moment';
+import moment from 'moment'
 import React, { useState } from 'react'
 import { Toast } from 'react-bootstrap'
 import { MessageWithTime } from './MessagesContext'
 
 /**
  * Component for displaying a message as a toast
- * @param props Message With Time 
+ * @param props Message With Time
  * @returns Toast
  */
-export default function MessageToast({ content, sticky, delay, time, error }: MessageWithTime) {
+export default function MessageToast({
+  content,
+  sticky,
+  delay,
+  time,
+  error,
+}: MessageWithTime) {
   const [show, setShow] = useState(true)
 
   return (
@@ -18,7 +24,7 @@ export default function MessageToast({ content, sticky, delay, time, error }: Me
       show={show}
       delay={delay || 3000}
       autohide={!sticky}
-      className={error ? 'bg-danger text-white': ''}
+      className={error ? 'bg-danger text-white' : ''}
     >
       <Toast.Header hidden={!sticky}>
         <small className='mr-auto'>{moment(time).fromNow()}</small>

@@ -78,7 +78,7 @@ export default function PostDetail() {
     <Container id='post-detail-container' className='mw-600'>
       {post && (
         <>
-        <h2 className='text-center'>{post.title}</h2>
+          <h2 className='text-center'>{post.title}</h2>
           <PostEntry
             post={post}
             onCommentClick={() => commentInput.current?.focus()}

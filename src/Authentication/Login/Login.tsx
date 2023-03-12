@@ -31,7 +31,7 @@ function Login() {
     event.preventDefault()
     // Reset errors
     setError(undefined)
-    // Stores if the user wants to be remembered 
+    // Stores if the user wants to be remembered
     localStorage.setItem('RememberMe', JSON.stringify(rememberMe))
     // Send login request
     login(username, password)
@@ -87,7 +87,7 @@ function Login() {
             onChange={(event) => setRememberMe(event.target.checked)}
           />
         </Form.Group>
-        
+
         {/* Submit button */}
         <Button
           variant='primary'

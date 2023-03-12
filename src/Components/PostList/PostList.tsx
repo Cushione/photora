@@ -24,7 +24,7 @@ export default function PostList({
   next,
   results,
   emptyMessage,
-  title
+  title,
 }: PostListProps) {
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)

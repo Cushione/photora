@@ -22,9 +22,11 @@ export default function FeedPage() {
     <div className='text-center'>
       <p>It's a bit empty here 🙃</p>
       <p>Try to follow somebody to get your own personalised feed</p>
-      <Link to="/explore" className='font-weight-bold'>Go to Explore page</Link>
+      <Link to='/explore' className='font-weight-bold'>
+        Go to Explore page
+      </Link>
     </div>
   )
 
-  return <PostList {...result} emptyMessage={noFollowingMessage} title="Feed"/>
+  return <PostList {...result} emptyMessage={noFollowingMessage} title='Feed' />
 }

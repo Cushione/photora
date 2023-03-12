@@ -67,7 +67,7 @@ export default function ImageInput({
         />
         <i className='fa-regular fa-pen-to-square fa-2xl'></i>
       </label>
-       {/* Hidden input field containing url of the selected image */}
+      {/* Hidden input field containing url of the selected image */}
       <input type='hidden' name='imagePreview' value={imagePreview} />
     </>
   )

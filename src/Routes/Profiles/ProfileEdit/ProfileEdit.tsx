@@ -8,7 +8,7 @@ import {
   useLoaderData,
 } from 'react-router-dom'
 import ImageInput from '../../../Components/ImageInput/ImageInput'
-import { showMessage } from '../../../Components/Messages/MessagesContext';
+import { showMessage } from '../../../Components/Messages/MessagesContext'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import Profile from '../../../shared/models/Profile.model'
 import Utils from '../../../shared/utils'
@@ -33,7 +33,7 @@ export async function ProfileEditAction({ request }) {
   }
 
   await axios.put<Profile>('profiles/user', formData)
-  showMessage({content: 'Profile updated'})
+  showMessage({ content: 'Profile updated' })
   return redirect(`/profiles/user`)
 }
 

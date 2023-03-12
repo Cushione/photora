@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-import { showMessage } from '../Components/Messages/MessagesContext';
+import { showMessage } from '../Components/Messages/MessagesContext'
 import { setLogin } from './UserInfoContext'
 
 /**
@@ -180,7 +180,11 @@ export function setupInterceptors(): void {
         }
         localStorage.removeItem(Token.RememberMe)
       }
-      showMessage({content: "Request failed. Please try again or refresh the page.", sticky: true, error: true})
+      showMessage({
+        content: 'Request failed. Please try again or refresh the page.',
+        sticky: true,
+        error: true,
+      })
       return Promise.reject(error)
     }
   )

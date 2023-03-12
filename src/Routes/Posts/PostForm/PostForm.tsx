@@ -8,12 +8,13 @@ import {
   useLoaderData,
 } from 'react-router-dom'
 import ImageInput from '../../../Components/ImageInput/ImageInput'
-import { showMessage } from '../../../Components/Messages/MessagesContext';
+import { showMessage } from '../../../Components/Messages/MessagesContext'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
 
-const placeholderImage = 'https://placehold.co/600x400?text=Click+here+to+add+image'
+const placeholderImage =
+  'https://placehold.co/600x400?text=Click+here+to+add+image'
 
 export async function PostFormLoader({ params }): Promise<Post | null> {
   if (params.id) {
@@ -46,11 +47,11 @@ export async function PostFormAction({ request, params }) {
 
   if (request.method.toLowerCase() === 'post') {
     await axios.post('posts', formData)
-    showMessage({content: 'Post created'})
+    showMessage({ content: 'Post created' })
     return redirect(`/profiles/user`)
   } else {
     await axios.put(`posts/${params.id}`, formData)
-    showMessage({content: 'Post updated'})
+    showMessage({ content: 'Post updated' })
     return redirect(`/posts/${params.id}`)
   }
 }
@@ -69,7 +70,7 @@ export default function PostForm() {
       method={data ? 'put' : 'post'}
       onSubmit={() => setLoading(true)}
     >
-      <h2 className='text-center'>{data ? "Edit" : "Create"} Post</h2>
+      <h2 className='text-center'>{data ? 'Edit' : 'Create'} Post</h2>
       <Row id='post-form'>
         <Col xs={12} lg={4}>
           <div className='image-wrapper mw-300 mx-auto'>
