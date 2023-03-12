@@ -270,13 +270,19 @@ The first step in my development process was to plan the website thoroughly:
   - Note: During development, I changed the layout of the post detail page and comments because there would not be enough space and it would reduce development time by reusing existing components  
 - Lastly, I wrote the majority of my user stories and tasks in my [GitHub Project](https://github.com/users/Cushione/projects/4) 
 
-## Agile Development
-- In my [GitHub Project](https://github.com/users/Cushione/projects/4), all my issues are separated into two milestones: "MVP" and "Additional Features".
+### Agile Development
+- In my [GitHub Project](https://github.com/users/Cushione/projects/4), all my issues are separated into two parts of the application by a custom field "App". Each ticket was assigned one of two milestones: "MVP" and "Additional Features"
 - Issues not necessary for my project were added to the "Additional Features" milestone. Those tickets were only to be worked on when all the "MVP" tickets were done and I still had time left.
 - Each issue was then categorized into user stories or technical tasks by adding the corresponding label.
-- All the issues were then grouped into various epics by adding an "EPIC: _name_" label.
+- All the issues were then grouped into various epics by a custom field "Epic".
+- Every issue was created in added "Unspecified" column. After specification, it was moved to "Todo".
 - When I was working on the project, I chose one issue to work on from the "Todo" column of the MVP board and moved it into the "In Progress" column.
 - After I finished the issue by fulfilling all the acceptance criteria, I closed the issue which moved it automatically into the "Done" Column.
+
+#### Custom field
+![Custom Field](docs/images/custom-field.png)
+- Custom field were created in the [settings of the GitHub Project](https://github.com/users/Cushione/projects/4/settings)
+
 
 ## Git
 - I started the program and repository by creating a new repository on GitHub.
