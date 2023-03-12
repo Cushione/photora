@@ -69,6 +69,7 @@ export default function PostForm() {
       method={data ? 'put' : 'post'}
       onSubmit={() => setLoading(true)}
     >
+      <h2 className='text-center'>{data ? "Edit" : "Create"} Post</h2>
       <Row id='post-form'>
         <Col xs={12} lg={4}>
           <div className='image-wrapper mw-300 mx-auto'>

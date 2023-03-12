@@ -50,7 +50,7 @@ export default function PostList({
 
   return (
     <Container id='post-list-container' className='mw-600'>
-      {title && <h2>{title}</h2>}
+      {title && <h2 className='text-center'>{title}</h2>}
       <InfiniteScroll
         dataLength={posts.length}
         next={loadMorePosts}

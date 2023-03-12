@@ -49,6 +49,7 @@ export default function ProfileEdit() {
     <>
       {profile && (
         <RouterForm method='post' onSubmit={() => setLoading(true)}>
+          <h2 className='text-center'>Edit Profile</h2>
           <input type='hidden' name='id' value={profile.id} />
           <Row id='profile-edit'>
             <Col xs={12} sm={4}>

@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Form as RouterForm, Link, useLoaderData } from 'react-router-dom'
-import { useUserInfoStore } from '../../../Authentication/UserInfoContext';
+import { useUserInfoStore } from '../../../Authentication/UserInfoContext'
 import CommentCard from '../../../Components/CommentCard/CommentCard'
-import { showMessage } from '../../../Components/Messages/MessagesContext';
+import { showMessage } from '../../../Components/Messages/MessagesContext'
 import PostEntry from '../../../Components/PostEntry/PostEntry'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import Comment from '../../../shared/models/Comment.model'
@@ -25,7 +25,7 @@ export async function PostDetailAction({ request, params }) {
   if (request.method.toLowerCase() === 'post') {
     const { content } = Object.fromEntries(await request.formData())
     const comment = await axios.post(`posts/${params.id}/comments`, { content })
-    showMessage({content: 'Comment posted'})
+    showMessage({ content: 'Comment posted' })
     return { comment }
   }
 }
@@ -76,8 +76,16 @@ export default function PostDetail() {
 
   return (
     <Container id='post-detail-container' className='mw-600'>
-      {post && <PostEntry post={post} onCommentClick={() => commentInput.current?.focus()} />}
-      <h2 id="comments-heading">Comments</h2>
+      {post && (
+        <>
+        <h2 className='text-center'>{post.title}</h2>
+          <PostEntry
+            post={post}
+            onCommentClick={() => commentInput.current?.focus()}
+          />
+        </>
+      )}
+      <h2 id='comments-heading'>Comments</h2>
       {loggedIn ? (
         <RouterForm method='post' onSubmit={() => setSubmitted(true)}>
           <Form.Group controlId='commentFormContent'>
