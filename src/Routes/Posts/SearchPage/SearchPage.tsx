@@ -62,7 +62,7 @@ export default function SearchPage() {
 
   return (
     <>
-      <Container id='search-page-container'>
+      <Container id='search-page-container' className='mw-600'>
         <RouterForm ref={searchForm} role='search' className='mx-auto'>
           <Form.Group controlId='searchFormKeywords' id='search-form-group'>
             <Form.Label srOnly>Keywords</Form.Label>

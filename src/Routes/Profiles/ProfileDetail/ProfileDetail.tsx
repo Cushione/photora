@@ -43,7 +43,7 @@ export default function ProfileDetail() {
     <>
       {profile && posts && (
         <>
-          <Row id='profile-detail' className='mb-5'>
+          <Row id='profile-detail' className='mb-5 mw-800 mx-auto'>
             <Col xs={12} sm={4} id='profile-image-column'>
               <div id='profile-image-wrapper'>
                 <Image

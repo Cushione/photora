@@ -12,7 +12,6 @@ import { showMessage } from '../../../Components/Messages/MessagesContext';
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
-import './PostForm.scss'
 
 const placeholderImage = 'https://placehold.co/600x400?text=Your Image'
 
@@ -59,7 +58,7 @@ export async function PostFormAction({ request, params }) {
 }
 
 export default function PostForm() {
-  const data: Post | undefined = useLoaderData() as
+  const data: Post | null | undefined = useLoaderData() as
     | Awaited<ReturnType<typeof PostFormLoader>>
     | undefined
   const [imagePreview, setImagePreview] = useState<string>(placeholderImage)
@@ -74,7 +73,7 @@ export default function PostForm() {
     >
       <Row id='post-form'>
         <Col xs={12} lg={4}>
-          <div className='image-wrapper'>
+          <div className='image-wrapper mw-300 mx-auto'>
             <ImageInput
               defaultImage={data?.image || placeholderImage}
               onChange={setImagePreview}
