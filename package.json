@@ -23,7 +23,6 @@
     "zustand": "^4.3.6"
   },
   "scripts": {
-    "heroku-prebuild": "npm install -g serve",
     "start": "serve build",
     "start:dev": "vite",
     "build": "vite build",
