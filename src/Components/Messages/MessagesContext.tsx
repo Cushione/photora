@@ -9,6 +9,7 @@ interface Message {
   content: string
   sticky?: boolean
   delay?: number
+  error?: boolean
 }
 
 /**
@@ -69,7 +70,7 @@ export function MessageOutput() {
   return (
     <div
       style={{
-        position: 'absolute',
+        position: 'fixed',
         top: 15,
         right: 25,
         zIndex: 99,

@@ -8,7 +8,7 @@ import { MessageWithTime } from './MessagesContext'
  * @param props Message With Time 
  * @returns Toast
  */
-export default function MessageToast({ content, sticky, delay, time }: MessageWithTime) {
+export default function MessageToast({ content, sticky, delay, time, error }: MessageWithTime) {
   const [show, setShow] = useState(true)
 
   return (
@@ -18,6 +18,7 @@ export default function MessageToast({ content, sticky, delay, time }: MessageWi
       show={show}
       delay={delay || 3000}
       autohide={!sticky}
+      className={error ? 'bg-danger text-white': ''}
     >
       <Toast.Header hidden={!sticky}>
         <small className='mr-auto'>{moment(time).fromNow()}</small>
