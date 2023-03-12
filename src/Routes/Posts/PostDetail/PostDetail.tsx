@@ -77,7 +77,7 @@ export default function PostDetail() {
   return (
     <Container id='post-detail-container' className='mw-600'>
       {post && <PostEntry post={post} onCommentClick={() => commentInput.current?.focus()} />}
-      <h2>Comments</h2>
+      <h2 id="comments-heading">Comments</h2>
       {loggedIn ? (
         <RouterForm method='post' onSubmit={() => setSubmitted(true)}>
           <Form.Group controlId='commentFormContent'>
