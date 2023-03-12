@@ -7,6 +7,7 @@ import FollowButton from '../../../Components/FollowButton/FollowButton'
 import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Profile from '../../../shared/models/Profile.model'
+import Utils from '../../../shared/utils';
 import './ProfileDetail.scss'
 
 export async function ProfileDetailLoader({
@@ -50,7 +51,7 @@ export default function ProfileDetail() {
                   fluid
                   roundedCircle
                   id='profile-image'
-                  src={profile.image}
+                  src={Utils.transformImage(profile.image, true, true, 300)}
                   alt='profile image'
                 />
               </div>

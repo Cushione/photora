@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import { NavLink } from 'react-router-dom'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext'
+import Utils from '../../shared/utils';
 import './Navigation.scss'
 
 /**
@@ -63,7 +64,7 @@ export default function Navigation() {
               <div
                 id='nav-avatar'
                 className='fa-fw'
-                style={{backgroundImage: `url(${userProfile.image})`}}
+                style={{backgroundImage: `url(${Utils.transformImage(userProfile.image, true, true, 100)})`}}
               ></div>,
               userProfile.name
             )
