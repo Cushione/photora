@@ -53,7 +53,7 @@ export default function SearchPage() {
     const getData = setTimeout(() => {
       setResult(null)
       if (keywords) {
-        submit(searchForm.current as any, { replace: true })
+        submit(searchForm.current, { replace: true })
       }
     }, 500)
 

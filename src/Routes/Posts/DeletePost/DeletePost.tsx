@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { redirect } from 'react-router-dom'
-import { showMessage, useShowMessage } from '../../../Components/Messages/MessagesContext'
+import { showMessage } from '../../../Components/Messages/MessagesContext'
 
 export async function DeletePostAction({ request, params }) {
   if (request.method.toLowerCase() === 'delete') {

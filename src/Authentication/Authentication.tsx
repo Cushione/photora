@@ -43,7 +43,7 @@ export async function login(
       username,
       password,
     },
-    { retry: false } as any
+    { retry: false } as AxiosRequestConfig
   )
   // Set user login state to true
   setLogin(true)
@@ -68,7 +68,7 @@ export function register(
       password1,
       password2,
     },
-    { retry: false } as any
+    { retry: false } as AxiosRequestConfig
   )
 }
 
@@ -147,7 +147,7 @@ export function setupInterceptors(): void {
   Attempt to refresh access token if request returns authorisation error
   */
   axios.interceptors.response.use(
-    (response: AxiosResponse<any>) => {
+    (response: AxiosResponse) => {
       // Store tokens if response contains access or response tokens
       if (response.data && response.data['access']) {
         storeToken(Token.Access, response.data.access)

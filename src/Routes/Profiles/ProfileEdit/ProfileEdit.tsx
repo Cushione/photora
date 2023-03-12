@@ -19,7 +19,7 @@ export async function ProfileEditLoader() {
 }
 
 export async function ProfileEditAction({ request }) {
-  const { id, imagePreview, imageName, ...updates } = Object.fromEntries(
+  const { imagePreview, imageName, ...updates } = Object.fromEntries(
     await request.formData()
   )
 

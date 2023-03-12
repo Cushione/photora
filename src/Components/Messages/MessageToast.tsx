@@ -4,16 +4,11 @@ import { Toast } from 'react-bootstrap'
 import { MessageWithTime } from './MessagesContext'
 
 /**
- * Props for Message Toast Component
- */
-interface MessageToastProps extends MessageWithTime {}
-
-/**
  * Component for displaying a message as a toast
- * @param props Message Toast Props 
+ * @param props Message With Time 
  * @returns Toast
  */
-export default function MessageToast({ content, sticky, delay, time }: MessageToastProps) {
+export default function MessageToast({ content, sticky, delay, time }: MessageWithTime) {
   const [show, setShow] = useState(true)
 
   return (

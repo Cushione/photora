@@ -9,7 +9,7 @@ import { Post } from '../../shared/models/Post.model'
  */
 interface LikeButtonProps {
   post: Post
-  onToggle?: (state: boolean) => any
+  onToggle?: (state: boolean) => unknown
 }
 
 /**

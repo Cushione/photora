@@ -9,7 +9,7 @@ import './ImageInput.scss'
 interface ImageInputProps {
   defaultImage?: string
   round?: boolean
-  onChange?: (url: string) => any
+  onChange?: (url: string) => unknown
 }
 
 /**

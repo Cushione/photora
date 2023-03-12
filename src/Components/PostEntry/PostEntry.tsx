@@ -16,7 +16,7 @@ import UserLikesModal, {
  */
 interface PostEntryProps {
   post: Post
-  onCommentClick: () => any
+  onCommentClick: () => unknown
   openable?: boolean
 }
 

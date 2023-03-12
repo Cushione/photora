@@ -10,7 +10,7 @@ import './LandingPage.scss'
  * @returns Landing Page
  */
 export default function LandingPage() {
-  const features = useRef<any>()
+  const features = useRef<HTMLDivElement>(null)
 
   usePageTitle('Photora', true)
 
