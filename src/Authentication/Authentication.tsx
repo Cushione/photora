@@ -179,6 +179,7 @@ export function setupInterceptors(): void {
           }
         }
         localStorage.removeItem(Token.RememberMe)
+        window.location.replace("/login")
       }
       showMessage({content: "Request failed. Please try again or refresh the page.", sticky: true, error: true})
       return Promise.reject(error)
