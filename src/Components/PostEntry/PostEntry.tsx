@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useRef, useState } from 'react'
-import { Button, Card, Modal } from 'react-bootstrap'
+import { Button, Card, Col, Modal, Row } from 'react-bootstrap'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext'
 import { Post } from '../../shared/models/Post.model'
@@ -79,60 +79,98 @@ export default function PostEntry({
         <Card.Img
           src={
             openable
-              ? Utils.transformImage(post.image, false, false, 800, true, false, null)
-              : Utils.transformImage(post.image, false, false, undefined, false, false)
+              ? Utils.transformImage(
+                  post.image,
+                  false,
+                  false,
+                  800,
+                  true,
+                  false,
+                  null
+                )
+              : Utils.transformImage(
+                  post.image,
+                  false,
+                  false,
+                  undefined,
+                  false,
+                  false
+                )
           }
           className={openable ? 'c-pointer' : ''}
           onClick={openPost}
         />
         <Card.Body>
-          <Card.Text className='d-flex'>
-            {/* Like and Comment Buttons */}
-            <LikeButton post={post} onToggle={handleLikeToggle}></LikeButton>
-            <Button
-              variant='link'
-              onClick={onCommentClick}
-              disabled={!loggedIn}
-            >
-              <i className='fa-regular fa-message'></i>
-            </Button>
-
-            {/* Number of likes and comments */}
-            {numberOfLikes > 0 && (
-              <Button
-                variant='link'
-                className='ml-2'
-                onClick={() => userLikesModalRef.current?.open()}
+          <Card.Text className='w-100'>
+            <Row>
+              <Col
+                xs={{span: 12, order: 2}}
+                lg={{span: "auto", order: 1}}
+                className='d-flex justify-content-around align-items-center'
               >
-                {numberOfLikes} Like
-                {numberOfLikes !== 1 ? 's' : ''}
-              </Button>
-            )}
-            {post.number_of_comments > 0 && (
-              <Button variant='link' onClick={onCommentClick}>
-                {post.number_of_comments} Comment
-                {post.number_of_comments !== 1 ? 's' : ''}
-              </Button>
-            )}
-
-            {/* Post mutation buttons if post owner */}
-            {post.is_owner && !openable && (
-              <>
-                <Link
-                  className='ml-auto btn btn-link'
-                  to={`/posts/${post.id}/edit`}
-                >
-                  <i className='fa-regular fa-pen-to-square'></i>
-                </Link>
+                {/* Like and Comment Buttons */}
+                <LikeButton
+                  post={post}
+                  onToggle={handleLikeToggle}
+                ></LikeButton>
                 <Button
                   variant='link'
-                  className='text-danger'
-                  onClick={() => setShowDeleteModal(true)}
+                  onClick={onCommentClick}
+                  disabled={!loggedIn}
                 >
-                  <i className='fa-regular fa-trash-can'></i>
+                  <i className='fa-regular fa-message'></i>
                 </Button>
-              </>
-            )}
+              </Col>
+
+              <Col
+                xs={{span: 12, order: 3}}
+                lg={{span: "auto", order: 2}}
+                className='d-flex justify-content-around align-items-center'
+              >
+                {/* Number of likes and comments */}
+                {numberOfLikes > 0 && (
+                  <Button
+                    variant='link'
+                    className='ml-2'
+                    onClick={() => userLikesModalRef.current?.open()}
+                  >
+                    {numberOfLikes} Like
+                    {numberOfLikes !== 1 ? 's' : ''}
+                  </Button>
+                )}
+                {post.number_of_comments > 0 && (
+                  <Button variant='link' onClick={onCommentClick}>
+                    {post.number_of_comments} Comment
+                    {post.number_of_comments !== 1 ? 's' : ''}
+                  </Button>
+                )}
+              </Col>
+
+              <Col
+                xs={{span: 12, order: 1}}
+                lg={{order: 3}}
+                className='d-flex justify-content-end align-items-center mb-3 mb-sm-0'
+              >
+                {/* Post mutation buttons if post owner */}
+                {post.is_owner && !openable && (
+                  <>
+                    <Link
+                      className='btn btn-link'
+                      to={`/posts/${post.id}/edit`}
+                    >
+                      <i className='fa-regular fa-pen-to-square'></i>
+                    </Link>
+                    <Button
+                      variant='link'
+                      className='text-danger'
+                      onClick={() => setShowDeleteModal(true)}
+                    >
+                      <i className='fa-regular fa-trash-can'></i>
+                    </Button>
+                  </>
+                )}
+              </Col>
+            </Row>
           </Card.Text>
 
           {/* Post title and description */}
