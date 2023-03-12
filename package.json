@@ -1,5 +1,5 @@
 {
-  "name": "moments",
+  "name": "photora",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,7 +25,8 @@
   "scripts": {
     "start:dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "lint": "eslint . --ext .tsx"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +48,10 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
     "msw": "^0.35.0",
     "prettier": "2.8.4"
   },
