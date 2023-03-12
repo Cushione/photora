@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import PostEntry from '../PostEntry/PostEntry'
 import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
 import { Post } from '../../shared/models/Post.model'
-import './PostList.scss'
 
 interface PostListProps extends PaginatedResult<Post> {
   emptyMessage?: JSX.Element
@@ -29,7 +28,7 @@ export default function PostList({ next, results, emptyMessage }: PostListProps)
   }
 
   return (
-    <Container id='post-list-container'>
+    <Container id='post-list-container' className='mw-600'>
       <InfiniteScroll
         dataLength={posts.length}
         next={loadMorePosts}
