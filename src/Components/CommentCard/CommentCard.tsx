@@ -1,6 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, Card, Form, Modal } from 'react-bootstrap'
 import Comment from '../../shared/models/Comment.model'
 import { useShowMessage } from '../Messages/MessagesContext'
@@ -26,6 +26,8 @@ export default function CommentCard({ comment }: CommentCardProps) {
   const [deleted, setDeleted] = useState<boolean>(false)
   const showMessage = useShowMessage()
 
+  const formRef = useRef<HTMLFormElement>(null)
+
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
   /**
@@ -34,6 +36,9 @@ export default function CommentCard({ comment }: CommentCardProps) {
    * update comment text and show message
    */
   const updateComment = (): void => {
+    if (!formRef.current?.reportValidity()) {
+      return
+    }
     setLoading(true)
     axios
       .put<Comment>(`posts/${comment.post}/comments/${comment.id}`, { content })
@@ -118,7 +123,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
 
           {/* Inline form or comment text that can be toggle by the user */}
           {showForm ? (
-            <Form>
+            <Form ref={formRef}>
               <Form.Group controlId='commentFormContent'>
                 <Form.Label srOnly={true}>Comment Content</Form.Label>
                 <Form.Control
