@@ -42,7 +42,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
         setShowForm(false)
         setCommentText(res.data.content)
         showMessage({ content: 'Comment updated' })
-      })
+      }).catch(() => setLoading(false))
   }
 
   /**
@@ -61,7 +61,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
         setDeleted(true)
         setShowDeleteModal(false)
         showMessage({ content: 'Comment deleted' })
-      })
+      }).catch(() => setLoading(false))
   }
 
   /**
