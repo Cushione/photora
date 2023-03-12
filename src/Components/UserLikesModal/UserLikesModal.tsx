@@ -57,9 +57,9 @@ function UserLikesModal(
           userLikes.map((user) => (
             <div className='d-flex justify-content-between mb-3'>
               <ProfileLink
-                profileId={user.profile_id}
-                profileImage={user.profile_image}
-                profileName={user.profile_name}
+                id={user.profile_id}
+                image={user.profile_image}
+                name={user.profile_name}
               />
               {loggedIn && !user.is_owner && (
                 <FollowButton size='sm' {...user} />

@@ -3,21 +3,26 @@ import { Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './ProfileLink.scss'
 
+/**
+ * Props for Profile Link Component
+ */
 interface ProfileLinkProps {
-  profileId: number
-  profileImage: string
-  profileName: string
+  id: number
+  image: string
+  name: string
 }
 
-export default function ProfileLink({
-  profileId,
-  profileImage,
-  profileName,
-}: ProfileLinkProps) {
+/**
+ * Component for displaying a link to the profile page of 
+ * a provided profile
+ * @param props Profile Link Props
+ * @returns Profile Link
+ */
+export default function ProfileLink(profile: ProfileLinkProps) {
   return (
-    <Link to={`/profiles/${profileId}`} className='post-list-profile-link'>
-      <Image className='post-list-avatar' src={profileImage} />
-      <span className='ml-2'>{profileName}</span>
+    <Link to={`/profiles/${profile.id}`} className='post-list-profile-link'>
+      <Image className='post-list-avatar' src={profile.image} />
+      <span className='ml-2'>{profile.name}</span>
     </Link>
   )
 }

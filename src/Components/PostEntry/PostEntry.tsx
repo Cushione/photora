@@ -46,9 +46,9 @@ export default function PostEntry({
         <Card.Body>
           <Card.Text className='d-flex justify-content-between'>
             <ProfileLink
-              profileId={post.profile_id}
-              profileImage={post.profile_image}
-              profileName={post.profile_name}
+              id={post.profile_id}
+              image={post.profile_image}
+              name={post.profile_name}
             />
             <span>{moment(post.created_at).fromNow()}</span>
           </Card.Text>

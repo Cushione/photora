@@ -14,7 +14,7 @@ interface CommentCardProps {
 }
 
 /**
- * Component to display an comment
+ * Component for displaying an comment
  * @param props Comment Card Props
  * @returns Comment Card
  */
@@ -81,9 +81,9 @@ export default function CommentCard({ comment }: CommentCardProps) {
           <Card.Title className='d-flex justify-content-between'>
             {/* Author Profile Link */}
             <ProfileLink
-              profileId={comment.profile_id}
-              profileImage={comment.profile_image}
-              profileName={comment.profile_name}
+              id={comment.profile_id}
+              image={comment.profile_image}
+              name={comment.profile_name}
             />
 
             {/* If owner, show comment manipulation buttons */}
