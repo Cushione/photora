@@ -1,26 +1,17 @@
-import axios from 'axios'
 import moment from 'moment'
-import React, { useContext, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext';
 import { Post } from '../../shared/models/Post.model'
-import FollowButton from '../FollowButton/FollowButton'
 import LikeButton from '../LikeButton/LikeButton'
 import ProfileLink from '../ProfileLink/ProfileLink'
+import UserLikesModal, { UserLikesModalRef } from '../UserLikesModal/UserLikesModal';
 
 interface PostEntryProps {
   post: Post
   onCommentClick: () => any
   openable?: boolean
-}
-
-interface UserLike {
-  is_followed: boolean
-  profile_id: number
-  profile_image: string
-  profile_name: string
-  is_owner: boolean
 }
 
 export default function PostEntry({
@@ -36,8 +27,8 @@ export default function PostEntry({
   )
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
-  const [showUserLikesModal, setShowUserLikesModal] = useState<boolean>(false)
-  const [userLikes, setUserLikes] = useState<UserLike[] | null>(null)
+
+  const userLikesModalRef = useRef<UserLikesModalRef>(null)
 
   const handleLikeToggle = (state: boolean) => {
     setNumberOfLikes(state ? numberOfLikes + 1 : numberOfLikes - 1)
@@ -47,14 +38,6 @@ export default function PostEntry({
     if (openable) {
       navigate(`/posts/${post.id}`)
     }
-  }
-
-  const openUserLikesModal = () => {
-    setUserLikes(null)
-    setShowUserLikesModal(true)
-    axios
-      .get<UserLike[]>(`posts/${post.id}/likes`)
-      .then((res) => setUserLikes(res.data))
   }
 
   return (
@@ -89,7 +72,7 @@ export default function PostEntry({
               <Button
                 variant='link'
                 className='ml-2'
-                onClick={() => openUserLikesModal()}
+                onClick={() => userLikesModalRef.current?.open()}
               >
                 {numberOfLikes} Like
                 {numberOfLikes !== 1 ? 's' : ''}
@@ -146,36 +129,7 @@ export default function PostEntry({
         </Modal.Footer>
       </Modal>
 
-      <Modal
-        centered
-        size='sm'
-        show={showUserLikesModal}
-        onHide={() => setShowUserLikesModal(false)}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Likes</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {userLikes ? (
-            userLikes.map((user) => (
-              <div className='d-flex justify-content-between mb-3'>
-                <ProfileLink
-                  profileId={user.profile_id}
-                  profileImage={user.profile_image}
-                  profileName={user.profile_name}
-                />
-                {loggedIn && !user.is_owner && (
-                  <FollowButton size='sm' {...user} />
-                )}
-              </div>
-            ))
-          ) : (
-            <p className='text-center p-4'>
-              <i className='fa-solid fa-circle-notch fa-spin fa-2xl'></i>
-            </p>
-          )}
-        </Modal.Body>
-      </Modal>
+      <UserLikesModal postId={post.id} ref={userLikesModalRef} />
     </>
   )
 }
