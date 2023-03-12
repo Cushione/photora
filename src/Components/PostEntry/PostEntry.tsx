@@ -79,8 +79,8 @@ export default function PostEntry({
         <Card.Img
           src={
             openable
-              ? Utils.transformImage(post.image, false, false, 800, false, null)
-              : Utils.transformImage(post.image, false, false, undefined, false)
+              ? Utils.transformImage(post.image, false, false, 800, true, false, null)
+              : Utils.transformImage(post.image, false, false, undefined, false, false)
           }
           className={openable ? 'c-pointer' : ''}
           onClick={openPost}

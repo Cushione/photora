@@ -38,12 +38,23 @@ export default class Utils {
     round: boolean,
     face: boolean,
     width?: number,
+    reduced = true,
     crop = true,
-    height?: number | null,
+    height?: number | null
   ): string {
-    return url.replace(
-      /upload\//,
-      `upload/${crop ? 'c_fill' : 'c_scale'}${face ? ',g_face' : ''}${width ? `,w_${width}` : ''}${height ? `,h_${height}` : height !== null && width ? `,h_${width}` : ''}/${round ? 'r_max/': ''}`
-    )
+    return url
+      .replace(
+        /upload\//,
+        `upload/${width || height ? (crop ? 'c_fill' : 'c_scale') : ''}${
+          face ? ',g_face' : ''
+        }${width ? `,w_${width}` : ''}${
+          height
+            ? `,h_${height}`
+            : height !== null && width
+            ? `,h_${width}`
+            : ''
+        }${reduced ? ',q_auto:good' : ''}/${round ? 'r_max/' : ''}`
+      )
+      .replaceAll(/\/,|,\/|(?<!:)\/\//g, '/')
   }
 }
