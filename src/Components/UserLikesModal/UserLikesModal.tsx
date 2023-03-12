@@ -3,25 +3,34 @@ import React, { useState, useImperativeHandle, Ref } from 'react'
 import { forwardRef } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext';
+import { UserLike } from '../../shared/models/UserLike.model';
 import FollowButton from '../FollowButton/FollowButton'
 import ProfileLink from '../ProfileLink/ProfileLink'
 
-interface UserLike {
-  is_followed: boolean
-  profile_id: number
-  profile_image: string
-  profile_name: string
-  is_owner: boolean
-}
-
+/**
+ * User Likes Modal Component Props
+ */
 interface UserLikesModalProps {
   postId: number
 }
 
+/**
+ * User Likes Modal Reference Type
+ * Provides information to the parent component about
+ * the type of data exposed by the forwardRef 
+ */
 export interface UserLikesModalRef {
   open: () => void
 }
 
+/**
+ * Component for displaying a list of users that liked the 
+ * provided post. Implements a Follow Button which allows 
+ * logged in user to follow any of the listed users
+ * @param props User Likes Modal Props 
+ * @param ref Reference to the component. Used by parent component 
+ * @returns Modal with list of user likes
+ */
 function UserLikesModal(
   { postId }: UserLikesModalProps,
   ref: Ref<UserLikesModalRef>
@@ -30,12 +39,15 @@ function UserLikesModal(
   const [userLikes, setUserLikes] = useState<UserLike[] | null>(null)
   const {loggedIn} = useUserInfoStore()
 
+  // Defines the values that should be exposed to the parent component
   useImperativeHandle(ref, () => ({
     open,
   }))
 
-  const open = () => {
-    setUserLikes(null)
+  /**
+   * Opens the modal and updates the list of user likes
+   */
+  const open = (): void => {
     setShowUserLikesModal(true)
     axios
       .get<UserLike[]>(`posts/${postId}/likes`)
@@ -76,4 +88,5 @@ function UserLikesModal(
   )
 }
 
+// Export the component together with a reference to it
 export default forwardRef(UserLikesModal)

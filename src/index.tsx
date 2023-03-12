@@ -47,7 +47,7 @@ import SearchPage, {
 import HomePage from './Routes/HomePage/HomePage'
 import FeedPage, { FeedPageLoader } from './Routes/Posts/FeedPage/FeedPage'
 import LandingPage from './Routes/LandingPage/LandingPage'
-import { MessageProvider } from './Components/Messages/MessagesContext'
+import { MessageOutput } from './Components/Messages/MessagesContext'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
@@ -169,7 +169,7 @@ function RouterProvider(): ReactElement {
 ReactDOM.render(
   <React.StrictMode>
     <RouterProvider />
-    <MessageProvider />
+    <MessageOutput />
     <UserInfoHandler />
   </React.StrictMode>,
   document.getElementById('root')

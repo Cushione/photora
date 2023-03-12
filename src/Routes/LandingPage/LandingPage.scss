@@ -1,5 +1,8 @@
 @import '../../shared/variables.scss';
 
+// Landing Page Component Styles
+
+// Jumbotron styles
 .jumbotron {
   background-color: $primaryColor;
   min-height: 100vh;
@@ -39,7 +42,9 @@
     }
   }
 
+  /****************************************************************/
   /* Icon copied from https://codemyui.com/scroll-icon-animation/ */
+  /****************************************************************/
 
   #icon-scroll,
   #icon-scroll:before {
@@ -80,8 +85,13 @@
       transform: translateY(46px);
     }
   }
+
+  /****************************************************************/
+  /* End of the icon styles                                       */
+  /****************************************************************/
 }
 
+// Feature section styles
 #features {
   min-height: 80vh;
   gap: 20px;
@@ -121,6 +131,7 @@
   }
 }
 
+// Footer styles
 #footer {
   margin-top: 8vh;
   padding: 5vh 0;

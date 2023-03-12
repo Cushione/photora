@@ -5,7 +5,7 @@ import { useUserInfoStore } from '../../Authentication/UserInfoContext';
 import { Post } from '../../shared/models/Post.model'
 
 /**
- * Props for the Like Button Component
+ * Props for Like Button Component
  */
 interface LikeButtonProps {
   post: Post
@@ -13,15 +13,20 @@ interface LikeButtonProps {
 }
 
 /**
- * 
- * @param param0 
- * @returns 
+ * Component for handling post likes
+ * Allows the user to toggle the like state of the provided
+ * post. Handles the request and state.
+ * @param props Like Button Props 
+ * @returns Like Button
  */
 export default function LikeButton({ post, onToggle }: LikeButtonProps) {
   const [active, setActive] = useState<boolean>(post.has_liked)
   const { loggedIn } = useUserInfoStore()
 
-  const toggleLike = async () => {
+  /**
+   * Send like request and update state according to response
+   */
+  const toggleLike = async (): Promise<void> => {
     const res = await axios.post(`posts/${post.id}/likes`)
     setActive(res.status === 201)
     onToggle?.(res.status === 201)

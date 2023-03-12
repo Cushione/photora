@@ -5,25 +5,37 @@ import { Link } from 'react-router-dom'
 import usePageTitle from '../../shared/hooks/usePageTitle'
 import './LandingPage.scss'
 
+/**
+ * Landing page component rendering static content
+ * @returns Landing Page
+ */
 export default function LandingPage() {
   const features = useRef<any>()
 
   usePageTitle('Photora', true)
 
-  const goToFeatures = () => {
+  /**
+   * Scroll to the features section on the page
+   */
+  const goToFeatures = (): void => {
     features.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <>
+    
+      {/* Jumbotron */}
       <div className='jumbotron text-white text-center'>
         <h1 className='display-1 mb-5'>PHOTORA</h1>
+        {/* Icon copied from https://codemyui.com/scroll-icon-animation/ */}
         <div
           id='icon-scroll'
           className='c-pointer'
           onClick={goToFeatures}
         ></div>
       </div>
+
+      {/* Features Section */}
       <Container ref={features} id='features' className='text-center'>
         <Row>
           <Col sm={4} className='my-4'>
@@ -87,6 +99,8 @@ export default function LandingPage() {
           </Col>
         </Row>
       </Container>
+      
+      {/* Footer */}
       <Container fluid>
         <Row
           id='footer'

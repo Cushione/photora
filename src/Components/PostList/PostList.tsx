@@ -7,17 +7,36 @@ import PostEntry from '../PostEntry/PostEntry'
 import { PaginatedResult } from '../../shared/models/PaginatedResponse.model'
 import { Post } from '../../shared/models/Post.model'
 
+/**
+ * Props for Post List
+ */
 interface PostListProps extends PaginatedResult<Post> {
   emptyMessage?: JSX.Element
 }
 
-export default function PostList({ next, results, emptyMessage }: PostListProps) {
+/**
+ * Component for displaying a paginated result of posts with infinite scroll feature
+ * @param props Post List Props
+ * @returns Post List
+ */
+export default function PostList({
+  next,
+  results,
+  emptyMessage,
+}: PostListProps) {
   const [currentNext, setCurrentNext] = useState<string>(next)
   const [posts, setPosts] = useState<Post[]>(results)
   const navigate = useNavigate()
 
-  const loadMorePosts = async () => {
+  /**
+   * Function for loading the next page of the result
+   */
+  const loadMorePosts = async (): Promise<void> => {
     const url = new URL(currentNext)
+    /*
+     Replace hostname in the url with the axios base url so the 
+     function works locally and in production
+     */
     const newPosts = (
       await axios.get<PaginatedResult<Post>>(
         url.pathname.toString() + url.search.toString()
@@ -35,6 +54,7 @@ export default function PostList({ next, results, emptyMessage }: PostListProps)
         hasMore={!!currentNext}
         loader={<h1>Loading</h1>}
       >
+        {/* Display posts as Post Entries */}
         {posts.length ? (
           posts.map((post) => (
             <PostEntry
@@ -45,9 +65,7 @@ export default function PostList({ next, results, emptyMessage }: PostListProps)
             ></PostEntry>
           ))
         ) : (
-          <p>
-            {emptyMessage ? emptyMessage : <i>No posts</i>}
-          </p>
+          <p>{emptyMessage ? emptyMessage : <i>No posts</i>}</p>
         )}
       </InfiniteScroll>
     </Container>

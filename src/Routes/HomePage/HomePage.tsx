@@ -2,6 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import usePageTitle from '../../shared/hooks/usePageTitle'
 
+/**
+ * Simple Homepage Component
+ * @returns Home Page
+ */
 export default function HomePage() {
   usePageTitle('Home')
 

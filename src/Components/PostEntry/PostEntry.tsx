@@ -2,18 +2,29 @@ import moment from 'moment'
 import React, { useRef, useState } from 'react'
 import { Button, Card, Modal } from 'react-bootstrap'
 import { Form, Link, useNavigate } from 'react-router-dom'
-import { useUserInfoStore } from '../../Authentication/UserInfoContext';
+import { useUserInfoStore } from '../../Authentication/UserInfoContext'
 import { Post } from '../../shared/models/Post.model'
+import Utils from '../../shared/utils'
 import LikeButton from '../LikeButton/LikeButton'
 import ProfileLink from '../ProfileLink/ProfileLink'
-import UserLikesModal, { UserLikesModalRef } from '../UserLikesModal/UserLikesModal';
+import UserLikesModal, {
+  UserLikesModalRef,
+} from '../UserLikesModal/UserLikesModal'
 
+/**
+ * Props for Post Entry Component
+ */
 interface PostEntryProps {
   post: Post
   onCommentClick: () => any
   openable?: boolean
 }
 
+/**
+ * Component for displaying a post
+ * @param props Post Entry Props
+ * @returns Post Entry Card
+ */
 export default function PostEntry({
   post,
   openable,
@@ -28,13 +39,21 @@ export default function PostEntry({
 
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false)
 
+  // Reference to the User Likes Modal
   const userLikesModalRef = useRef<UserLikesModalRef>(null)
 
-  const handleLikeToggle = (state: boolean) => {
+  /**
+   * When the post like state changes, adjust like count accordingly
+   * @param state new post like state
+   */
+  const handleLikeToggle = (state: boolean): void => {
     setNumberOfLikes(state ? numberOfLikes + 1 : numberOfLikes - 1)
   }
 
-  const openPost = () => {
+  /**
+   * If post can be opened, navigate to the post detail page
+   */
+  const openPost = (): void => {
     if (openable) {
       navigate(`/posts/${post.id}`)
     }
@@ -45,14 +64,18 @@ export default function PostEntry({
       <Card key={post.id} className='my-4'>
         <Card.Body>
           <Card.Text className='d-flex justify-content-between'>
+            {/* Link to the author profile */}
             <ProfileLink
               id={post.profile_id}
               image={post.profile_image}
               name={post.profile_name}
             />
+            {/* Times since post creation */}
             <span>{moment(post.created_at).fromNow()}</span>
           </Card.Text>
         </Card.Body>
+
+        {/* Post image */}
         <Card.Img
           src={
             openable
@@ -64,6 +87,7 @@ export default function PostEntry({
         />
         <Card.Body>
           <Card.Text className='d-flex'>
+            {/* Like and Comment Buttons */}
             <LikeButton post={post} onToggle={handleLikeToggle}></LikeButton>
             <Button
               variant='link'
@@ -72,6 +96,8 @@ export default function PostEntry({
             >
               <i className='fa-regular fa-message'></i>
             </Button>
+
+            {/* Number of likes and comments */}
             {numberOfLikes > 0 && (
               <Button
                 variant='link'
@@ -88,6 +114,8 @@ export default function PostEntry({
                 {post.number_of_comments !== 1 ? 's' : ''}
               </Button>
             )}
+
+            {/* Post mutation buttons if post owner */}
             {post.is_owner && !openable && (
               <>
                 <Link
@@ -106,10 +134,14 @@ export default function PostEntry({
               </>
             )}
           </Card.Text>
+
+          {/* Post title and description */}
           <Card.Title>{post.title}</Card.Title>
           <Card.Text>{post.description}</Card.Text>
         </Card.Body>
       </Card>
+
+      {/* Modal for confirming a post deletion */}
       <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Post</Modal.Title>
@@ -118,12 +150,12 @@ export default function PostEntry({
           Are you sure that you want to delete this Post: "{post.title}"?
         </Modal.Body>
         <Modal.Footer>
-          <Form method='delete' action='delete'>
-            <Button
-              type='submit'
-              variant='danger'
-              onClick={() => setShowDeleteModal(false)}
-            >
+          <Form
+            method='delete'
+            action='delete'
+            onSubmit={() => setShowDeleteModal(false)}
+          >
+            <Button type='submit' variant='danger'>
               Delete
             </Button>
           </Form>
@@ -133,6 +165,7 @@ export default function PostEntry({
         </Modal.Footer>
       </Modal>
 
+      {/* Modal for displaying the list of users who liked the post */}
       <UserLikesModal postId={post.id} ref={userLikesModalRef} />
     </>
   )
