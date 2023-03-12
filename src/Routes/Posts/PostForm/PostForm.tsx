@@ -13,7 +13,7 @@ import usePageTitle from '../../../shared/hooks/usePageTitle'
 import { Post } from '../../../shared/models/Post.model'
 import Utils from '../../../shared/utils'
 
-const placeholderImage = 'https://placehold.co/600x400?text=Your Image'
+const placeholderImage = 'https://placehold.co/600x400?text=Click+here+to+add+image'
 
 export async function PostFormLoader({ params }): Promise<Post | null> {
   if (params.id) {
