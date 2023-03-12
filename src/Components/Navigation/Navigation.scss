@@ -1,6 +1,8 @@
 @import '../../shared/variables.scss';
 
+// Main Navigation Styles
 #main-navigation {
+  // Styles for links in the main navigation
   a {
     border-radius: 4px;
     display: flex;
@@ -8,7 +10,7 @@
 
     &:hover {
       background-color: #f6f6f6;
-      color: $primaryColor
+      color: $primaryColor;
     }
 
     &.active {
@@ -22,19 +24,22 @@
 
     @media screen and (min-width: 500px) {
       &.active {
-        background-color: white
+        background-color: white;
       }
     }
   }
 
+  // Style for the user profile link in the main navigation
   #nav-user {
     display: flex;
     align-items: center;
     width: 100%;
 
-    img#nav-avatar {
+    #nav-avatar {
+      margin-right: 15px;
+      font-size: 1.3rem;
       height: 1.25em;
-      object-fit: cover;
+      width: 1.25em;
       border-radius: 50%;
     }
 
@@ -45,7 +50,8 @@
     }
   }
 
-  i, img {
+  // Styles for icons in the main navigation
+  i {
     margin-right: 15px;
     font-size: 1.3rem;
   }

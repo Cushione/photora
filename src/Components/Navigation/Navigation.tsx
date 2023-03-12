@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom'
 import { useUserInfoStore } from '../../Authentication/UserInfoContext'
 import './Navigation.scss'
 
+/**
+ * Structure of the React Router Link State
+ */
 interface LinkState {
   isActive: boolean
   isPending: boolean
@@ -22,7 +25,7 @@ export default function Navigation() {
    * @param LinkState Current state of the link
    * @returns Style classes
    */
-  const linkState = (state: LinkState) =>
+  const linkState = (state: LinkState): string =>
     state.isActive ? 'active' : state.isPending ? 'pending' : ''
 
   /**
@@ -57,11 +60,11 @@ export default function Navigation() {
           {({ isPending }: LinkState) =>
             displayLink(
               isPending,
-              <img
+              <div
                 id='nav-avatar'
                 className='fa-fw'
-                src={userProfile.image}
-              ></img>,
+                style={{backgroundImage: `url(${userProfile.image}) 50% 50% no-repeat`}}
+              ></div>,
               userProfile.name
             )
           }
