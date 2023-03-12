@@ -18,5 +18,5 @@ export default function LikedPage() {
 
   usePageTitle('Liked Posts')
 
-  return <PostList {...result} />
+  return <PostList {...result} title="Liked" />
 }

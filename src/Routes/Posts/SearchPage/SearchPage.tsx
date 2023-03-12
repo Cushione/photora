@@ -37,7 +37,7 @@ export default function SearchPage() {
 
   const submit = useSubmit()
   const navigation = useNavigation()
-  const searchForm = useRef<HTMLFormElement | null>(null)
+  const searchForm = useRef<HTMLFormElement>(null)
 
   usePageTitle('Search')
 
@@ -81,7 +81,7 @@ export default function SearchPage() {
           </Form.Group>
         </RouterForm>
       </Container>
-      {result && <PostList {...result} />}
+      {result && <PostList {...result} emptyMessage={<p>No posts found 😞</p>} />}
     </>
   )
 }

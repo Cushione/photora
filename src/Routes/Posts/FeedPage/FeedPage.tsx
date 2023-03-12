@@ -26,5 +26,5 @@ export default function FeedPage() {
     </div>
   )
 
-  return <PostList {...result} emptyMessage={noFollowingMessage} />
+  return <PostList {...result} emptyMessage={noFollowingMessage} title="Feed"/>
 }
