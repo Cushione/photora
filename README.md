@@ -10,6 +10,8 @@ Photora is a social media application that allows authenticated members to post 
 # Objective
 The objective of this project is to present my skills in React, Typescript, Django Rest Framework and Python. I also want to show my proficiency in Object Oriented Programming and other standard programming constructs such as flow control, iteration, selection, functions, and data structures.
 
+# Django Rest Backend
+The repository for the backend of the application can be found here: [https://github.com/Cushione/photora_api](https://github.com/Cushione/photora_api)
 
 # Contents
 * [Features](#features)
@@ -49,6 +51,7 @@ The objective of this project is to present my skills in React, Typescript, Djan
 * [Development process](#development-process)
   * [Development Preparation](#development-preparation)
   * [Agile Development](#agile-development)
+  * [Custom Fields](#custom-fields)
   * [Git](#git)
   * [React](#react)
   * [Vite](#vite)
@@ -266,8 +269,8 @@ While I was working on this project, I tried to follow an agile development appr
 The first step in my development process was to plan the website thoroughly:
 - At first, I created a simple class diagram that shows the models I was planning on implementing, with their properties and relations  
   [Link to the class diagram](https://drive.google.com/file/d/1mJWKN7ZxXBxVgPcC8Y_ZCXYZGNR4A8dm/view?usp=sharing)
-- Next, I thought about the User Interface and its layout. I created simple [wireframes](docs/wireframes.png) for the homepage and the article detail page. 
-  - Note: During development, I changed the layout of the post detail page and comments because there would not be enough space and it would reduce development time by reusing existing components  
+- Next, I thought about the User Interface and its layout. I created simple [wireframes](docs/images/wireframes.png) for the homepage and the article detail page. 
+  - Note: During development, I changed the layout of the post detail page and comments because there would not be enough space and it reduced development time by reusing existing components  
 - Lastly, I wrote the majority of my user stories and tasks in my [GitHub Project](https://github.com/users/Cushione/projects/4) 
 
 ### Agile Development
@@ -279,9 +282,9 @@ The first step in my development process was to plan the website thoroughly:
 - When I was working on the project, I chose one issue to work on from the "Todo" column of the MVP board and moved it into the "In Progress" column.
 - After I finished the issue by fulfilling all the acceptance criteria, I closed the issue which moved it automatically into the "Done" Column.
 
-#### Custom field
-![Custom Field](docs/images/custom-field.png)
-- Custom field were created in the [settings of the GitHub Project](https://github.com/users/Cushione/projects/4/settings)
+#### Custom fields
+![Custom Fields](docs/images/custom-field.png)
+Custom fields were created in the [settings of the GitHub Project](https://github.com/users/Cushione/projects/4/settings)
 
 
 ## Git
@@ -415,7 +418,7 @@ The live link can be found here: [Photora](https://photora.herokuapp.com/)
 
 # Acknowledgements
 
-I would like to acknowledge the following people who have helped me along the way in completing my fourth portfolio project:
+I would like to acknowledge the following people who have helped me along the way in completing my final portfolio project:
 - My husband, Moritz Wach, for all his knowledge and relentless support.
 - My mentor, Spencer Barriball, for his guidance and inspiration.
 - My friends and colleagues for testing the website rigorously and sharing posts and writing comments.
