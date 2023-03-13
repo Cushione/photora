@@ -8,7 +8,7 @@ Photora is a social media application that allows authenticated members to post 
 ![Website Mockup](docs/website-mockup.png)
 
 # Objective
-The objective of this project is to present my skills in React, Typescript, Django Rest Framework and Python. I also want to show my proficiency in Object Oriented Programming and other standard programming constructs such as flow control, iteration, selection, functions, and data structures.
+The objective of this project is to present my skills in React, Typescript, Django Rest Framework and Python. I also want to demonstrate my proficiency in Object Oriented Programming and other standard programming constructs such as flow control, iteration, selection, functions, and data structures.
 
 # Django Rest Backend
 The repository for the backend of the application can be found here: [https://github.com/Cushione/photora_api](https://github.com/Cushione/photora_api)
@@ -77,8 +77,8 @@ The repository for the backend of the application can be found here: [https://gi
 
 ## Sidebar
 ![Sidebar](docs/features/sidebar.png)
-- The sidebar is always visible on every page but the landing page
-- It is fully responsive and includes and name at the top and links to all the pages below.
+- The sidebar is always visible on every page but the landing page.
+- It is fully responsive and includes name at the top and links to all the pages below.
 - The sidebar is identical on each page to allow for easy navigation from page to page across all devices.  
 
 ### Authenticated Links
@@ -92,8 +92,8 @@ The repository for the backend of the application can be found here: [https://gi
 - The Post Entry component is reused throughout the application to display posts.
 - At the top of the card, a link to the author's profile and the time since posting is displayed.
 - The middle of the card shows the image of the post.
-- Below the image, the owner of the post can see buttons to edit and delete the post. All the users can see like and comment buttons which are only accessible to members though.
-- Next to the buttons users can see the number of likes and comments. Users can click the number of likes to see a list of members that liked the post.
+- Below the image, the owner of the post can see buttons to edit and delete the post. All the users can see like and comment buttons, which are only accessible to authenticated members.
+- Next to the buttons, users can see the number of likes and comments. Users can click the number of likes to see a list of members who liked the post.
 
 ## User Likes Modal
 ![User Likes Modal](docs/features/user-likes-modal.png)
@@ -106,7 +106,7 @@ The repository for the backend of the application can be found here: [https://gi
 - The Home Page is used to display a welcoming message to new users who are not yet members.
 
 ![Home Page No Follow](docs/features/home-page-no-follow.png)
-- Members who have not yet followed anybody, can see a welcome message and a hint to follow somebody.
+- Members, who have not yet followed anybody, can see a welcome message and a hint to follow somebody other members.
 
 ![Home Page Feed](docs/features/home-page-feed.png)
 - The posts in the feed are displayed with the Post List component that uses the Post Entry component for every post. The post list component is reused on multiple pages to display a list of posts.
@@ -122,7 +122,7 @@ The repository for the backend of the application can be found here: [https://gi
 ## Explore Page
 ![Explore Page](docs/features/explore.png)
 - The explore page allows any user to explore new content.
-- The page shows all the posts except posts from themselves and members the user does not follow.
+- This page shows all the posts except posts from the authors themselves and members the author already follows.
 - The explore page uses one of the pages that use the Post List component to display the result.
 
 ## Liked Page
