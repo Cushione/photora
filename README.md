@@ -3,7 +3,7 @@
 Photora is a social media application that allows authenticated members to post images and share their content with other people. Members can post, like posts, comment on posts, and also edit and delete their posts. Members can also follow other members to create a personalized feed.
 
 # Live Page
-[https://photora.herokuapp.com/](https://photora.herokuapp.com/)
+[https://photora.1441990.xyz/](https://photora.1441990.xyz/)
 
 ![Website Mockup](docs/website-mockup.png)
 
@@ -239,12 +239,12 @@ As the primary color for my application, I chose a steel blue color: #2F5373. Fo
 
 ## Validation
 ### HTML
-[HTML Validation](https://validator.w3.org/nu/?doc=https%3A%2F%2Fphotora.herokuapp.com%2F)  
+[HTML Validation](https://validator.w3.org/nu/?doc=https%3A%2F%2Fphotora.1441990.xyz%2F)  
 There were no errors found on any page using the W3C HTML Validator.
 
 ### CSS
 ![CSS Validation](docs/images/w3c-css-validator.png)  
-There were no errors found in the stylesheet using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fphotora.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en).
+There were no errors found in the stylesheet using the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fphotora.1441990.xyz%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en).
 
 ### TSX
 ![Eslint Validation](docs/images/eslint.gif)  
@@ -358,7 +358,7 @@ Instead of the built-in Context feature, the application uses the [Zustand](http
 
 # Deployment
 
-The app was deployed using Heroku and the [NGINX Heroku Buildpack](https://github.com/heroku/heroku-buildpack-nginx). NGINX was used to allow users to access the application through deep links e.g. [photora.herokuapp.com/posts/11](https://photora.herokuapp.com/posts/11). The [serve](https://www.npmjs.com/package/serve) library by Vercel that is suggested by Code Institute only allowed the user to open the landing page of the application and showed a 404 error page for deep links.
+The app was deployed using Heroku and the [NGINX Heroku Buildpack](https://github.com/heroku/heroku-buildpack-nginx). NGINX was used to allow users to access the application through deep links e.g. [photora.1441990.xyz/posts/11](https://photora.1441990.xyz/posts/11). The [serve](https://www.npmjs.com/package/serve) library by Vercel that is suggested by Code Institute only allowed the user to open the landing page of the application and showed a 404 error page for deep links.
 
 ## Deployment Preparation
 Before the deployment, the following steps were taken to prepare the application for the deployment on Heroku with NGINX:
@@ -397,7 +397,7 @@ The steps to deploy the React app to Heroku are as follows:
     - enable automatic deployment by clicking on the button "Enable Automatic Deploys" in the "Automatic Deploys" Section.
     - deploy a branch manually by selecting the branch and clicking the button "Deploy Branch" in the "Manual deploys" section.
 
-The live link can be found here: [Photora](https://photora.herokuapp.com/)
+The live link can be found here: [Photora](https://photora.1441990.xyz/)
 
 # Credits
 
